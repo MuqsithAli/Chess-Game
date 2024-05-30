@@ -1,7 +1,6 @@
 package Main;
 
-import Piece.Pawn;
-import Piece.Queen;
+import Piece.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -102,26 +101,26 @@ public class Main implements MouseListener {
     }
 
     public static void initialiseBoard() {
-        Image image1 = blackRook1.getImage();
-        Image scaledImage1 = image1.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        blackRook1 = new ImageIcon(scaledImage1);
-        board[0][0].setIcon(blackRook1);
-
-        Image image2 = blackRook2.getImage();
-        Image scaledImage2 = image2.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        blackRook2 = new ImageIcon(scaledImage2);
-        board[0][7].setIcon(blackRook2);
-
-        Image image3 = blackKnight1.getImage();
-        Image scaledImage3 = image3.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        blackKnight1 = new ImageIcon(scaledImage3);
-        board[0][1].setIcon(blackKnight1);
-
-        Image image4 = blackKnight2.getImage();
-        Image scaledImage4 = image4.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        blackKnight2 = new ImageIcon(scaledImage4);
-        board[0][6].setIcon(blackKnight2);
-
+//        Image image1 = blackRook1.getImage();
+//        Image scaledImage1 = image1.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        blackRook1 = new ImageIcon(scaledImage1);
+//        board[0][0].setIcon(blackRook1);
+//
+//        Image image2 = blackRook2.getImage();
+//        Image scaledImage2 = image2.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        blackRook2 = new ImageIcon(scaledImage2);
+//        board[0][7].setIcon(blackRook2);
+//
+//        Image image3 = blackKnight1.getImage();
+//        Image scaledImage3 = image3.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        blackKnight1 = new ImageIcon(scaledImage3);
+//        board[0][1].setIcon(blackKnight1);
+//
+//        Image image4 = blackKnight2.getImage();
+//        Image scaledImage4 = image4.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        blackKnight2 = new ImageIcon(scaledImage4);
+//        board[0][6].setIcon(blackKnight2);
+//
         Image image5 = blackBishop1.getImage();
         Image scaledImage5 = image5.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
         blackBishop1 = new ImageIcon(scaledImage5);
@@ -131,136 +130,140 @@ public class Main implements MouseListener {
         Image scaledImage6 = image6.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
         blackBishop2 = new ImageIcon(scaledImage6);
         board[0][5].setIcon(blackBishop2);
-
+//
         Image image7 = blackQueen.getImage();
         Image scaledImage7 = image7.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
         blackQueen = new ImageIcon(scaledImage7);
         board[0][3].setIcon(blackQueen);
-//
+////
         Image image8 = blackKing.getImage();
         Image scaledImage8 = image8.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
         blackKing = new ImageIcon(scaledImage8);
-        board[0][4].setIcon(blackKing);
-
-        Image image9 = blackPawn1.getImage();
-        Image scaledImage9 = image9.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        blackPawn1 = new ImageIcon(scaledImage9);
-        board[1][0].setIcon(blackPawn1);
-
-        Image image10 = blackPawn2.getImage();
-        Image scaledImage10 = image10.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        blackPawn2 = new ImageIcon(scaledImage10);
-        board[1][1].setIcon(blackPawn2);
-
-        Image image11 = blackPawn3.getImage();
-        Image scaledImage11 = image11.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        blackPawn3 = new ImageIcon(scaledImage11);
-        board[1][2].setIcon(blackPawn3);
-
-        Image image12 = blackPawn4.getImage();
-        Image scaledImage12 = image12.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        blackPawn4 = new ImageIcon(scaledImage12);
-        board[1][3].setIcon(blackPawn4);
-
+//        board[0][4].setIcon(blackKing);
+//        board[5][5].setIcon(blackKing);
+//
+//        Image image9 = blackPawn1.getImage();
+//        Image scaledImage9 = image9.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        blackPawn1 = new ImageIcon(scaledImage9);
+//        board[1][0].setIcon(blackPawn1);
+//
+//        Image image10 = blackPawn2.getImage();
+//        Image scaledImage10 = image10.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        blackPawn2 = new ImageIcon(scaledImage10);
+//        board[1][1].setIcon(blackPawn2);
+//
+//        Image image11 = blackPawn3.getImage();
+//        Image scaledImage11 = image11.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        blackPawn3 = new ImageIcon(scaledImage11);
+//        board[1][2].setIcon(blackPawn3);
+//
+//        Image image12 = blackPawn4.getImage();
+//        Image scaledImage12 = image12.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        blackPawn4 = new ImageIcon(scaledImage12);
+//        board[1][3].setIcon(blackPawn4);
+//
         Image image13 = blackPawn5.getImage();
         Image scaledImage13 = image13.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
         blackPawn5 = new ImageIcon(scaledImage13);
-        board[1][4].setIcon(blackPawn5);
-
+//        board[1][4].setIcon(blackPawn5);
+//
         Image image14 = blackPawn6.getImage();
         Image scaledImage14 = image14.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
         blackPawn6 = new ImageIcon(scaledImage14);
         board[1][5].setIcon(blackPawn6);
-
-        Image image15 = blackPawn7.getImage();
-        Image scaledImage15 = image15.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        blackPawn7 = new ImageIcon(scaledImage15);
-        board[1][6].setIcon(blackPawn7);
-
-        Image image16 = blackPawn8.getImage();
-        Image scaledImage16 = image16.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        blackPawn8 = new ImageIcon(scaledImage16);
-        board[1][7].setIcon(blackPawn8);
-
+//
+//        Image image15 = blackPawn7.getImage();
+//        Image scaledImage15 = image15.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        blackPawn7 = new ImageIcon(scaledImage15);
+//        board[1][6].setIcon(blackPawn7);
+//
+//        Image image16 = blackPawn8.getImage();
+//        Image scaledImage16 = image16.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        blackPawn8 = new ImageIcon(scaledImage16);
+//        board[1][7].setIcon(blackPawn8);
+//
         Image image17 = whiteRook1.getImage();
         Image scaledImage17 = image17.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
         whiteRook1 = new ImageIcon(scaledImage17);
         board[7][0].setIcon(whiteRook1);
-
-        Image image18 = whiteRook2.getImage();
-        Image scaledImage18 = image18.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        whiteRook2 = new ImageIcon(scaledImage18);
-        board[7][7].setIcon(whiteRook2);
-
-        Image image19 = whiteKnight1.getImage();
-        Image scaledImage19 = image19.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        whiteKnight1 = new ImageIcon(scaledImage19);
-        board[7][1].setIcon(whiteKnight1);
-
-        Image image20 = whiteKnight2.getImage();
-        Image scaledImage20 = image20.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        whiteKnight2 = new ImageIcon(scaledImage20);
-        board[7][6].setIcon(whiteKnight2);
-
-        Image image21 = whiteBishop1.getImage();
-        Image scaledImage21 = image21.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        whiteBishop1 = new ImageIcon(scaledImage21);
-        board[7][2].setIcon(whiteBishop1);
-
-        Image image22 = whiteBishop2.getImage();
-        Image scaledImage22 = image22.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        whiteBishop2 = new ImageIcon(scaledImage22);
-        board[7][5].setIcon(whiteBishop2);
-
-        Image image23 = whiteQueen.getImage();
-        Image scaledImage23 = image23.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
-        whiteQueen = new ImageIcon(scaledImage23);
-        board[7][3].setIcon(whiteQueen);
+//
+//        Image image18 = whiteRook2.getImage();
+//        Image scaledImage18 = image18.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        whiteRook2 = new ImageIcon(scaledImage18);
+//        board[7][7].setIcon(whiteRook2);
+//
+//        Image image19 = whiteKnight1.getImage();
+//        Image scaledImage19 = image19.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        whiteKnight1 = new ImageIcon(scaledImage19);
+//        board[7][1].setIcon(whiteKnight1);
+//
+//        Image image20 = whiteKnight2.getImage();
+//        Image scaledImage20 = image20.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        whiteKnight2 = new ImageIcon(scaledImage20);
+//        board[7][6].setIcon(whiteKnight2);
+//
+//        Image image21 = whiteBishop1.getImage();
+//        Image scaledImage21 = image21.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        whiteBishop1 = new ImageIcon(scaledImage21);
+//        board[7][2].setIcon(whiteBishop1);
+//
+//        Image image22 = whiteBishop2.getImage();
+//        Image scaledImage22 = image22.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        whiteBishop2 = new ImageIcon(scaledImage22);
+//        board[7][5].setIcon(whiteBishop2);
+//
+//        Image image23 = whiteQueen.getImage();
+//        Image scaledImage23 = image23.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        whiteQueen = new ImageIcon(scaledImage23);
+//        board[7][3].setIcon(whiteQueen);
 
         Image image24 = whiteKing.getImage();
         Image scaledImage24 = image24.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
         whiteKing = new ImageIcon(scaledImage24);
-        board[7][4].setIcon(whiteKing);
+//        board[7][4].setIcon(whiteKing);
+        board[3][6].setIcon(whiteKing);
+//        board[5][3].setIcon(blackPawn5);
+//        board[5][5].setIcon(blackPawn5);
 
-        Image image25 = whitePawn1.getImage();
-        Image scaledImage25 = image25.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
-        whitePawn1 = new ImageIcon(scaledImage25);
-        board[6][0].setIcon(whitePawn1);
-
-        Image image26 = whitePawn2.getImage();
-        Image scaledImage26 = image26.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
-        whitePawn2 = new ImageIcon(scaledImage26);
-        board[6][1].setIcon(whitePawn2);
-
-        Image image27 = whitePawn3.getImage();
-        Image scaledImage27 = image27.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
-        whitePawn3 = new ImageIcon(scaledImage27);
-        board[6][2].setIcon(whitePawn3);
-
-        Image image28 = whitePawn4.getImage();
-        Image scaledImage28 = image28.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
-        whitePawn4 = new ImageIcon(scaledImage28);
-        board[6][3].setIcon(whitePawn4);
-
+//        Image image25 = whitePawn1.getImage();
+//        Image scaledImage25 = image25.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        whitePawn1 = new ImageIcon(scaledImage25);
+//        board[6][0].setIcon(whitePawn1);
+//
+//        Image image26 = whitePawn2.getImage();
+//        Image scaledImage26 = image26.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        whitePawn2 = new ImageIcon(scaledImage26);
+//        board[6][1].setIcon(whitePawn2);
+//
+//        Image image27 = whitePawn3.getImage();
+//        Image scaledImage27 = image27.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        whitePawn3 = new ImageIcon(scaledImage27);
+//        board[6][2].setIcon(whitePawn3);
+//
+//        Image image28 = whitePawn4.getImage();
+//        Image scaledImage28 = image28.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        whitePawn4 = new ImageIcon(scaledImage28);
+//        board[6][3].setIcon(whitePawn4);
+//
         Image image29 = whitePawn5.getImage();
         Image scaledImage29 = image29.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
         whitePawn5 = new ImageIcon(scaledImage29);
-        board[6][4].setIcon(whitePawn5);
-
-        Image image30 = whitePawn6.getImage();
-        Image scaledImage30 = image30.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
-        whitePawn6 = new ImageIcon(scaledImage30);
-        board[6][5].setIcon(whitePawn6);
-
-        Image image31 = whitePawn7.getImage();
-        Image scaledImage31 = image31.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
-        whitePawn7 = new ImageIcon(scaledImage31);
-        board[6][6].setIcon(whitePawn7);
-
-        Image image32 = whitePawn8.getImage();
-        Image scaledImage32 = image32.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
-        whitePawn8 = new ImageIcon(scaledImage32);
-        board[6][7].setIcon(whitePawn8);
+//        board[6][4].setIcon(whitePawn5);
+            board[1][4].setIcon(whitePawn5);
+//        Image image30 = whitePawn6.getImage();
+//        Image scaledImage30 = image30.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        whitePawn6 = new ImageIcon(scaledImage30);
+//        board[6][5].setIcon(whitePawn6);
+//
+//        Image image31 = whitePawn7.getImage();
+//        Image scaledImage31 = image31.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        whitePawn7 = new ImageIcon(scaledImage31);
+//        board[6][6].setIcon(whitePawn7);
+//
+//        Image image32 = whitePawn8.getImage();
+//        Image scaledImage32 = image32.getScaledInstance(46, 58, Image.SCALE_SMOOTH); // Adjust the size as needed
+//        whitePawn8 = new ImageIcon(scaledImage32);
+//        board[6][7].setIcon(whitePawn8);
     }
 
     @Override
@@ -286,7 +289,6 @@ public class Main implements MouseListener {
         } else {
             clickedCell.setBorder(null);
         }
-        System.out.println(clickedStack.size());
         if (clickedStack.size() == 2) {
             movePiece(clickedStack.get(0), clickedStack.get(1));
             clickedStack.pop();
@@ -300,9 +302,25 @@ public class Main implements MouseListener {
             Pawn pawn = new Pawn(row, col, pieceColor);
             pawn.highlightCells(row, col);
         }
-        if(pieceType == "queen"){
+        if (pieceType == "queen") {
             Queen queen = new Queen(row, col, pieceColor);
             queen.highlightCells(row, col);
+        }
+        if (pieceType == "knight") {
+            Knight knight = new Knight(row, col, pieceColor);
+            knight.highlightCells(row, col);
+        }
+        if (pieceType == "rook") {
+            Rook rook = new Rook(row, col, pieceColor);
+            rook.highlightCells(row, col);
+        }
+        if (pieceType == "bishop") {
+            Bishop bishop = new Bishop(row, col, pieceColor);
+            bishop.highlightCells(row, col);
+        }
+        if (pieceType == "king") {
+            King king = new King(row, col, pieceColor);
+            king.highlightCells(row, col);
         }
         if (clickedCell.getBorder() == null && clickedCell.getIcon() != null) {
             for (int i = 0; i < board.length; i++) {
@@ -352,6 +370,18 @@ public class Main implements MouseListener {
         if (getType((ImageIcon) source.getIcon()).equals("queen")) {
             Queen queen = new Queen(row, col, getColor((ImageIcon) source.getIcon()));
             return queen.movableCells();
+        }
+        if (getType((ImageIcon) source.getIcon()).equals("knight")) {
+            Knight knight = new Knight(row, col, getColor((ImageIcon) source.getIcon()));
+            return knight.movableCells();
+        }
+        if (getType((ImageIcon) source.getIcon()).equals("rook")) {
+            Rook rook = new Rook(row, col, getColor((ImageIcon) source.getIcon()));
+            return rook.movableCells();
+        }
+        if (getType((ImageIcon) source.getIcon()).equals("bishop")) {
+            Bishop bishop = new Bishop(row, col, getColor((ImageIcon) source.getIcon()));
+            return bishop.movableCells();
         }
         return new ArrayList<>();
     }

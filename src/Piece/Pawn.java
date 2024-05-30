@@ -90,7 +90,6 @@ public class Pawn {
         if (Objects.equals(this.color, "white")) {
             //check vacancy of forward cell
             if (row - 1 >= 0) {
-                System.out.println(true);
                 if (getColor((ImageIcon) board[row - 1][col].getIcon()).equals("empty")) {
                     board[row - 1][col].setBackground(blueHighlight);
                     board[row - 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
