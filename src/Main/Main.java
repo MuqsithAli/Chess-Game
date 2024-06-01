@@ -270,7 +270,7 @@ public class Main implements MouseListener {
 
 
         //Perform Modifications below
-        board[7][0].setIcon(whiteKing);
+        board[4][5].setIcon(whiteKing);
         board[2][4].setIcon(blackPawn1);
         board[2][6].setIcon(blackPawn1);
         board[6][6].setIcon(blackPawn1);
@@ -309,27 +309,27 @@ public class Main implements MouseListener {
         String pieceColor = getColor((ImageIcon) clickedCell.getIcon());
         String pieceType = getType((ImageIcon) clickedCell.getIcon());
 //        System.out.println(pieceColor+" "+pieceType);
-        if (pieceType == "pawn") {
+        if (pieceType.equals("pawn")) {
             Pawn pawn = new Pawn(row, col, pieceColor);
             pawn.highlightCells(row, col);
         }
-        if (pieceType == "queen") {
+        if (pieceType.equals("queen")) {
             Queen queen = new Queen(row, col, pieceColor);
             queen.highlightCells(row, col);
         }
-        if (pieceType == "knight") {
+        if (pieceType.equals("knight")) {
             Knight knight = new Knight(row, col, pieceColor);
             knight.highlightCells(row, col);
         }
-        if (pieceType == "rook") {
+        if (pieceType.equals("rook")) {
             Rook rook = new Rook(row, col, pieceColor);
             rook.highlightCells(row, col);
         }
-        if (pieceType == "bishop") {
+        if (pieceType.equals("bishop")) {
             Bishop bishop = new Bishop(row, col, pieceColor);
             bishop.highlightCells(row, col);
         }
-        if (pieceType == "king") {
+        if (pieceType.equals("king")) {
             King king = new King(row, col, pieceColor);
             king.highlightCells(row, col);
         }
