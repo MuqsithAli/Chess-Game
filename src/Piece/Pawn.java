@@ -146,7 +146,7 @@ public class Pawn {
             //Handle IOB
             if (col + 1 < board.length && row + 1 < board.length) {
                 //check if right diagonal cell contains an enemy piece
-                if (getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("white") && !getType((ImageIcon) board[row - 1][col + 1].getIcon()).equals("king")) {
+                if (getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("white") && !getType((ImageIcon) board[row + 1][col + 1].getIcon()).equals("king")) {
                     board[row + 1][col + 1].setBackground(redHighlight);
                     board[row + 1][col + 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
                 }
