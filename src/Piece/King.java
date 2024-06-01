@@ -9,6 +9,7 @@ import java.util.List;
 
 import static Main.Main.*;
 
+//new logic
 public class King {
     public int row = -1;
     public int col = -1;
