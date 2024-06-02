@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Stack;
 
 public class Main implements MouseListener {
@@ -50,6 +51,7 @@ public class Main implements MouseListener {
     public static Color darkSquare = new Color(118, 150, 86);
     public static Color lightSquare = new Color(238, 238, 210);
     public static Stack<JLabel> clickedStack = new Stack<>(); // 0 -> Chess Piece, 1 -> movable Cell
+    public static String player = "white";
 
     Main() {
         JFrame frame = new JFrame("Chess");
@@ -235,46 +237,41 @@ public class Main implements MouseListener {
                 board[i][j].setFont(new Font("Arial", Font.PLAIN, 12));
             }
         }
-//        board[0][0].setIcon(blackRook1);
-//        board[0][7].setIcon(blackRook2);
-//        board[0][1].setIcon(blackKnight1);
-//        board[0][6].setIcon(blackKnight2);
-//        board[0][2].setIcon(blackBishop1);
-//        board[0][5].setIcon(blackBishop2);
-//        board[0][3].setIcon(blackQueen);
-//        board[0][4].setIcon(blackKing);
-//        board[1][0].setIcon(blackPawn1);
-//        board[1][1].setIcon(blackPawn2);
-//        board[1][2].setIcon(blackPawn3);
-//        board[1][3].setIcon(blackPawn4);
-//        board[1][4].setIcon(blackPawn5);
-//        board[1][5].setIcon(blackPawn6);
-//        board[1][6].setIcon(blackPawn7);
-//        board[1][7].setIcon(blackPawn8);
-//        board[7][0].setIcon(whiteRook1);
-//        board[7][7].setIcon(whiteRook2);
-//        board[7][1].setIcon(whiteKnight1);
-//        board[7][6].setIcon(whiteKnight2);
-//        board[7][2].setIcon(whiteBishop1);
-//        board[7][5].setIcon(whiteBishop2);
-//        board[7][3].setIcon(whiteQueen);
-//        board[7][4].setIcon(whiteKing);
-//        board[6][0].setIcon(whitePawn1);
-//        board[6][1].setIcon(whitePawn2);
-//        board[6][2].setIcon(whitePawn3);
-//        board[6][3].setIcon(whitePawn4);
-//        board[6][4].setIcon(whitePawn5);
-//        board[6][5].setIcon(whitePawn6);
-//        board[6][6].setIcon(whitePawn7);
-//        board[6][7].setIcon(whitePawn8);
+        board[0][0].setIcon(blackRook1);
+        board[0][7].setIcon(blackRook2);
+        board[0][1].setIcon(blackKnight1);
+        board[0][6].setIcon(blackKnight2);
+        board[0][2].setIcon(blackBishop1);
+        board[0][5].setIcon(blackBishop2);
+        board[0][3].setIcon(blackQueen);
+        board[0][4].setIcon(blackKing);
+        board[1][0].setIcon(blackPawn1);
+        board[1][1].setIcon(blackPawn2);
+        board[1][2].setIcon(blackPawn3);
+        board[1][3].setIcon(blackPawn4);
+        board[1][4].setIcon(blackPawn5);
+        board[1][5].setIcon(blackPawn6);
+        board[1][6].setIcon(blackPawn7);
+        board[1][7].setIcon(blackPawn8);
+        board[7][0].setIcon(whiteRook1);
+        board[7][7].setIcon(whiteRook2);
+        board[7][1].setIcon(whiteKnight1);
+        board[7][6].setIcon(whiteKnight2);
+        board[7][2].setIcon(whiteBishop1);
+        board[7][5].setIcon(whiteBishop2);
+        board[7][3].setIcon(whiteQueen);
+        board[7][4].setIcon(whiteKing);
+        board[6][0].setIcon(whitePawn1);
+        board[6][1].setIcon(whitePawn2);
+        board[6][2].setIcon(whitePawn3);
+        board[6][3].setIcon(whitePawn4);
+        board[6][4].setIcon(whitePawn5);
+        board[6][5].setIcon(whitePawn6);
+        board[6][6].setIcon(whitePawn7);
+        board[6][7].setIcon(whitePawn8);
 
 
         //Perform Modifications below
-        board[4][5].setIcon(blackKing);
-        board[2][4].setIcon(whitePawn5);
-        board[2][6].setIcon(whitePawn5);
-        board[6][6].setIcon(whitePawn5);
-        board[6][4].setIcon(whitePawn5);
     }
 
     @Override
@@ -293,9 +290,14 @@ public class Main implements MouseListener {
                 }
             }
         }
-        clickedStack.push(clickedCell);
+        if(clickedStack.isEmpty() && player.equals(getColor((ImageIcon) clickedCell.getIcon()))){
+            clickedStack.push(clickedCell);
+        }
+        else{
+            clickedStack.push(clickedCell);
+        }
         //Highlight the selected piece
-        if (clickedCell.getBorder() == null && clickedCell.getIcon() != null) {
+        if (clickedCell.getBorder() == null && clickedCell.getIcon() != null && player.equals(getColor((ImageIcon) clickedCell.getIcon()))) {
             clickedCell.setBorder(BorderFactory.createLineBorder(Color.red, 5));
         } else {
             clickedCell.setBorder(null);
@@ -358,6 +360,7 @@ public class Main implements MouseListener {
         ) {
             destination.setIcon(source.getIcon());
             source.setIcon(null);
+            player = Objects.equals(player, "white") ? "black" : "white";
         }
         destination.setBorder(null);
     }
