@@ -270,11 +270,11 @@ public class Main implements MouseListener {
 
 
         //Perform Modifications below
-        board[4][5].setIcon(whiteKing);
-        board[2][4].setIcon(blackPawn1);
-        board[2][6].setIcon(blackPawn1);
-        board[6][6].setIcon(blackPawn1);
-        board[6][4].setIcon(blackPawn1);
+        board[4][5].setIcon(blackKing);
+        board[2][4].setIcon(whitePawn5);
+        board[2][6].setIcon(whitePawn5);
+        board[6][6].setIcon(whitePawn5);
+        board[6][4].setIcon(whitePawn5);
     }
 
     @Override

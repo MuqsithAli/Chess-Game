@@ -159,55 +159,141 @@ public class King {
                 }
             }
         } else {
-            //forward
+            //check if forward cell is empty and ensure we are 1 square away from opposite king
             if (row - 1 >= 0) {
                 if (getColor((ImageIcon) board[row - 1][col].getIcon()).equals("empty")
                         && isSafe(row - 1, col)
                 ) {
-                    if (row - 2 >= 0 && col - 1 >= 0 && col + 1 < board.length) {
-                        if (!(getType((ImageIcon) board[row - 2][col - 1].getIcon()).equals("king") && getType((ImageIcon) board[row - 2][col].getIcon()).equals("king") && getType((ImageIcon) board[row - 2][col + 1].getIcon()).equals("king"))) {
-                            ans.add(board[row - 1][col]);
-                        }
-                    } else {
-                        ans.add(board[row - 1][col]);
-                    }
+                    ans.add(board[row - 1][col]);
                 }
+
+
+                //check if forward cell has a opposite piece and ensure we are 1 square away from opposite king
                 if (getColor((ImageIcon) board[row - 1][col].getIcon()).equals("white") && isSafe(row - 1, col)) {
-                    if (row - 2 >= 0 && col - 1 >= 0 && col + 1 < board.length) {
-                        if (!(getType((ImageIcon) board[row - 2][col - 1].getIcon()).equals("king") || getType((ImageIcon) board[row - 2][col].getIcon()).equals("king") || getType((ImageIcon) board[row - 2][col + 1].getIcon()).equals("king"))) {
-                            ans.add(board[row - 1][col]);
-                        }
-                    } else {
-                        ans.add(board[row - 1][col]);
-                    }
+                    ans.add(board[row - 1][col]);
                 }
             }
 
-            //backward
+
+            //check if backward cell is empty and ensure we are 1 square away from opposite king
             if (row + 1 < board.length) {
                 if (getColor((ImageIcon) board[row + 1][col].getIcon()).equals("empty")
                         && isSafe(row + 1, col)
                 ) {
-                    if (row + 2 < board.length && col - 1 >= 0 && col + 1 < board.length) {
-                        if (!(getType((ImageIcon) board[row + 2][col - 1].getIcon()).equals("king") || getType((ImageIcon) board[row + 2][col].getIcon()).equals("king") || getType((ImageIcon) board[row + 2][col + 1].getIcon()).equals("king"))
-                                && !((getColor((ImageIcon) board[row + 2][col - 1].getIcon()).equals("white") && getType((ImageIcon) board[row + 2][col - 1].getIcon()).equals("pawn")) || (getColor((ImageIcon) board[row + 2][col + 1].getIcon()).equals("white") && getType((ImageIcon) board[row + 2][col + 1].getIcon()).equals("pawn")))) {
-                            ans.add(board[row + 1][col]);
-                        }
-                    } else {
-                        ans.add(board[row + 1][col]);
-
-                    }
+                    ans.add(board[row + 1][col]);
                 }
+
+
+                //check if backward cell has an opposite piece and ensure we are 1 square away from opposite king
                 if (getColor((ImageIcon) board[row + 1][col].getIcon()).equals("white") && isSafe(row + 1, col)) {
-                    if (row + 2 < board.length && col - 1 >= 0 && col + 1 < board.length) {
-                        if (!(getType((ImageIcon) board[row + 2][col - 1].getIcon()).equals("king") || getType((ImageIcon) board[row + 2][col].getIcon()).equals("king") || getType((ImageIcon) board[row + 2][col + 1].getIcon()).equals("king"))
-                                && !((getColor((ImageIcon) board[row + 2][col - 1].getIcon()).equals("white") && getType((ImageIcon) board[row + 2][col - 1].getIcon()).equals("pawn")) || (getColor((ImageIcon) board[row + 2][col + 1].getIcon()).equals("white") && getType((ImageIcon) board[row + 2][col + 1].getIcon()).equals("pawn")))
-                        ) {
-                            ans.add(board[row + 1][col]);
-                        }
-                    } else {
-                        ans.add(board[row + 1][col]);
-                    }
+                    ans.add(board[row + 1][col]);
+                }
+            }
+
+            //check if left cell is empty and ensure we are 1 square away from opposite king
+            if (col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row][col - 1].getIcon()).equals("empty")
+                        && isSafe(row, col - 1)
+                ) {
+                    ans.add(board[row][col - 1]);
+                }
+
+
+                //check if left cell has an opposite piece and ensure we are 1 square away from opposite king
+                if (getColor((ImageIcon) board[row][col - 1].getIcon()).equals("white") && isSafe(row, col - 1)) {
+                    ans.add(board[row][col - 1]);
+                }
+            }
+
+            //check if right cell is empty and ensure we are 1 square away from opposite king
+            if (col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row][col + 1].getIcon()).equals("empty")
+                        && isSafe(row, col + 1)
+                ) {
+                    ans.add(board[row][col + 1]);
+                }
+
+
+                //check if right cell has an opposite piece and ensure we are 1 square away from opposite king
+                if (getColor((ImageIcon) board[row][col + 1].getIcon()).equals("white") && isSafe(row, col + 1)) {
+                    ans.add(board[row][col + 1]);
+                }
+            }
+
+
+            //check if upper left diagonal is empty and ensure it is 1 square away from opposite king
+            if (row - 1 >= 0 && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row - 1][col - 1].getIcon()).equals("empty")
+                        && isSafe(row - 1, col - 1)
+                ) {
+                    ans.add(board[row - 1][col - 1]);
+                }
+            }
+
+
+            //check if upper left diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row - 1 >= 0 && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row - 1][col - 1].getIcon()).equals("white")
+                        && isSafe(row - 1, col - 1)
+                ) {
+                    ans.add(board[row - 1][col - 1]);
+                }
+            }
+
+            //check if upper right diagonal is empty and ensure it is 1 square away from opposite king
+            if (row - 1 >= 0 && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row - 1][col + 1].getIcon()).equals("empty")
+                        && isSafe(row - 1, col + 1)
+                ) {
+                    ans.add(board[row - 1][col + 1]);
+                }
+            }
+
+
+            //check if upper right diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row - 1 >= 0 && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row - 1][col + 1].getIcon()).equals("white")
+                        && isSafe(row - 1, col + 1)
+                ) {
+                    ans.add(board[row - 1][col + 1]);
+                }
+            }
+
+            //check if lower right diagonal is empty and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("empty")
+                        && isSafe(row + 1, col + 1)
+                ) {
+                    ans.add(board[row + 1][col + 1]);
+                }
+            }
+
+
+            //check if lower right diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("white")
+                        && isSafe(row + 1, col + 1)
+                ) {
+                    ans.add(board[row + 1][col + 1]);
+                }
+            }
+
+            //check if lower left diagonal is empty and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row + 1][col - 1].getIcon()).equals("empty")
+                        && isSafe(row + 1, col - 1)
+                ) {
+                    ans.add(board[row + 1][col - 1]);
+                }
+            }
+
+
+            //check if lower left diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row + 1][col - 1].getIcon()).equals("white")
+                        && isSafe(row + 1, col - 1)
+                ) {
+                    ans.add(board[row + 1][col - 1]);
                 }
             }
         }
@@ -380,62 +466,157 @@ public class King {
                 }
             }
         } else {
-            //forward
+            //check if forward cell is empty and ensure we are 1 square away from opposite king
             if (row - 1 >= 0) {
                 if (getColor((ImageIcon) board[row - 1][col].getIcon()).equals("empty")
                         && isSafe(row - 1, col)
                 ) {
-                    if (row - 2 >= 0 && col - 1 >= 0 && col + 1 < board.length) {
-                        if (!(getType((ImageIcon) board[row - 2][col - 1].getIcon()).equals("king") || getType((ImageIcon) board[row - 2][col].getIcon()).equals("king") || getType((ImageIcon) board[row - 2][col + 1].getIcon()).equals("king"))) {
-                            board[row - 1][col].setBackground(blueHighlight);
-                            board[row - 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
-                        }
-                    } else {
-                        board[row - 1][col].setBackground(blueHighlight);
-                        board[row - 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
-                    }
+                    board[row - 1][col].setBackground(blueHighlight);
+                    board[row - 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
                 }
+
+
+                //check if forward cell has a opposite piece and ensure we are 1 square away from opposite king
                 if (getColor((ImageIcon) board[row - 1][col].getIcon()).equals("white") && isSafe(row - 1, col)) {
-                    if (row - 2 >= 0 && col - 1 >= 0 && col + 1 < board.length) {
-                        if (!(getType((ImageIcon) board[row - 2][col - 1].getIcon()).equals("king") || getType((ImageIcon) board[row - 2][col].getIcon()).equals("king") || getType((ImageIcon) board[row - 2][col + 1].getIcon()).equals("king"))) {
-                            board[row - 1][col].setBackground(redHighlight);
-                            board[row - 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
-                        }
-                    } else {
-                        board[row - 1][col].setBackground(redHighlight);
-                        board[row - 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
-                    }
+                    board[row - 1][col].setBackground(redHighlight);
+                    board[row - 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
 
+
+            //check if backward cell is empty and ensure we are 1 square away from opposite king
+            if (row + 1 < board.length) {
+                if (getColor((ImageIcon) board[row + 1][col].getIcon()).equals("empty")
+                        && isSafe(row + 1, col)
+                ) {
+                    board[row + 1][col].setBackground(blueHighlight);
+                    board[row + 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
                 }
 
-                //backward
-                if (row + 1 < board.length) {
-                    if (getColor((ImageIcon) board[row + 1][col].getIcon()).equals("empty")
-                            && isSafe(row + 1, col)
-                    ) {
-                        if (row + 2 < board.length && col - 1 >= 0 && col + 1 < board.length) {
-                            if (!(getType((ImageIcon) board[row + 2][col - 1].getIcon()).equals("king") || getType((ImageIcon) board[row + 2][col].getIcon()).equals("king") || getType((ImageIcon) board[row + 2][col + 1].getIcon()).equals("king"))
-                                    && !((getColor((ImageIcon) board[row + 2][col - 1].getIcon()).equals("white") && getType((ImageIcon) board[row + 2][col - 1].getIcon()).equals("pawn")) || (getColor((ImageIcon) board[row + 2][col + 1].getIcon()).equals("white") && getType((ImageIcon) board[row + 2][col + 1].getIcon()).equals("pawn")))) {
-                                board[row + 1][col].setBackground(blueHighlight);
-                                board[row + 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
-                            }
-                        } else {
-                            board[row + 1][col].setBackground(blueHighlight);
-                            board[row + 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
-                        }
-                    }
-                    if (getColor((ImageIcon) board[row + 1][col].getIcon()).equals("white") && isSafe(row + 1, col)) {
-                        if (row + 2 < board.length && col - 1 >= 0 && col + 1 < board.length) {
-                            if (!(getType((ImageIcon) board[row + 2][col - 1].getIcon()).equals("king") || getType((ImageIcon) board[row + 2][col].getIcon()).equals("king") || getType((ImageIcon) board[row + 2][col + 1].getIcon()).equals("king"))
-                                    && !((getColor((ImageIcon) board[row + 2][col - 1].getIcon()).equals("white") && getType((ImageIcon) board[row + 2][col - 1].getIcon()).equals("pawn")) || (getColor((ImageIcon) board[row + 2][col + 1].getIcon()).equals("white") && getType((ImageIcon) board[row + 2][col + 1].getIcon()).equals("pawn")))) {
-                                board[row + 1][col].setBackground(redHighlight);
-                                board[row + 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
-                            }
-                        } else {
-                            board[row + 1][col].setBackground(redHighlight);
-                            board[row + 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
-                        }
-                    }
+
+                //check if backward cell has an opposite piece and ensure we are 1 square away from opposite king
+                if (getColor((ImageIcon) board[row + 1][col].getIcon()).equals("white") && isSafe(row + 1, col)) {
+                    board[row + 1][col].setBackground(redHighlight);
+                    board[row + 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+            //check if left cell is empty and ensure we are 1 square away from opposite king
+            if (col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row][col - 1].getIcon()).equals("empty")
+                        && isSafe(row, col - 1)
+                ) {
+                    board[row][col - 1].setBackground(blueHighlight);
+                    board[row][col - 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+
+
+                //check if left cell has an opposite piece and ensure we are 1 square away from opposite king
+                if (getColor((ImageIcon) board[row][col - 1].getIcon()).equals("white") && isSafe(row, col - 1)) {
+                    board[row][col - 1].setBackground(redHighlight);
+                    board[row][col - 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+            //check if right cell is empty and ensure we are 1 square away from opposite king
+            if (col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row][col + 1].getIcon()).equals("empty")
+                        && isSafe(row, col + 1)
+                ) {
+                    board[row][col + 1].setBackground(blueHighlight);
+                    board[row][col + 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+
+
+                //check if right cell has an opposite piece and ensure we are 1 square away from opposite king
+                if (getColor((ImageIcon) board[row][col + 1].getIcon()).equals("white") && isSafe(row, col + 1)) {
+                    board[row][col + 1].setBackground(redHighlight);
+                    board[row][col + 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+
+            //check if upper left diagonal is empty and ensure it is 1 square away from opposite king
+            if (row - 1 >= 0 && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row - 1][col - 1].getIcon()).equals("empty")
+                        && isSafe(row - 1, col - 1)
+                ) {
+                    board[row - 1][col - 1].setBackground(blueHighlight);
+                    board[row - 1][col - 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+
+            //check if upper left diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row - 1 >= 0 && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row - 1][col - 1].getIcon()).equals("white")
+                        && isSafe(row - 1, col - 1)
+                ) {
+                    board[row - 1][col - 1].setBackground(redHighlight);
+                    board[row - 1][col - 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+            //check if upper right diagonal is empty and ensure it is 1 square away from opposite king
+            if (row - 1 >= 0 && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row - 1][col + 1].getIcon()).equals("empty")
+                        && isSafe(row - 1, col + 1)
+                ) {
+                    board[row - 1][col + 1].setBackground(blueHighlight);
+                    board[row - 1][col + 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+
+            //check if upper right diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row - 1 >= 0 && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row - 1][col + 1].getIcon()).equals("white")
+                        && isSafe(row - 1, col + 1)
+                ) {
+                    board[row - 1][col + 1].setBackground(redHighlight);
+                    board[row - 1][col + 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+            //check if lower right diagonal is empty and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("empty")
+                        && isSafe(row + 1, col + 1)
+                ) {
+                    board[row + 1][col + 1].setBackground(blueHighlight);
+                    board[row + 1][col + 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+
+            //check if lower right diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("white")
+                        && isSafe(row + 1, col + 1)
+                ) {
+                    board[row + 1][col + 1].setBackground(redHighlight);
+                    board[row + 1][col + 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+            //check if lower left diagonal is empty and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row + 1][col - 1].getIcon()).equals("empty")
+                        && isSafe(row + 1, col - 1)
+                ) {
+                    board[row + 1][col - 1].setBackground(blueHighlight);
+                    board[row + 1][col - 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+
+            //check if lower left diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row + 1][col - 1].getIcon()).equals("white")
+                        && isSafe(row + 1, col - 1)
+                ) {
+                    board[row + 1][col - 1].setBackground(redHighlight);
+                    board[row + 1][col - 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
                 }
             }
         }
@@ -609,16 +790,14 @@ public class King {
                 }
             }
         } else {
-            for (int i = 0; i < board.length; i++) {
-                for (int j = 0; j < board.length; j++) {
-                    if (getColor((ImageIcon) board[i][j].getIcon()).equals("white")) {
-                        if (getType((ImageIcon) board[i][j].getIcon()).equals("pawn")) {
-                            Pawn pawn = new Pawn(i, j, "white");
-                            if (pawn.movableCells().contains(board[row][col])) {
-                                return false;
-                            }
-                        }
-                    }
+            if (row + 1 < board.length && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row + 1][col - 1].getIcon()).equals("white") && getType((ImageIcon) board[row + 1][col - 1].getIcon()).equals("pawn")) {
+                    return false;
+                }
+            }
+            if (row + 1 < board.length && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("white") && getType((ImageIcon) board[row + 1][col + 1].getIcon()).equals("pawn")) {
+                    return false;
                 }
             }
             if (row - 1 >= 0 && col - 1 >= 0) {
