@@ -9,7 +9,7 @@ import java.util.List;
 
 import static Main.Main.*;
 
-//new logic
+//completing king
 public class King {
     public int row = -1;
     public int col = -1;
@@ -55,6 +55,36 @@ public class King {
                 }
             }
 
+            //check if left cell is empty and ensure we are 1 square away from opposite king
+            if (col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row][col - 1].getIcon()).equals("empty")
+                        && isSafe(row, col - 1)
+                ) {
+                    ans.add(board[row][col - 1]);
+                }
+
+
+                //check if left cell has an opposite piece and ensure we are 1 square away from opposite king
+                if (getColor((ImageIcon) board[row][col - 1].getIcon()).equals("black") && isSafe(row, col - 1)) {
+                    ans.add(board[row][col - 1]);
+                }
+            }
+
+            //check if right cell is empty and ensure we are 1 square away from opposite king
+            if (col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row][col + 1].getIcon()).equals("empty")
+                        && isSafe(row, col + 1)
+                ) {
+                    ans.add(board[row][col + 1]);
+                }
+
+
+                //check if right cell has an opposite piece and ensure we are 1 square away from opposite king
+                if (getColor((ImageIcon) board[row][col + 1].getIcon()).equals("black") && isSafe(row, col + 1)) {
+                    ans.add(board[row][col + 1]);
+                }
+            }
+
             //check if upper left diagonal is empty and ensure it is 1 square away from opposite king
             if (row - 1 >= 0 && col - 1 >= 0) {
                 if (getColor((ImageIcon) board[row - 1][col - 1].getIcon()).equals("empty")
@@ -63,34 +93,69 @@ public class King {
                     ans.add(board[row - 1][col - 1]);
                 }
             }
-        }
 
-        //check if upper left diagonal has an opposite piece and ensure it is 1 square away from opposite king
-        if (row - 1 >= 0 && col - 1 >= 0) {
-            if (getColor((ImageIcon) board[row - 1][col - 1].getIcon()).equals("black")
-                    && isSafe(row - 1, col - 1)
-            ) {
-                ans.add(board[row - 1][col - 1]);
-                if (row - 2 >= 0) {
-                    if (col - 2 >= 0) {
-                        if (!(getType((ImageIcon) board[row - 2][col - 2].getIcon()).equals("king") || getType((ImageIcon) board[row - 2][col - 1].getIcon()).equals("king") || getType((ImageIcon) board[row - 2][col].getIcon()).equals("king") || getType((ImageIcon) board[row - 1][col - 2].getIcon()).equals("king") || getType((ImageIcon) board[row][col - 2].getIcon()).equals("king"))
-                                && !((getColor((ImageIcon) board[row - 2][col - 2].getIcon()).equals("black") && getType((ImageIcon) board[row - 2][col - 2].getIcon()).equals("pawn")) || (getColor((ImageIcon) board[row - 2][col].getIcon()).equals("black") && getType((ImageIcon) board[row - 2][col].getIcon()).equals("pawn")))) {
-                            ans.add(board[row - 1][col - 1]);
-                        }
-                    } else {
-                        if (!(getType((ImageIcon) board[row - 2][col - 1].getIcon()).equals("king"))
-                                && !((getColor((ImageIcon) board[row - 2][col].getIcon()).equals("black") && getType((ImageIcon) board[row - 2][col].getIcon()).equals("pawn")))) {
-                            ans.add(board[row - 1][col - 1]);
-                        }
-                    }
-                } else {
-                    if (col - 2 >= 0) {
-                        if (!(getType((ImageIcon) board[row - 1][col - 2].getIcon()).equals("king") || getType((ImageIcon) board[row][col - 2].getIcon()).equals("king"))) {
-                            ans.add(board[row - 1][col - 1]);
-                        }
-                    } else {
-                        ans.add(board[row - 1][col - 1]);
-                    }
+            //check if upper left diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row - 1 >= 0 && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row - 1][col - 1].getIcon()).equals("black")
+                        && isSafe(row - 1, col - 1)
+                ) {
+                    ans.add(board[row - 1][col - 1]);
+                }
+            }
+
+            //check if upper right diagonal is empty and ensure it is 1 square away from opposite king
+            if (row - 1 >= 0 && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row - 1][col + 1].getIcon()).equals("empty")
+                        && isSafe(row - 1, col + 1)
+                ) {
+                    ans.add(board[row - 1][col + 1]);
+                }
+            }
+
+            //check if upper right diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row - 1 >= 0 && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row - 1][col + 1].getIcon()).equals("black")
+                        && isSafe(row - 1, col + 1)
+                ) {
+                    ans.add(board[row - 1][col + 1]);
+                }
+            }
+
+            //check if lower right diagonal is empty and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("empty")
+                        && isSafe(row + 1, col + 1)
+                ) {
+                    ans.add(board[row + 1][col + 1]);
+                }
+            }
+
+
+            //check if lower right diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("black")
+                        && isSafe(row + 1, col + 1)
+                ) {
+                    ans.add(board[row + 1][col + 1]);
+                }
+            }
+
+            //check if lower left diagonal is empty and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row + 1][col - 1].getIcon()).equals("empty")
+                        && isSafe(row + 1, col - 1)
+                ) {
+                    ans.add(board[row + 1][col - 1]);
+                }
+            }
+
+
+            //check if lower left diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row + 1][col - 1].getIcon()).equals("black")
+                        && isSafe(row + 1, col - 1)
+                ) {
+                    ans.add(board[row + 1][col - 1]);
                 }
             }
         } else {
@@ -181,7 +246,6 @@ public class King {
 
             //check if backward cell is empty and ensure we are 1 square away from opposite king
             if (row + 1 < board.length) {
-                System.out.println(isSafe(row+1, col));
                 if (getColor((ImageIcon) board[row + 1][col].getIcon()).equals("empty")
                         && isSafe(row + 1, col)
                 ) {
@@ -194,6 +258,40 @@ public class King {
                 if (getColor((ImageIcon) board[row + 1][col].getIcon()).equals("black") && isSafe(row + 1, col)) {
                     board[row + 1][col].setBackground(redHighlight);
                     board[row + 1][col].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+            //check if left cell is empty and ensure we are 1 square away from opposite king
+            if (col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row][col - 1].getIcon()).equals("empty")
+                        && isSafe(row, col - 1)
+                ) {
+                    board[row][col - 1].setBackground(blueHighlight);
+                    board[row][col - 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+
+
+                //check if left cell has an opposite piece and ensure we are 1 square away from opposite king
+                if (getColor((ImageIcon) board[row][col - 1].getIcon()).equals("black") && isSafe(row, col - 1)) {
+                    board[row][col - 1].setBackground(redHighlight);
+                    board[row][col - 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+            //check if right cell is empty and ensure we are 1 square away from opposite king
+            if (col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row][col + 1].getIcon()).equals("empty")
+                        && isSafe(row, col + 1)
+                ) {
+                    board[row][col + 1].setBackground(blueHighlight);
+                    board[row][col + 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+
+
+                //check if right cell has an opposite piece and ensure we are 1 square away from opposite king
+                if (getColor((ImageIcon) board[row][col + 1].getIcon()).equals("black") && isSafe(row, col + 1)) {
+                    board[row][col + 1].setBackground(redHighlight);
+                    board[row][col + 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
                 }
             }
 
@@ -216,6 +314,69 @@ public class King {
                 ) {
                     board[row - 1][col - 1].setBackground(redHighlight);
                     board[row - 1][col - 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+            //check if upper right diagonal is empty and ensure it is 1 square away from opposite king
+            if (row - 1 >= 0 && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row - 1][col + 1].getIcon()).equals("empty")
+                        && isSafe(row - 1, col + 1)
+                ) {
+                    board[row - 1][col + 1].setBackground(blueHighlight);
+                    board[row - 1][col + 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+
+            //check if upper right diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row - 1 >= 0 && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row - 1][col + 1].getIcon()).equals("black")
+                        && isSafe(row - 1, col + 1)
+                ) {
+                    board[row - 1][col + 1].setBackground(redHighlight);
+                    board[row - 1][col + 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+            //check if lower right diagonal is empty and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("empty")
+                        && isSafe(row + 1, col + 1)
+                ) {
+                    board[row + 1][col + 1].setBackground(blueHighlight);
+                    board[row + 1][col + 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+
+            //check if lower right diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("black")
+                        && isSafe(row + 1, col + 1)
+                ) {
+                    board[row + 1][col + 1].setBackground(redHighlight);
+                    board[row + 1][col + 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+            //check if lower left diagonal is empty and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row + 1][col - 1].getIcon()).equals("empty")
+                        && isSafe(row + 1, col - 1)
+                ) {
+                    board[row + 1][col - 1].setBackground(blueHighlight);
+                    board[row + 1][col - 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                }
+            }
+
+
+            //check if lower left diagonal has an opposite piece and ensure it is 1 square away from opposite king
+            if (row + 1 < board.length && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row + 1][col - 1].getIcon()).equals("black")
+                        && isSafe(row + 1, col - 1)
+                ) {
+                    board[row + 1][col - 1].setBackground(redHighlight);
+                    board[row + 1][col - 1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
                 }
             }
         } else {
@@ -282,15 +443,13 @@ public class King {
 
     public boolean isSafe(int row, int col) {
         if (Objects.equals(this.color, "white")) {
-            if(row - 1 >= 0 && col - 1 >= 0){
-                if(getColor((ImageIcon) board[row-1][col-1].getIcon()).equals("black") && getType((ImageIcon) board[row-1][col-1].getIcon()).equals("pawn")){
-                System.out.println("yes");
+            if (row - 1 >= 0 && col - 1 >= 0) {
+                if (getColor((ImageIcon) board[row - 1][col - 1].getIcon()).equals("black") && getType((ImageIcon) board[row - 1][col - 1].getIcon()).equals("pawn")) {
                     return false;
                 }
-                System.out.println("no");
             }
-            if(row - 1 >= 0 && col + 1 < board.length){
-                if(getColor((ImageIcon) board[row-1][col+1].getIcon()).equals("black") && getType((ImageIcon) board[row-1][col+1].getIcon()).equals("pawn")){
+            if (row - 1 >= 0 && col + 1 < board.length) {
+                if (getColor((ImageIcon) board[row - 1][col + 1].getIcon()).equals("black") && getType((ImageIcon) board[row - 1][col + 1].getIcon()).equals("pawn")) {
                     return false;
                 }
             }
@@ -449,8 +608,7 @@ public class King {
                     return false;
                 }
             }
-        }
-        else {
+        } else {
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board.length; j++) {
                     if (getColor((ImageIcon) board[i][j].getIcon()).equals("white")) {
