@@ -25,6 +25,9 @@ public class Rook {
         if (Objects.equals(this.color, "white")) {
             //forward
             for (int i = row - 1; i >= 0; i--) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("white") || (getColor((ImageIcon) board[i][col].getIcon()).equals("black") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -37,6 +40,9 @@ public class Rook {
 
             //backward
             for (int i = row + 1; i < board.length; i++) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("white") || (getColor((ImageIcon) board[i][col].getIcon()).equals("black") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -49,6 +55,9 @@ public class Rook {
 
             //left
             for (int i = col - 1; i >= 0; i--) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("white") || (getColor((ImageIcon) board[row][i].getIcon()).equals("black") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -61,6 +70,9 @@ public class Rook {
 
             //right
             for (int i = col + 1; i < board.length; i++) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("white") || (getColor((ImageIcon) board[row][i].getIcon()).equals("black") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -73,6 +85,9 @@ public class Rook {
         } else {
             //forward
             for (int i = row - 1; i >= 0; i--) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("black") || (getColor((ImageIcon) board[i][col].getIcon()).equals("white") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -85,6 +100,9 @@ public class Rook {
 
             //backward
             for (int i = row + 1; i < board.length; i++) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("black") || (getColor((ImageIcon) board[i][col].getIcon()).equals("white") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -97,6 +115,9 @@ public class Rook {
 
             //left
             for (int i = col - 1; i >= 0; i--) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("black") || (getColor((ImageIcon) board[row][i].getIcon()).equals("white") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -109,6 +130,9 @@ public class Rook {
 
             //right
             for (int i = col + 1; i < board.length; i++) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("black") || (getColor((ImageIcon) board[row][i].getIcon()).equals("white") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -137,6 +161,9 @@ public class Rook {
         if (Objects.equals(this.color, "white")) {
             //forward
             for (int i = row - 1; i >= 0; i--) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("white") || (getColor((ImageIcon) board[i][col].getIcon()).equals("black") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -151,6 +178,9 @@ public class Rook {
 
             //backward
             for (int i = row + 1; i < board.length; i++) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("white") || (getColor((ImageIcon) board[i][col].getIcon()).equals("black") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -165,6 +195,9 @@ public class Rook {
 
             //left
             for (int i = col - 1; i >= 0; i--) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("white") || (getColor((ImageIcon) board[row][i].getIcon()).equals("black") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -179,6 +212,9 @@ public class Rook {
 
             //right
             for (int i = col + 1; i < board.length; i++) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("white") || (getColor((ImageIcon) board[row][i].getIcon()).equals("black") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -193,6 +229,9 @@ public class Rook {
         } else {
             //forward
             for (int i = row - 1; i >= 0; i--) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("black") || (getColor((ImageIcon) board[i][col].getIcon()).equals("white") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -207,6 +246,9 @@ public class Rook {
 
             //backward
             for (int i = row + 1; i < board.length; i++) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("black") || (getColor((ImageIcon) board[i][col].getIcon()).equals("white") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -221,6 +263,9 @@ public class Rook {
 
             //left
             for (int i = col - 1; i >= 0; i--) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("black") || (getColor((ImageIcon) board[row][i].getIcon()).equals("white") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -235,6 +280,9 @@ public class Rook {
 
             //right
             for (int i = col + 1; i < board.length; i++) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("black") || (getColor((ImageIcon) board[row][i].getIcon()).equals("white") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -248,4 +296,37 @@ public class Rook {
             }
         }
     }
+    public boolean canMove(int prevRow, int prevCol, int row, int col){
+        if(Objects.equals(this.color, "white")){
+            ImageIcon temp = (ImageIcon) board[row][col].getIcon();
+            board[row][col].setIcon(whiteRook1);
+            board[prevRow][prevCol].setIcon(null);
+            if(isCheck("white", board)){
+                board[row][col].setIcon(temp);
+                board[prevRow][prevCol].setIcon(whiteRook1);
+                return false;
+            }
+            else{
+                board[row][col].setIcon(temp);
+                board[prevRow][prevCol].setIcon(whiteRook1);
+                return true;
+            }
+        }
+        else{
+            ImageIcon temp = (ImageIcon) board[row][col].getIcon();
+            board[row][col].setIcon(blackRook1);
+            board[prevRow][prevCol].setIcon(null);
+            if(isCheck("black", board)){
+                board[row][col].setIcon(temp);
+                board[prevRow][prevCol].setIcon(blackRook1);
+                return false;
+            }
+            else{
+                board[row][col].setIcon(temp);
+                board[prevRow][prevCol].setIcon(blackRook1);
+                return true;
+            }
+        }
+    }
 }
+

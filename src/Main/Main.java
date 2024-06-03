@@ -50,6 +50,7 @@ public class Main implements MouseListener {
     public static Color redHighlight = new Color(228, 119, 119);
     public static Color darkSquare = new Color(118, 150, 86);
     public static Color lightSquare = new Color(238, 238, 210);
+    public static Color pinkHighLight = new Color(252, 168, 210);
     public static Stack<JLabel> clickedStack = new Stack<>(); // 0 -> Chess Piece, 1 -> movable Cell
     public static String player = "white";
 
@@ -231,10 +232,14 @@ public class Main implements MouseListener {
     }
 
     public static void initialiseBoard() {
-        for(int i = 0 ; i < board.length; i++){
-            for(int j = 0; j < board.length ; j++){
-                board[i][j].setText(i+", "+j);
-                board[i][j].setFont(new Font("Arial", Font.PLAIN, 12));
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                board[i][j].setBackground((i + j) % 2 != 0 ? darkSquare : lightSquare);
+                board[i][j].setIcon(null);
+                board[i][j].setBorder(null);
+//                board[i][j].setText(i + ", " + j);
+//                board[i][j].setFont(new Font("Arial", Font.PLAIN, 12));
             }
         }
         board[0][0].setIcon(blackRook1);
@@ -272,6 +277,9 @@ public class Main implements MouseListener {
 
 
         //Perform Modifications below
+//        board[0][0].setIcon(blackKing);
+//        board[4][3].setIcon(whiteRook2);
+//        board[5][7].setIcon(whiteRook2);
     }
 
     @Override
@@ -290,14 +298,13 @@ public class Main implements MouseListener {
                 }
             }
         }
-        if(clickedStack.isEmpty() && player.equals(getColor((ImageIcon) clickedCell.getIcon()))){
+        if (clickedStack.isEmpty() && player.equals(getColor((ImageIcon) clickedCell.getIcon()))) {
             clickedStack.push(clickedCell);
-        }
-        else{
+        } else {
             clickedStack.push(clickedCell);
         }
         //Highlight the selected piece
-        if (clickedCell.getBorder() == null && clickedCell.getIcon() != null && player.equals(getColor((ImageIcon) clickedCell.getIcon()))) {
+        if ((clickedCell.getBorder() == null && clickedCell.getIcon() != null && player.equals(getColor((ImageIcon) clickedCell.getIcon())) || clickedCell.getBackground() == pinkHighLight)) {
             clickedCell.setBorder(BorderFactory.createLineBorder(Color.red, 5));
         } else {
             clickedCell.setBorder(null);
@@ -347,12 +354,42 @@ public class Main implements MouseListener {
                 }
             }
         }
-
+        if (isCheck("white", board)) {
+            for (JLabel[] jLabels : board) {
+                for (int j = 0; j < board.length; j++) {
+                    if (getColor((ImageIcon) jLabels[j].getIcon()).equals("white") && getType((ImageIcon) jLabels[j].getIcon()).equals("king")) {
+                        jLabels[j].setBackground(pinkHighLight);
+                        jLabels[j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+            }
+            if (isCheckMate("white")) {
+                JOptionPane.showMessageDialog(null, "Black wins!");
+                player = "white";
+                initialiseBoard();
+            }
+        }
+        if (isCheck("black", board)) {
+            for (JLabel[] jLabels : board) {
+                for (int j = 0; j < board.length; j++) {
+                    if (getColor((ImageIcon) jLabels[j].getIcon()).equals("black") && getType((ImageIcon) jLabels[j].getIcon()).equals("king")) {
+                        jLabels[j].setBackground(pinkHighLight);
+                        jLabels[j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+            }
+        }
+        if (isCheckMate("black")) {
+            JOptionPane.showMessageDialog(null, "White wins!");
+            player = "white";
+            initialiseBoard();
+        }
     }
 
     public static void movePiece(JLabel source, JLabel destination) {
         if (source != destination
                 && source.getIcon() != null
+                && getColor((ImageIcon) source.getIcon()).equals(player)
                 && !getColor((ImageIcon) source.getIcon()).equals(getColor((ImageIcon) destination.getIcon()))
                 && !(getColor((ImageIcon) source.getIcon()).equals("white") && getType((ImageIcon) destination.getIcon()).equals("king") && getColor((ImageIcon) destination.getIcon()).equals("black"))
                 && !(getColor((ImageIcon) source.getIcon()).equals("black") && getType((ImageIcon) destination.getIcon()).equals("king") && getColor((ImageIcon) destination.getIcon()).equals("white"))
@@ -519,5 +556,62 @@ public class Main implements MouseListener {
         g2d.dispose();
 
         return bufferedImage;
+    }
+
+    public static boolean isCheck(String color, JLabel[][] board) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (getColor((ImageIcon) board[i][j].getIcon()).equals(color) && getType((ImageIcon) board[i][j].getIcon()).equals("king")) {
+                    King king = new King(i, j, color);
+                    if (!king.isSafe(i, j)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isCheckMate(String color) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (getColor((ImageIcon) board[i][j].getIcon()).equals(color)) {
+                    if (getType((ImageIcon) board[i][j].getIcon()).equals("king")) {
+                        King king = new King(i, j, color);
+                        if (!king.movableCells().isEmpty()) {
+                            return false;
+                        }
+                    } else if (getType((ImageIcon) board[i][j].getIcon()).equals("queen")) {
+                        Queen queen = new Queen(i, j, color);
+                        if (!queen.movableCells().isEmpty()) {
+                            return false;
+                        }
+                    } else if (getType((ImageIcon) board[i][j].getIcon()).equals("rook")) {
+                        Rook rook = new Rook(i, j, color);
+                        if (!rook.movableCells().isEmpty()) {
+                            return false;
+                        }
+                    } else if (getType((ImageIcon) board[i][j].getIcon()).equals("knight")) {
+                        Knight knight = new Knight(i, j, color);
+                        if (!knight.movableCells().isEmpty()) {
+                            return false;
+                        }
+                    } else if (getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) {
+                        Bishop bishop = new Bishop(i, j, color);
+                        if (!bishop.movableCells().isEmpty()) {
+                            return false;
+                        }
+                    } else {
+                        Pawn pawn = new Pawn(i, j, color);
+                        if (!pawn.movableCells().isEmpty()) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

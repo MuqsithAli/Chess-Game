@@ -25,6 +25,9 @@ public class Bishop {
         if (Objects.equals(this.color, "white")) {
             //upper right diagonal
             for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -37,6 +40,9 @@ public class Bishop {
 
             //upper left diagonal
             for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -49,6 +55,9 @@ public class Bishop {
 
             //lower right diagonal
             for (int i = row + 1, j = col + 1; i < board.length && j < board.length; i++, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -60,6 +69,9 @@ public class Bishop {
             }
             //lower left diagonal
             for (int i = row + 1, j = col - 1; i < board.length && j >= 0; i++, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -72,6 +84,9 @@ public class Bishop {
         } else {
             //upper right diagonal
             for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -84,6 +99,9 @@ public class Bishop {
 
             //upper left diagonal
             for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -96,6 +114,9 @@ public class Bishop {
 
             //lower right diagonal
             for (int i = row + 1, j = col + 1; i < board.length && j < board.length; i++, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -107,6 +128,9 @@ public class Bishop {
             }
             //lower left diagonal
             for (int i = row + 1, j = col - 1; i < board.length && j >= 0; i++, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -135,6 +159,9 @@ public class Bishop {
         if (Objects.equals(this.color, "white")) {
             //upper right diagonal
             for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -149,6 +176,9 @@ public class Bishop {
 
             //upper left diagonal
             for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -163,6 +193,9 @@ public class Bishop {
 
             //lower right diagonal
             for (int i = row + 1, j = col + 1; i < board.length && j < board.length; i++, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -176,6 +209,9 @@ public class Bishop {
             }
             //lower left diagonal
             for (int i = row + 1, j = col - 1; i < board.length && j >= 0; i++, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -190,6 +226,9 @@ public class Bishop {
         } else {
             //upper right diagonal
             for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -204,6 +243,9 @@ public class Bishop {
 
             //upper left diagonal
             for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -218,6 +260,9 @@ public class Bishop {
 
             //lower right diagonal
             for (int i = row + 1, j = col + 1; i < board.length && j < board.length; i++, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -231,6 +276,9 @@ public class Bishop {
             }
             //lower left diagonal
             for (int i = row + 1, j = col - 1; i < board.length && j >= 0; i++, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -241,6 +289,39 @@ public class Bishop {
                 }
                 board[i][j].setBackground(blueHighlight);
                 board[i][j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+            }
+        }
+    }
+
+    public boolean canMove(int prevRow, int prevCol, int row, int col){
+        if(Objects.equals(this.color, "white")){
+            ImageIcon temp = (ImageIcon) board[row][col].getIcon();
+            board[row][col].setIcon(whiteBishop1);
+            board[prevRow][prevCol].setIcon(null);
+            if(isCheck("white", board)){
+                board[row][col].setIcon(temp);
+                board[prevRow][prevCol].setIcon(whiteBishop1);
+                return false;
+            }
+            else{
+                board[row][col].setIcon(temp);
+                board[prevRow][prevCol].setIcon(whiteBishop2);
+                return true;
+            }
+        }
+        else{
+            ImageIcon temp = (ImageIcon) board[row][col].getIcon();
+            board[row][col].setIcon(blackBishop1);
+            board[prevRow][prevCol].setIcon(null);
+            if(isCheck("black", board)){
+                board[row][col].setIcon(temp);
+                board[prevRow][prevCol].setIcon(blackBishop1);
+                return false;
+            }
+            else{
+                board[row][col].setIcon(temp);
+                board[prevRow][prevCol].setIcon(blackBishop1);
+                return true;
             }
         }
     }

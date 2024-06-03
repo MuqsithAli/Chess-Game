@@ -635,29 +635,45 @@ public class King {
                 }
             }
             if (row - 1 >= 0 && col - 1 >= 0) {
-                return !getColor((ImageIcon) board[row - 1][col - 1].getIcon()).equals("black") || !getType((ImageIcon) board[row - 1][col - 1].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row - 1][col - 1].getIcon()).equals("black") && getType((ImageIcon) board[row - 1][col - 1].getIcon()).equals("king")){
+                    return false;
+                }
             }
             if (row - 1 >= 0) {
-                return !getColor((ImageIcon) board[row - 1][col].getIcon()).equals("black") || !getType((ImageIcon) board[row - 1][col].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row - 1][col].getIcon()).equals("black") && getType((ImageIcon) board[row - 1][col].getIcon()).equals("king")){
+                    return false;
+                }
             }
             if (row - 1 >= 0 && col + 1 < board.length) {
-                return !getColor((ImageIcon) board[row - 1][col + 1].getIcon()).equals("black") || !getType((ImageIcon) board[row - 1][col + 1].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row - 1][col + 1].getIcon()).equals("black") && getType((ImageIcon) board[row - 1][col + 1].getIcon()).equals("king")){
+                    return false;
+                }
             }
             if (col - 1 >= 0) {
-                return !getColor((ImageIcon) board[row][col - 1].getIcon()).equals("black") || !getType((ImageIcon) board[row][col - 1].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row][col - 1].getIcon()).equals("black") && getType((ImageIcon) board[row][col - 1].getIcon()).equals("king")){
+                    return false;
+                }
             }
 
             if (col + 1 < board.length) {
-                return !getColor((ImageIcon) board[row][col + 1].getIcon()).equals("black") || !getType((ImageIcon) board[row][col + 1].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row][col + 1].getIcon()).equals("black") && getType((ImageIcon) board[row][col + 1].getIcon()).equals("king")){
+                    return false;
+                }
             }
             if (row + 1 < board.length && col - 1 >= 0) {
-                return !getColor((ImageIcon) board[row + 1][col - 1].getIcon()).equals("black") || !getType((ImageIcon) board[row + 1][col - 1].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row + 1][col - 1].getIcon()).equals("black") && getType((ImageIcon) board[row + 1][col - 1].getIcon()).equals("king")){
+                    return false;
+                }
             }
-            if (row + 1 >= 0) {
-                return !getColor((ImageIcon) board[row + 1][col].getIcon()).equals("black") || !getType((ImageIcon) board[row + 1][col].getIcon()).equals("king");
+            if (row + 1 < board.length) {
+                if(getColor((ImageIcon) board[row + 1][col].getIcon()).equals("black") && getType((ImageIcon) board[row + 1][col].getIcon()).equals("king")){
+                    return false;
+                }
             }
-            if (row + 1 >= 0 && col + 1 < board.length) {
-                return !getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("black") || !getType((ImageIcon) board[row + 1][col + 1].getIcon()).equals("king");
+            if (row + 1 < board.length && col + 1 < board.length) {
+                if(getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("black") && getType((ImageIcon) board[row + 1][col + 1].getIcon()).equals("king")){
+                    return false;
+                }
             }
             //check diagonals
             //left upper diagonal
@@ -671,6 +687,9 @@ public class King {
 
             //right upper diagonal
             for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+                if(getType((ImageIcon) board[i][j].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && (getType((ImageIcon) board[i][j].getIcon()).equals("bishop") || getType((ImageIcon) board[i][j].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
@@ -680,6 +699,9 @@ public class King {
 
             //left lower diagonal
             for (int i = row + 1, j = col - 1; i < board.length && j >= 0; i++, j--) {
+                if(getType((ImageIcon) board[i][j].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && (getType((ImageIcon) board[i][j].getIcon()).equals("bishop") || getType((ImageIcon) board[i][j].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
@@ -689,6 +711,9 @@ public class King {
 
             //right lower diagonal
             for (int i = row + 1, j = col + 1; i < board.length && j < board.length; i++, j++) {
+                if(getType((ImageIcon) board[i][j].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && (getType((ImageIcon) board[i][j].getIcon()).equals("bishop") || getType((ImageIcon) board[i][j].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
@@ -699,6 +724,9 @@ public class King {
             //check vertical and horizontal
             //up
             for (int i = row - 1; i >= 0; i--) {
+                if(getType((ImageIcon) board[i][col].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("black") && (getType((ImageIcon) board[i][col].getIcon()).equals("rook") || getType((ImageIcon) board[i][col].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[i][col].getIcon()).equals("empty")) {
@@ -708,6 +736,9 @@ public class King {
 
             //down
             for (int i = row + 1; i < board.length; i++) {
+                if(getType((ImageIcon) board[i][col].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("black") && (getType((ImageIcon) board[i][col].getIcon()).equals("rook") || getType((ImageIcon) board[i][col].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[i][col].getIcon()).equals("empty")) {
@@ -717,6 +748,9 @@ public class King {
 
             //left
             for (int j = col - 1; j >= 0; j--) {
+                if(getType((ImageIcon) board[row][j].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][j].getIcon()).equals("black") && (getType((ImageIcon) board[row][j].getIcon()).equals("rook") || getType((ImageIcon) board[row][j].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[row][j].getIcon()).equals("empty")) {
@@ -726,6 +760,9 @@ public class King {
 
             //right
             for (int j = col + 1; j < board.length; j++) {
+                if(getType((ImageIcon) board[row][j].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][j].getIcon()).equals("black") && (getType((ImageIcon) board[row][j].getIcon()).equals("rook") || getType((ImageIcon) board[row][j].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[row][j].getIcon()).equals("empty")) {
@@ -801,33 +838,52 @@ public class King {
                 }
             }
             if (row - 1 >= 0 && col - 1 >= 0) {
-                return !getColor((ImageIcon) board[row - 1][col - 1].getIcon()).equals("white") || !getType((ImageIcon) board[row - 1][col - 1].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row - 1][col - 1].getIcon()).equals("white") && getType((ImageIcon) board[row - 1][col - 1].getIcon()).equals("king")){
+                    return false;
+                }
             }
             if (row - 1 >= 0) {
-                return !getColor((ImageIcon) board[row - 1][col].getIcon()).equals("white") || !getType((ImageIcon) board[row - 1][col].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row - 1][col].getIcon()).equals("white") && getType((ImageIcon) board[row - 1][col].getIcon()).equals("king")){
+                    return false;
+                }
             }
             if (row - 1 >= 0 && col + 1 < board.length) {
-                return !getColor((ImageIcon) board[row - 1][col + 1].getIcon()).equals("white") || !getType((ImageIcon) board[row - 1][col + 1].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row - 1][col + 1].getIcon()).equals("white") && getType((ImageIcon) board[row - 1][col + 1].getIcon()).equals("king")){
+                    return false;
+                }
             }
             if (col - 1 >= 0) {
-                return !getColor((ImageIcon) board[row][col - 1].getIcon()).equals("white") || !getType((ImageIcon) board[row][col - 1].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row][col - 1].getIcon()).equals("white") && getType((ImageIcon) board[row][col - 1].getIcon()).equals("king")){
+                    return false;
+                }
             }
 
             if (col + 1 < board.length) {
-                return !getColor((ImageIcon) board[row][col + 1].getIcon()).equals("white") || !getType((ImageIcon) board[row][col + 1].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row][col + 1].getIcon()).equals("white") && getType((ImageIcon) board[row][col + 1].getIcon()).equals("king")){
+                    return false;
+                }
             }
             if (row + 1 < board.length && col - 1 >= 0) {
-                return !getColor((ImageIcon) board[row + 1][col - 1].getIcon()).equals("white") || !getType((ImageIcon) board[row + 1][col - 1].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row + 1][col - 1].getIcon()).equals("white") && getType((ImageIcon) board[row + 1][col - 1].getIcon()).equals("king")){
+                    return false;
+                }
             }
             if (row + 1 >= 0) {
-                return !getColor((ImageIcon) board[row + 1][col].getIcon()).equals("white") || !getType((ImageIcon) board[row + 1][col].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row + 1][col].getIcon()).equals("white") && getType((ImageIcon) board[row + 1][col].getIcon()).equals("king")){
+                    return false;
+                }
             }
             if (row + 1 >= 0 && col + 1 < board.length) {
-                return !getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("white") || !getType((ImageIcon) board[row + 1][col + 1].getIcon()).equals("king");
+                if(getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("white") && getType((ImageIcon) board[row + 1][col + 1].getIcon()).equals("king")){
+                    return false;
+                }
             }
             //check diagonals
             //left upper diagonal
             for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+                if(getType((ImageIcon) board[i][j].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && (getType((ImageIcon) board[i][j].getIcon()).equals("bishop") || getType((ImageIcon) board[i][j].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
@@ -837,6 +893,9 @@ public class King {
 
             //right upper diagonal
             for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+                if(getType((ImageIcon) board[i][j].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && (getType((ImageIcon) board[i][j].getIcon()).equals("bishop") || getType((ImageIcon) board[i][j].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
@@ -846,6 +905,9 @@ public class King {
 
             //left lower diagonal
             for (int i = row + 1, j = col - 1; i < board.length && j >= 0; i++, j--) {
+                if(getType((ImageIcon) board[i][j].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && (getType((ImageIcon) board[i][j].getIcon()).equals("bishop") || getType((ImageIcon) board[i][j].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
@@ -855,6 +917,9 @@ public class King {
 
             //right lower diagonal
             for (int i = row + 1, j = col + 1; i < board.length && j < board.length; i++, j++) {
+                if(getType((ImageIcon) board[i][j].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && (getType((ImageIcon) board[i][j].getIcon()).equals("bishop") || getType((ImageIcon) board[i][j].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
@@ -865,6 +930,9 @@ public class King {
             //check vertical and horizontal
             //up
             for (int i = row - 1; i >= 0; i--) {
+                if(getType((ImageIcon) board[i][col].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("white") && (getType((ImageIcon) board[i][col].getIcon()).equals("rook") || getType((ImageIcon) board[i][col].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[i][col].getIcon()).equals("empty")) {
@@ -874,6 +942,9 @@ public class King {
 
             //down
             for (int i = row + 1; i < board.length; i++) {
+                if(getType((ImageIcon) board[i][col].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("white") && (getType((ImageIcon) board[i][col].getIcon()).equals("rook") || getType((ImageIcon) board[i][col].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[i][col].getIcon()).equals("empty")) {
@@ -883,6 +954,9 @@ public class King {
 
             //left
             for (int j = col - 1; j >= 0; j--) {
+                if(getType((ImageIcon) board[row][j].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][j].getIcon()).equals("white") && (getType((ImageIcon) board[row][j].getIcon()).equals("rook") || getType((ImageIcon) board[row][j].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[row][j].getIcon()).equals("empty")) {
@@ -892,6 +966,9 @@ public class King {
 
             //right
             for (int j = col + 1; j < board.length; j++) {
+                if(getType((ImageIcon) board[row][j].getIcon()).equals("king")){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][j].getIcon()).equals("white") && (getType((ImageIcon) board[row][j].getIcon()).equals("rook") || getType((ImageIcon) board[row][j].getIcon()).equals("queen"))) {
                     return false;
                 } else if (!getColor((ImageIcon) board[row][j].getIcon()).equals("empty")) {

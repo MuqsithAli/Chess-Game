@@ -25,6 +25,9 @@ public class Queen {
         if (Objects.equals(this.color, "white")) {
             //forward
             for (int i = row - 1; i >= 0; i--) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("white") || (getColor((ImageIcon) board[i][col].getIcon()).equals("black") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -37,6 +40,9 @@ public class Queen {
 
             //backward
             for (int i = row + 1; i < board.length; i++) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("white") || (getColor((ImageIcon) board[i][col].getIcon()).equals("black") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -49,6 +55,9 @@ public class Queen {
 
             //left
             for (int i = col - 1; i >= 0; i--) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("white") || (getColor((ImageIcon) board[row][i].getIcon()).equals("black") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -61,6 +70,9 @@ public class Queen {
 
             //right
             for (int i = col + 1; i < board.length; i++) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("white") || (getColor((ImageIcon) board[row][i].getIcon()).equals("black") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -73,6 +85,9 @@ public class Queen {
 
             //upper right diagonal
             for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -85,6 +100,9 @@ public class Queen {
 
             //upper left diagonal
             for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -97,6 +115,9 @@ public class Queen {
 
             //lower right diagonal
             for (int i = row + 1, j = col + 1; i < board.length && j < board.length; i++, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -108,6 +129,9 @@ public class Queen {
             }
             //lower left diagonal
             for (int i = row + 1, j = col - 1; i < board.length && j >= 0; i++, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -121,6 +145,9 @@ public class Queen {
         else{
             //forward
             for (int i = row - 1; i >= 0; i--) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("black") || (getColor((ImageIcon) board[i][col].getIcon()).equals("white") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -133,6 +160,9 @@ public class Queen {
 
             //backward
             for (int i = row + 1; i < board.length; i++) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("black") || (getColor((ImageIcon) board[i][col].getIcon()).equals("white") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -145,6 +175,9 @@ public class Queen {
 
             //left
             for (int i = col - 1; i >= 0; i--) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("black") || (getColor((ImageIcon) board[row][i].getIcon()).equals("white") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -157,6 +190,9 @@ public class Queen {
 
             //right
             for (int i = col + 1; i < board.length; i++) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("black") || (getColor((ImageIcon) board[row][i].getIcon()).equals("white") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -169,6 +205,9 @@ public class Queen {
 
             //upper right diagonal
             for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -181,6 +220,9 @@ public class Queen {
 
             //upper left diagonal
             for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -193,6 +235,9 @@ public class Queen {
 
             //lower right diagonal
             for (int i = row + 1, j = col + 1; i < board.length && j < board.length; i++, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -204,6 +249,9 @@ public class Queen {
             }
             //lower left diagonal
             for (int i = row + 1, j = col - 1; i < board.length && j >= 0; i++, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -232,6 +280,9 @@ public class Queen {
         if (Objects.equals(this.color, "white")) {
             //forward
             for (int i = row - 1; i >= 0; i--) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("white") || (getColor((ImageIcon) board[i][col].getIcon()).equals("black") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -246,6 +297,9 @@ public class Queen {
 
             //backward
             for (int i = row + 1; i < board.length; i++) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("white") || (getColor((ImageIcon) board[i][col].getIcon()).equals("black") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -260,6 +314,9 @@ public class Queen {
 
             //left
             for (int i = col - 1; i >= 0; i--) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("white") || (getColor((ImageIcon) board[row][i].getIcon()).equals("black") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -274,6 +331,9 @@ public class Queen {
 
             //right
             for (int i = col + 1; i < board.length; i++) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("white") || (getColor((ImageIcon) board[row][i].getIcon()).equals("black") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -288,6 +348,9 @@ public class Queen {
 
             //upper right diagonal
             for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -302,6 +365,9 @@ public class Queen {
 
             //upper left diagonal
             for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -316,6 +382,9 @@ public class Queen {
 
             //lower right diagonal
             for (int i = row + 1, j = col + 1; i < board.length && j < board.length; i++, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -329,6 +398,9 @@ public class Queen {
             }
             //lower left diagonal
             for (int i = row + 1, j = col - 1; i < board.length && j >= 0; i++, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") || (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -343,6 +415,9 @@ public class Queen {
         } else {
             //forward
             for (int i = row - 1; i >= 0; i--) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("black") || (getColor((ImageIcon) board[i][col].getIcon()).equals("white") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -357,6 +432,9 @@ public class Queen {
 
             //backward
             for (int i = row + 1; i < board.length; i++) {
+                if(!canMove(row, col, i, col)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][col].getIcon()).equals("black") || (getColor((ImageIcon) board[i][col].getIcon()).equals("white") && getType((ImageIcon) board[i][col].getIcon()).equals("king"))) {
                     break;
                 }
@@ -371,6 +449,9 @@ public class Queen {
 
             //left
             for (int i = col - 1; i >= 0; i--) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("black") || (getColor((ImageIcon) board[row][i].getIcon()).equals("white") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -385,6 +466,9 @@ public class Queen {
 
             //right
             for (int i = col + 1; i < board.length; i++) {
+                if(!canMove(row, col, row, i)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[row][i].getIcon()).equals("black") || (getColor((ImageIcon) board[row][i].getIcon()).equals("white") && getType((ImageIcon) board[row][i].getIcon()).equals("king"))) {
                     break;
                 }
@@ -399,6 +483,9 @@ public class Queen {
 
             //upper right diagonal
             for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -413,6 +500,9 @@ public class Queen {
 
             //upper left diagonal
             for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -427,6 +517,9 @@ public class Queen {
 
             //lower right diagonal
             for (int i = row + 1, j = col + 1; i < board.length && j < board.length; i++, j++) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -440,6 +533,9 @@ public class Queen {
             }
             //lower left diagonal
             for (int i = row + 1, j = col - 1; i < board.length && j >= 0; i++, j--) {
+                if(!canMove(row, col, i, j)){
+                    continue;
+                }
                 if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") || (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("king"))) {
                     break;
                 }
@@ -450,6 +546,38 @@ public class Queen {
                 }
                 board[i][j].setBackground(blueHighlight);
                 board[i][j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+            }
+        }
+    }
+    public boolean canMove(int prevRow, int prevCol, int row, int col){
+        if(Objects.equals(this.color, "white")){
+            ImageIcon temp = (ImageIcon) board[row][col].getIcon();
+            board[row][col].setIcon(whiteQueen);
+            board[prevRow][prevCol].setIcon(null);
+            if(isCheck("white", board)){
+                board[row][col].setIcon(temp);
+                board[prevRow][prevCol].setIcon(whiteQueen);
+                return false;
+            }
+            else{
+                board[row][col].setIcon(temp);
+                board[prevRow][prevCol].setIcon(whiteQueen);
+                return true;
+            }
+        }
+        else{
+            ImageIcon temp = (ImageIcon) board[row][col].getIcon();
+            board[row][col].setIcon(blackQueen);
+            board[prevRow][prevCol].setIcon(null);
+            if(isCheck("black", board)){
+                board[row][col].setIcon(temp);
+                board[prevRow][prevCol].setIcon(blackQueen);
+                return false;
+            }
+            else{
+                board[row][col].setIcon(temp);
+                board[prevRow][prevCol].setIcon(blackQueen);
+                return true;
             }
         }
     }
