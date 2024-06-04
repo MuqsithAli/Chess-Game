@@ -48,10 +48,17 @@ public class Main implements MouseListener {
     public static ImageIcon whitePawn8;
     public static Color blueHighlight = new Color(135, 206, 235);
     public static Color redHighlight = new Color(228, 119, 119);
+    public static Color pinkHighLight = new Color(252, 168, 210);
+    public static Color purpleHighLight = new Color(148, 107, 219);
     public static Color darkSquare = new Color(118, 150, 86);
     public static Color lightSquare = new Color(238, 238, 210);
-    public static Color pinkHighLight = new Color(252, 168, 210);
     public static Stack<JLabel> clickedStack = new Stack<>(); // 0 -> Chess Piece, 1 -> movable Cell
+    public static boolean whiteKingMoved = false;
+    public static boolean whiteRook1Moved = false;
+    public static boolean whiteRook2Moved = false;
+    public static boolean blackKingMoved = false;
+    public static boolean blackRook1Moved = false;
+    public static boolean blackRook2Moved = false;
     public static String player = "white";
 
     Main() {
@@ -60,8 +67,10 @@ public class Main implements MouseListener {
         board = new JLabel[8][8];
 
         // Load the image icon
-        blackRook1 = blackRook2 = new ImageIcon(getClass().getResource("/Images/black_rook.png"));
-        whiteRook1 = whiteRook2 = new ImageIcon(getClass().getResource("/Images/white_rook.png"));
+        blackRook1 = new ImageIcon(getClass().getResource("/Images/black_rook.png"));
+        blackRook2 = new ImageIcon(getClass().getResource("/Images/black_rook.png"));
+        whiteRook1 = new ImageIcon(getClass().getResource("/Images/white_rook.png"));
+        whiteRook2 = new ImageIcon(getClass().getResource("/Images/white_rook.png"));
         blackKnight1 = blackKnight2 = new ImageIcon(getClass().getResource("/Images/black_knight.png"));
         whiteKnight1 = whiteKnight2 = new ImageIcon(getClass().getResource("/Images/white_knight.png"));
         blackBishop1 = blackBishop2 = new ImageIcon(getClass().getResource("/Images/black_bishop.png"));
@@ -242,44 +251,47 @@ public class Main implements MouseListener {
 //                board[i][j].setFont(new Font("Arial", Font.PLAIN, 12));
             }
         }
-        board[0][0].setIcon(blackRook1);
-        board[0][7].setIcon(blackRook2);
-        board[0][1].setIcon(blackKnight1);
-        board[0][6].setIcon(blackKnight2);
-        board[0][2].setIcon(blackBishop1);
-        board[0][5].setIcon(blackBishop2);
-        board[0][3].setIcon(blackQueen);
-        board[0][4].setIcon(blackKing);
-        board[1][0].setIcon(blackPawn1);
-        board[1][1].setIcon(blackPawn2);
-        board[1][2].setIcon(blackPawn3);
-        board[1][3].setIcon(blackPawn4);
-        board[1][4].setIcon(blackPawn5);
-        board[1][5].setIcon(blackPawn6);
-        board[1][6].setIcon(blackPawn7);
-        board[1][7].setIcon(blackPawn8);
-        board[7][0].setIcon(whiteRook1);
-        board[7][7].setIcon(whiteRook2);
-        board[7][1].setIcon(whiteKnight1);
-        board[7][6].setIcon(whiteKnight2);
-        board[7][2].setIcon(whiteBishop1);
-        board[7][5].setIcon(whiteBishop2);
-        board[7][3].setIcon(whiteQueen);
-        board[7][4].setIcon(whiteKing);
-        board[6][0].setIcon(whitePawn1);
-        board[6][1].setIcon(whitePawn2);
-        board[6][2].setIcon(whitePawn3);
-        board[6][3].setIcon(whitePawn4);
-        board[6][4].setIcon(whitePawn5);
-        board[6][5].setIcon(whitePawn6);
-        board[6][6].setIcon(whitePawn7);
-        board[6][7].setIcon(whitePawn8);
+//        board[0][0].setIcon(blackRook1);
+//        board[0][7].setIcon(blackRook2);
+//        board[0][1].setIcon(blackKnight1);
+//        board[0][6].setIcon(blackKnight2);
+//        board[0][2].setIcon(blackBishop1);
+//        board[0][5].setIcon(blackBishop2);
+//        board[0][3].setIcon(blackQueen);
+//        board[0][4].setIcon(blackKing);
+//        board[1][0].setIcon(blackPawn1);
+//        board[1][1].setIcon(blackPawn2);
+//        board[1][2].setIcon(blackPawn3);
+//        board[1][3].setIcon(blackPawn4);
+//        board[1][4].setIcon(blackPawn5);
+//        board[1][5].setIcon(blackPawn6);
+//        board[1][6].setIcon(blackPawn7);
+//        board[1][7].setIcon(blackPawn8);
+//        board[7][0].setIcon(whiteRook1);
+//        board[7][7].setIcon(whiteRook2);
+//        board[7][1].setIcon(whiteKnight1);
+//        board[7][6].setIcon(whiteKnight2);
+//        board[7][2].setIcon(whiteBishop1);
+//        board[7][5].setIcon(whiteBishop2);
+//        board[7][3].setIcon(whiteQueen);
+//        board[7][4].setIcon(whiteKing);
+//        board[6][0].setIcon(whitePawn1);
+//        board[6][1].setIcon(whitePawn2);
+//        board[6][2].setIcon(whitePawn3);
+//        board[6][3].setIcon(whitePawn4);
+//        board[6][4].setIcon(whitePawn5);
+//        board[6][5].setIcon(whitePawn6);
+//        board[6][6].setIcon(whitePawn7);
+//        board[6][7].setIcon(whitePawn8);
 
 
         //Perform Modifications below
-//        board[0][0].setIcon(blackKing);
-//        board[4][3].setIcon(whiteRook2);
-//        board[5][7].setIcon(whiteRook2);
+        board[7][4].setIcon(whiteKing);
+        board[7][0].setIcon(whiteRook1);
+        board[7][7].setIcon(whiteRook2);
+        board[0][4].setIcon(blackKing);
+        board[0][0].setIcon(blackRook1);
+        board[0][7].setIcon(blackRook2);
     }
 
     @Override
@@ -378,11 +390,11 @@ public class Main implements MouseListener {
                     }
                 }
             }
-        }
-        if (isCheckMate("black")) {
-            JOptionPane.showMessageDialog(null, "White wins!");
-            player = "white";
-            initialiseBoard();
+            if (isCheckMate("black")) {
+                JOptionPane.showMessageDialog(null, "White wins!");
+                player = "white";
+                initialiseBoard();
+            }
         }
     }
 
@@ -395,12 +407,161 @@ public class Main implements MouseListener {
                 && !(getColor((ImageIcon) source.getIcon()).equals("black") && getType((ImageIcon) destination.getIcon()).equals("king") && getColor((ImageIcon) destination.getIcon()).equals("white"))
                 && movableCells(source).contains(destination)
         ) {
+            if (source.getIcon() == whiteKing) {
+                whiteKingMoved = true;
+            } else if (source.getIcon() == whiteRook1 && board[7][0] == source) {
+                whiteRook1Moved = true;
+            } else if (source.getIcon() == whiteRook1 && board[7][7] == source) {
+                whiteRook2Moved = true;
+            } else if (source.getIcon() == blackKing) {
+                blackKingMoved = true;
+            } else if (source.getIcon() == blackRook1 && board[0][0] == source) {
+                blackRook1Moved = true;
+            } else if (source.getIcon() == blackRook1 && board[0][7] == source) {
+                blackRook2Moved = true;
+            }
+            if (source == board[7][4] && source.getIcon() == whiteKing && destination == board[7][6]) {
+                destination.setIcon(whiteKing);
+                source.setIcon(null);
+                board[7][7].setIcon(null);
+                board[7][5].setIcon(whiteRook2);
+                player = Objects.equals(player, "white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            }
+            if (source == board[7][4] && source.getIcon() == whiteKing && destination == board[7][1]) {
+                destination.setIcon(whiteKing);
+                source.setIcon(null);
+                board[7][0].setIcon(null);
+                board[7][2].setIcon(whiteRook1);
+                player = Objects.equals(player, "white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            }
+            if (source == board[0][4] && source.getIcon() == blackKing && destination == board[0][6]) {
+                destination.setIcon(blackKing);
+                source.setIcon(null);
+                board[0][7].setIcon(null);
+                board[0][5].setIcon(blackRook2);
+                player = Objects.equals(player, "white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            }
+            if (source == board[0][4] && source.getIcon() == blackKing && destination == board[0][1]) {
+                destination.setIcon(blackKing);
+                source.setIcon(null);
+                board[0][0].setIcon(null);
+                board[0][2].setIcon(blackRook1);
+                player = Objects.equals(player, "white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            }
             destination.setIcon(source.getIcon());
             source.setIcon(null);
+            if (canPromote(player)) {
+                handlePromotion(player);
+            }
             player = Objects.equals(player, "white") ? "black" : "white";
         }
         destination.setBorder(null);
     }
+
+
+    public static void handlePromotion(String color) {
+        if (color.equals("white")) {
+            int row = 0;
+            int x = 0;
+            for (int j = 0; j < board.length; j++) {
+                if (getColor((ImageIcon) board[0][j].getIcon()).equals("white") && getType((ImageIcon) board[0][j].getIcon()).equals("pawn")) {
+                    x = j;
+                    break;
+                }
+            }
+            int col = x;
+            JFrame promotionWindow = new JFrame("Pawn Promotion");
+            promotionWindow.setSize(400, 80);
+            promotionWindow.setLocationRelativeTo(null); // Center the window
+
+            JPanel promotionPanel = new JPanel();
+            promotionPanel.setLayout(new FlowLayout());
+            JButton queenButton = new JButton("Queen");
+            queenButton.addActionListener(e -> promotePawn(row, col, whiteQueen, promotionWindow));
+            promotionPanel.add(queenButton);
+
+            JButton rookButton = new JButton("Rook");
+            rookButton.addActionListener(e -> promotePawn(row, col, whiteRook2, promotionWindow));
+            promotionPanel.add(rookButton);
+
+            JButton bishopButton = new JButton("Bishop");
+            bishopButton.addActionListener(e -> promotePawn(row, col, whiteBishop2, promotionWindow));
+            promotionPanel.add(bishopButton);
+
+            JButton knightButton = new JButton("Knight");
+            knightButton.addActionListener(e -> promotePawn(row, col, whiteKnight1, promotionWindow));
+            promotionPanel.add(knightButton);
+
+            promotionWindow.add(promotionPanel);
+            promotionWindow.setVisible(true);
+        } else {
+            int row = 7;
+            int x = 0;
+            for (int j = 0; j < board.length; j++) {
+                if (getColor((ImageIcon) board[7][j].getIcon()).equals("black") && getType((ImageIcon) board[7][j].getIcon()).equals("pawn")) {
+                    x = j;
+                    break;
+                }
+            }
+            int col = x;
+            JFrame promotionWindow = new JFrame("Pawn Promotion");
+            promotionWindow.setSize(400, 80);
+            promotionWindow.setLocationRelativeTo(null); // Center the window
+
+            JPanel promotionPanel = new JPanel();
+            promotionPanel.setLayout(new FlowLayout());
+            JButton queenButton = new JButton("Queen");
+            queenButton.addActionListener(e -> promotePawn(row, col, blackQueen, promotionWindow));
+            promotionPanel.add(queenButton);
+
+            JButton rookButton = new JButton("Rook");
+            rookButton.addActionListener(e -> promotePawn(row, col, blackRook1, promotionWindow));
+            promotionPanel.add(rookButton);
+
+            JButton bishopButton = new JButton("Bishop");
+            bishopButton.addActionListener(e -> promotePawn(row, col, blackBishop1, promotionWindow));
+            promotionPanel.add(bishopButton);
+
+            JButton knightButton = new JButton("Knight");
+            knightButton.addActionListener(e -> promotePawn(row, col, blackKnight1, promotionWindow));
+            promotionPanel.add(knightButton);
+
+            promotionWindow.add(promotionPanel);
+            promotionWindow.setVisible(true);
+        }
+    }
+
+    public static void promotePawn(int row, int col, ImageIcon promotionPiece, JFrame promotionWindow) {
+        board[row][col].setIcon(promotionPiece);
+        promotionWindow.dispose(); // Close promotion window
+    }
+
+    public static boolean canPromote(String color) {
+        if (color.equals("white")) {
+            for (int col = 0; col < board.length; col++) {
+                if (getColor((ImageIcon) board[0][col].getIcon()).equals("white") && getType((ImageIcon) board[0][col].getIcon()).equals("pawn")) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            for (int col = 0; col < board.length; col++) {
+                if (getColor((ImageIcon) board[7][col].getIcon()).equals("black") && getType((ImageIcon) board[7][col].getIcon()).equals("pawn")) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
 
     public static List<JLabel> movableCells(JLabel source) {
         int row = -1;

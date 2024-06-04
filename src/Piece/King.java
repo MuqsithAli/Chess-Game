@@ -24,6 +24,15 @@ public class King {
     public List<JLabel> movableCells() {
         List<JLabel> ans = new ArrayList<>();
         if (Objects.equals(this.color, "white")) {
+            //check for castling
+            if(canCastle("right")){
+                ans.add(board[7][6]);
+            }
+            if(canCastle("left")){
+                ans.add(board[7][1]);
+            }
+
+
             //check if forward cell is empty and ensure we are 1 square away from opposite king
             if (row - 1 >= 0) {
                 if (getColor((ImageIcon) board[row - 1][col].getIcon()).equals("empty")
@@ -159,6 +168,15 @@ public class King {
                 }
             }
         } else {
+            //check for castling
+            if(canCastle("right")){
+                ans.add(board[0][6]);
+            }
+            if(canCastle("left")){
+                ans.add(board[0][1]);
+            }
+
+
             //check if forward cell is empty and ensure we are 1 square away from opposite king
             if (row - 1 >= 0) {
                 if (getColor((ImageIcon) board[row - 1][col].getIcon()).equals("empty")
@@ -312,6 +330,17 @@ public class King {
             }
         }
         if (Objects.equals(this.color, "white")) {
+            //check for castling
+            if(canCastle("right")){
+                board[7][6].setBackground(purpleHighLight);
+                board[7][6].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+            }
+            if(canCastle("left")){
+                board[7][1].setBackground(purpleHighLight);
+                board[7][1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+            }
+
+
             //check if forward cell is empty and ensure we are 1 square away from opposite king
             if (row - 1 >= 0) {
                 if (getColor((ImageIcon) board[row - 1][col].getIcon()).equals("empty")
@@ -466,6 +495,17 @@ public class King {
                 }
             }
         } else {
+            //check for castling
+            if(canCastle("right")){
+                board[0][6].setBackground(purpleHighLight);
+                board[0][6].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+            }
+            if(canCastle("left")){
+                board[0][1].setBackground(purpleHighLight);
+                board[0][1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+            }
+
+
             //check if forward cell is empty and ensure we are 1 square away from opposite king
             if (row - 1 >= 0) {
                 if (getColor((ImageIcon) board[row - 1][col].getIcon()).equals("empty")
@@ -868,12 +908,12 @@ public class King {
                     return false;
                 }
             }
-            if (row + 1 >= 0) {
+            if (row + 1 < board.length) {
                 if(getColor((ImageIcon) board[row + 1][col].getIcon()).equals("white") && getType((ImageIcon) board[row + 1][col].getIcon()).equals("king")){
                     return false;
                 }
             }
-            if (row + 1 >= 0 && col + 1 < board.length) {
+            if (row + 1 < board.length && col + 1 < board.length) {
                 if(getColor((ImageIcon) board[row + 1][col + 1].getIcon()).equals("white") && getType((ImageIcon) board[row + 1][col + 1].getIcon()).equals("king")){
                     return false;
                 }
@@ -1035,5 +1075,44 @@ public class King {
             }
         }
         return true;
+    }
+    public boolean canCastle(String direction){
+        if(Objects.equals(this.color, "white")){
+            if(direction.equals("right")){
+//                System.out.println(whiteRook2Moved);
+                if(board[7][5].getIcon()==null && board[7][6].getIcon() == null && isSafe(7, 5) && isSafe(7, 6) && !whiteKingMoved && !whiteRook2Moved){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                if(board[7][3].getIcon()==null && board[7][2].getIcon() == null && board[7][1].getIcon() == null && isSafe(7, 3) && isSafe(7, 2)  && isSafe(7, 2) && !whiteKingMoved && !whiteRook1Moved){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        else{
+            if(direction.equals("right")){
+                if(board[0][5].getIcon()==null && board[0][6].getIcon() == null && isSafe(0, 5) && isSafe(0, 6) && !blackKingMoved && !blackRook2Moved){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                if(board[0][3].getIcon()==null && board[0][2].getIcon() == null && board[0][1].getIcon() == null && isSafe(0, 3) && isSafe(0, 2)  && isSafe(0, 2) && !blackKingMoved && !blackRook1Moved){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
     }
 }
