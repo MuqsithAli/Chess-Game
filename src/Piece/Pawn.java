@@ -23,6 +23,81 @@ public class Pawn {
     public List<JLabel> movableCells() {
         List<JLabel> ans = new ArrayList<>();
         if (Objects.equals(this.color, "white")) {
+            //check for enpasante
+            if(row == 3){
+                if(col == 0){
+                    //right
+                    if(getColor((ImageIcon) board[2][1].getIcon()).equals("empty") && canMove(row, col, 2, 1) && blackEnpasante2){
+                        ans.add(board[2][1]);
+                    }
+                }
+                else if(col == 1){
+                    //left
+                    if(getColor((ImageIcon) board[2][0].getIcon()).equals("empty") && canMove(row, col, 2, 0) && blackEnpasante1){
+                        ans.add(board[2][0]);
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[2][2].getIcon()).equals("empty") && canMove(row, col, 2, 2) && blackEnpasante3){
+                        ans.add(board[2][2]);
+                    }
+                }
+                else if(col == 2){
+                    //left
+                    if(getColor((ImageIcon) board[2][1].getIcon()).equals("empty") && canMove(row, col, 2, 1) && blackEnpasante2){
+                        ans.add(board[2][1]);
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[2][3].getIcon()).equals("empty") && canMove(row, col, 2, 3) && blackEnpasante4){
+                        ans.add(board[2][3]);
+                    }
+                }
+                else if(col == 3){
+                    //left
+                    if(getColor((ImageIcon) board[2][2].getIcon()).equals("empty") && canMove(row, col, 2, 2) && blackEnpasante3){
+                        ans.add(board[2][2]);
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[2][4].getIcon()).equals("empty") && canMove(row, col, 2, 4) && blackEnpasante5){
+                        ans.add(board[2][4]);
+                    }
+                }
+                else if(col == 4){
+                    //left
+                    if(getColor((ImageIcon) board[2][3].getIcon()).equals("empty") && canMove(row, col, 2, 3) && blackEnpasante4){
+                        ans.add(board[2][3]);
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[2][5].getIcon()).equals("empty") && canMove(row, col, 2, 5) && blackEnpasante6){
+                        ans.add(board[2][5]);
+                    }
+                }
+                else if(col == 5){
+                    //left
+                    if(getColor((ImageIcon) board[2][4].getIcon()).equals("empty") && canMove(row, col, 2, 4) && blackEnpasante5){
+                        ans.add(board[2][4]);
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[2][6].getIcon()).equals("empty") && canMove(row, col, 2, 6) && blackEnpasante7){
+                        ans.add(board[2][6]);
+                    }
+                }
+                else if(col == 6){
+                    //left
+                    if(getColor((ImageIcon) board[2][5].getIcon()).equals("empty") && canMove(row, col, 2, 5) && blackEnpasante6){
+                        ans.add(board[2][5]);
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[2][7].getIcon()).equals("empty") && canMove(row, col, 2, 7) && blackEnpasante8){
+                        ans.add(board[2][7]);
+                    }
+                }
+                else if(col == 7){
+                    //left
+                    if(getColor((ImageIcon) board[2][6].getIcon()).equals("empty") && canMove(row, col, 2, 6) && blackEnpasante7){
+                        ans.add(board[2][6]);
+                    }
+                }
+            }
             if (row - 1 >= 0) {
                 if (getColor((ImageIcon) board[row - 1][col].getIcon()).equals("empty") && canMove(row, col, row - 1, col)) {
                     ans.add(board[row - 1][col]);
@@ -43,6 +118,81 @@ public class Pawn {
                 }
             }
         } else {
+            //check for enpasante
+            if(row == 4){
+                if(col == 0){
+                    //right
+                    if(getColor((ImageIcon) board[5][1].getIcon()).equals("empty") && canMove(row, col, 5, 1) && whiteEnpasante2){
+                        ans.add(board[5][1]);
+                    }
+                }
+                else if(col == 1){
+                    //left
+                    if(getColor((ImageIcon) board[5][0].getIcon()).equals("empty") && canMove(row, col, 5, 0) && whiteEnpasante1){
+                        ans.add(board[5][0]);
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[5][2].getIcon()).equals("empty") && canMove(row, col, 5, 2) && whiteEnpasante3){
+                        ans.add(board[5][2]);
+                    }
+                }
+                else if(col == 2){
+                    //left
+                    if(getColor((ImageIcon) board[5][1].getIcon()).equals("empty") && canMove(row, col, 5, 1) && whiteEnpasante2){
+                        ans.add(board[5][1]);
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[5][3].getIcon()).equals("empty") && canMove(row, col, 5, 3) && whiteEnpasante4){
+                        ans.add(board[5][3]);
+                    }
+                }
+                else if(col == 3){
+                    //left
+                    if(getColor((ImageIcon) board[5][2].getIcon()).equals("empty") && canMove(row, col, 5, 2) && whiteEnpasante3){
+                        ans.add(board[5][2]);
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[5][4].getIcon()).equals("empty") && canMove(row, col, 5, 4) && whiteEnpasante5){
+                        ans.add(board[5][4]);
+                    }
+                }
+                else if(col == 4){
+                    //left
+                    if(getColor((ImageIcon) board[5][3].getIcon()).equals("empty") && canMove(row, col, 5, 3) && whiteEnpasante4){
+                        ans.add(board[5][3]);
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[5][5].getIcon()).equals("empty") && canMove(row, col, 5, 5) && whiteEnpasante6){
+                        ans.add(board[5][5]);
+                    }
+                }
+                else if(col == 5){
+                    //left
+                    if(getColor((ImageIcon) board[5][4].getIcon()).equals("empty") && canMove(row, col, 5, 4) && whiteEnpasante5){
+                        ans.add(board[5][4]);
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[5][6].getIcon()).equals("empty") && canMove(row, col, 5, 6) && whiteEnpasante7){
+                        ans.add(board[5][6]);
+                    }
+                }
+                else if(col == 6){
+                    //left
+                    if(getColor((ImageIcon) board[5][5].getIcon()).equals("empty") && canMove(row, col, 5, 5) && whiteEnpasante6){
+                        ans.add(board[5][5]);
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[5][7].getIcon()).equals("empty") && canMove(row, col, 5, 7) && whiteEnpasante8){
+                        ans.add(board[5][7]);
+                    }
+                }
+                else if(col == 7){
+                    //left
+                    if(getColor((ImageIcon) board[5][6].getIcon()).equals("empty") && canMove(row, col, 5, 6) && whiteEnpasante7){
+                        ans.add(board[5][6]);
+                    }
+                }
+            }
             //check vacancy of forward cell
             if (row + 1 < board.length) {
                 if (getColor((ImageIcon) board[row + 1][col].getIcon()).equals("empty") && canMove(row, col, row + 1, col)) {
@@ -87,6 +237,95 @@ public class Pawn {
         }
 
         if (Objects.equals(this.color, "white")) {
+            //check for enpasante
+            if(row == 3){
+                if(col == 0){
+                    //right
+                    if(getColor((ImageIcon) board[2][1].getIcon()).equals("empty") && canMove(row, col, 2, 1) && blackEnpasante2){
+                        board[2][1].setBackground(redHighlight);
+                        board[2][1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 1){
+                    //left
+                    if(getColor((ImageIcon) board[2][0].getIcon()).equals("empty") && canMove(row, col, 2, 0) && blackEnpasante1){
+                        board[2][0].setBackground(redHighlight);
+                        board[2][0].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[2][2].getIcon()).equals("empty") && canMove(row, col, 2, 2) && blackEnpasante3){
+                        board[2][2].setBackground(redHighlight);
+                        board[2][2].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 2){
+                    //left
+                    if(getColor((ImageIcon) board[2][1].getIcon()).equals("empty") && canMove(row, col, 2, 1) && blackEnpasante2){
+                        board[2][1].setBackground(redHighlight);
+                        board[2][1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[2][3].getIcon()).equals("empty") && canMove(row, col, 2, 3) && blackEnpasante4){
+                        board[2][3].setBackground(redHighlight);
+                        board[2][3].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 3){
+                    //left
+                    if(getColor((ImageIcon) board[2][2].getIcon()).equals("empty") && canMove(row, col, 2, 2) && blackEnpasante3){
+                        board[2][2].setBackground(redHighlight);
+                        board[2][2].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[2][4].getIcon()).equals("empty") && canMove(row, col, 2, 4) && blackEnpasante5){
+                        board[2][4].setBackground(redHighlight);
+                        board[2][4].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 4){
+                    //left
+                    if(getColor((ImageIcon) board[2][3].getIcon()).equals("empty") && canMove(row, col, 2, 3) && blackEnpasante4){
+                        board[2][3].setBackground(redHighlight);
+                        board[2][3].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[2][5].getIcon()).equals("empty") && canMove(row, col, 2, 5) && blackEnpasante6){
+                        board[2][5].setBackground(redHighlight);
+                        board[2][5].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 5){
+                    //left
+                    if(getColor((ImageIcon) board[2][4].getIcon()).equals("empty") && canMove(row, col, 2, 4) && blackEnpasante5){
+                        board[2][4].setBackground(redHighlight);
+                        board[2][4].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[2][6].getIcon()).equals("empty") && canMove(row, col, 2, 6) && blackEnpasante7){
+                        board[2][6].setBackground(redHighlight);
+                        board[2][6].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 6){
+                    //left
+                    if(getColor((ImageIcon) board[2][5].getIcon()).equals("empty") && canMove(row, col, 2, 5) && blackEnpasante6){
+                        board[2][5].setBackground(redHighlight);
+                        board[2][5].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[2][7].getIcon()).equals("empty") && canMove(row, col, 2, 7) && blackEnpasante8){
+                        board[2][7].setBackground(redHighlight);
+                        board[2][7].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 7){
+                    //left
+                    if(getColor((ImageIcon) board[2][6].getIcon()).equals("empty") && canMove(row, col, 2, 6) && blackEnpasante7){
+                        board[2][6].setBackground(redHighlight);
+                        board[2][6].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+            }
             //check vacancy of forward cell
             if (row - 1 >= 0) {
                 if (getColor((ImageIcon) board[row - 1][col].getIcon()).equals("empty") && canMove(row, col, row - 1, col)) {
@@ -119,6 +358,95 @@ public class Pawn {
                 }
             }
         } else {
+            //check for enpasante
+            if(row == 4){
+                if(col == 0){
+                    //right
+                    if(getColor((ImageIcon) board[5][1].getIcon()).equals("empty") && canMove(row, col, 5, 1) && whiteEnpasante2){
+                        board[5][1].setBackground(redHighlight);
+                        board[5][1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 1){
+                    //left
+                    if(getColor((ImageIcon) board[5][0].getIcon()).equals("empty") && canMove(row, col, 5, 0) && whiteEnpasante1){
+                        board[5][0].setBackground(redHighlight);
+                        board[5][0].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[5][2].getIcon()).equals("empty") && canMove(row, col, 5, 2) && whiteEnpasante3){
+                        board[5][2].setBackground(redHighlight);
+                        board[5][2].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 2){
+                    //left
+                    if(getColor((ImageIcon) board[5][1].getIcon()).equals("empty") && canMove(row, col, 5, 1) && whiteEnpasante2){
+                        board[5][1].setBackground(redHighlight);
+                        board[5][1].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[5][3].getIcon()).equals("empty") && canMove(row, col, 5, 3) && whiteEnpasante4){
+                        board[5][3].setBackground(redHighlight);
+                        board[5][3].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 3){
+                    //left
+                    if(getColor((ImageIcon) board[5][2].getIcon()).equals("empty") && canMove(row, col, 5, 2) && whiteEnpasante3){
+                        board[5][2].setBackground(redHighlight);
+                        board[5][2].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[5][2].getIcon()).equals("empty") && canMove(row, col, 5, 2) && whiteEnpasante5){
+                        board[5][4].setBackground(redHighlight);
+                        board[5][4].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 4){
+                    //left
+                    if(getColor((ImageIcon) board[5][3].getIcon()).equals("empty") && canMove(row, col, 5, 3) && whiteEnpasante4){
+                        board[5][3].setBackground(redHighlight);
+                        board[5][3].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[5][5].getIcon()).equals("empty") && canMove(row, col, 5, 5) && whiteEnpasante6){
+                        board[5][5].setBackground(redHighlight);
+                        board[5][5].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 5){
+                    //left
+                    if(getColor((ImageIcon) board[5][4].getIcon()).equals("empty") && canMove(row, col, 5, 4) && whiteEnpasante5){
+                        board[5][4].setBackground(redHighlight);
+                        board[5][4].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[5][6].getIcon()).equals("empty") && canMove(row, col, 5, 6) && whiteEnpasante7){
+                        board[5][6].setBackground(redHighlight);
+                        board[5][6].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 6){
+                    //left
+                    if(getColor((ImageIcon) board[5][5].getIcon()).equals("empty") && canMove(row, col, 5, 5) && whiteEnpasante6){
+                        board[5][5].setBackground(redHighlight);
+                        board[5][5].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                    //right
+                    if(getColor((ImageIcon) board[5][7].getIcon()).equals("empty") && canMove(row, col, 5, 7) && whiteEnpasante8){
+                        board[5][7].setBackground(redHighlight);
+                        board[5][7].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+                else if(col == 7){
+                    //left
+                    if(getColor((ImageIcon) board[5][6].getIcon()).equals("empty") && canMove(row, col, 5, 6) && whiteEnpasante7){
+                        board[5][6].setBackground(redHighlight);
+                        board[5][6].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                    }
+                }
+            }
             //check vacancy of forward cell
             if (row + 1 < board.length) {
                 if (getColor((ImageIcon) board[row + 1][col].getIcon()).equals("empty") && canMove(row, col, row + 1, col)) {

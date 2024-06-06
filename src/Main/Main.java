@@ -59,7 +59,24 @@ public class Main implements MouseListener {
     public static boolean blackKingMoved = false;
     public static boolean blackRook1Moved = false;
     public static boolean blackRook2Moved = false;
+    public static boolean blackEnpasante1 = false;
+    public static boolean blackEnpasante2 = false;
+    public static boolean blackEnpasante3 = false;
+    public static boolean blackEnpasante4 = false;
+    public static boolean blackEnpasante5 = false;
+    public static boolean blackEnpasante6 = false;
+    public static boolean blackEnpasante7 = false;
+    public static boolean blackEnpasante8 = false;
+    public static boolean whiteEnpasante1 = false;
+    public static boolean whiteEnpasante2 = false;
+    public static boolean whiteEnpasante3 = false;
+    public static boolean whiteEnpasante4 = false;
+    public static boolean whiteEnpasante5 = false;
+    public static boolean whiteEnpasante6 = false;
+    public static boolean whiteEnpasante7 = false;
+    public static boolean whiteEnpasante8 = false;
     public static String player = "white";
+    public static int uselessHalfMoves = 0;
 
     Main() {
         JFrame frame = new JFrame("Chess");
@@ -67,20 +84,20 @@ public class Main implements MouseListener {
         board = new JLabel[8][8];
 
         // Load the image icon
-        blackRook1 = new ImageIcon(getClass().getResource("/Images/black_rook.png"));
-        blackRook2 = new ImageIcon(getClass().getResource("/Images/black_rook.png"));
-        whiteRook1 = new ImageIcon(getClass().getResource("/Images/white_rook.png"));
-        whiteRook2 = new ImageIcon(getClass().getResource("/Images/white_rook.png"));
-        blackKnight1 = blackKnight2 = new ImageIcon(getClass().getResource("/Images/black_knight.png"));
-        whiteKnight1 = whiteKnight2 = new ImageIcon(getClass().getResource("/Images/white_knight.png"));
-        blackBishop1 = blackBishop2 = new ImageIcon(getClass().getResource("/Images/black_bishop.png"));
-        whiteBishop1 = whiteBishop2 = new ImageIcon(getClass().getResource("/Images/white_bishop.png"));
-        blackQueen = new ImageIcon(getClass().getResource("/Images/black_queen.png"));
-        whiteQueen = new ImageIcon(getClass().getResource("/Images/white_queen.png"));
-        blackKing = new ImageIcon(getClass().getResource("/Images/black_king.png"));
-        whiteKing = new ImageIcon(getClass().getResource("/Images/white_king.png"));
-        whitePawn1 = whitePawn2 = whitePawn3 = whitePawn4 = whitePawn5 = whitePawn6 = whitePawn7 = whitePawn8 = new ImageIcon(getClass().getResource("/Images/white_pawn.png"));
-        blackPawn1 = blackPawn2 = blackPawn3 = blackPawn4 = blackPawn5 = blackPawn6 = blackPawn7 = blackPawn8 = new ImageIcon(getClass().getResource("/Images/black_pawn.png"));
+        blackRook1 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/black_rook.png")));
+        blackRook2 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/black_rook.png")));
+        whiteRook1 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/white_rook.png")));
+        whiteRook2 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/white_rook.png")));
+        blackKnight1 = blackKnight2 = new ImageIcon(Objects.requireNonNull(Objects.requireNonNull(getClass().getResource("/Images/black_knight.png"))));
+        whiteKnight1 = whiteKnight2 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/white_knight.png")));
+        blackBishop1 = blackBishop2 = new ImageIcon(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(getClass().getResource("/Images/black_bishop.png")))))));
+        whiteBishop1 = whiteBishop2 = new ImageIcon(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(getClass().getResource("/Images/white_bishop.png")))));
+        blackQueen = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/black_queen.png")));
+        whiteQueen = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/white_queen.png")));
+        blackKing = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/black_king.png")));
+        whiteKing = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/white_king.png")));
+        whitePawn1 = whitePawn2 = whitePawn3 = whitePawn4 = whitePawn5 = whitePawn6 = whitePawn7 = whitePawn8 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/white_pawn.png")));
+        blackPawn1 = blackPawn2 = blackPawn3 = blackPawn4 = blackPawn5 = blackPawn6 = blackPawn7 = blackPawn8 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/black_pawn.png")));
 
         Image image1 = blackRook1.getImage();
         Image scaledImage1 = image1.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
@@ -251,47 +268,41 @@ public class Main implements MouseListener {
 //                board[i][j].setFont(new Font("Arial", Font.PLAIN, 12));
             }
         }
-//        board[0][0].setIcon(blackRook1);
-//        board[0][7].setIcon(blackRook2);
-//        board[0][1].setIcon(blackKnight1);
-//        board[0][6].setIcon(blackKnight2);
-//        board[0][2].setIcon(blackBishop1);
-//        board[0][5].setIcon(blackBishop2);
-//        board[0][3].setIcon(blackQueen);
-//        board[0][4].setIcon(blackKing);
-//        board[1][0].setIcon(blackPawn1);
-//        board[1][1].setIcon(blackPawn2);
-//        board[1][2].setIcon(blackPawn3);
-//        board[1][3].setIcon(blackPawn4);
-//        board[1][4].setIcon(blackPawn5);
-//        board[1][5].setIcon(blackPawn6);
-//        board[1][6].setIcon(blackPawn7);
-//        board[1][7].setIcon(blackPawn8);
-//        board[7][0].setIcon(whiteRook1);
-//        board[7][7].setIcon(whiteRook2);
-//        board[7][1].setIcon(whiteKnight1);
-//        board[7][6].setIcon(whiteKnight2);
-//        board[7][2].setIcon(whiteBishop1);
-//        board[7][5].setIcon(whiteBishop2);
-//        board[7][3].setIcon(whiteQueen);
-//        board[7][4].setIcon(whiteKing);
-//        board[6][0].setIcon(whitePawn1);
-//        board[6][1].setIcon(whitePawn2);
-//        board[6][2].setIcon(whitePawn3);
-//        board[6][3].setIcon(whitePawn4);
-//        board[6][4].setIcon(whitePawn5);
-//        board[6][5].setIcon(whitePawn6);
-//        board[6][6].setIcon(whitePawn7);
-//        board[6][7].setIcon(whitePawn8);
+        board[0][0].setIcon(blackRook1);
+        board[0][7].setIcon(blackRook2);
+        board[0][1].setIcon(blackKnight1);
+        board[0][6].setIcon(blackKnight2);
+        board[0][2].setIcon(blackBishop1);
+        board[0][5].setIcon(blackBishop2);
+        board[0][3].setIcon(blackQueen);
+        board[0][4].setIcon(blackKing);
+        board[1][0].setIcon(blackPawn1);
+        board[1][1].setIcon(blackPawn2);
+        board[1][2].setIcon(blackPawn3);
+        board[1][3].setIcon(blackPawn4);
+        board[1][4].setIcon(blackPawn5);
+        board[1][5].setIcon(blackPawn6);
+        board[1][6].setIcon(blackPawn7);
+        board[1][7].setIcon(blackPawn8);
+        board[7][0].setIcon(whiteRook1);
+        board[7][7].setIcon(whiteRook2);
+        board[7][1].setIcon(whiteKnight1);
+        board[7][6].setIcon(whiteKnight2);
+        board[7][2].setIcon(whiteBishop1);
+        board[7][5].setIcon(whiteBishop2);
+        board[7][3].setIcon(whiteQueen);
+        board[7][4].setIcon(whiteKing);
+        board[6][0].setIcon(whitePawn1);
+        board[6][1].setIcon(whitePawn2);
+        board[6][2].setIcon(whitePawn3);
+        board[6][3].setIcon(whitePawn4);
+        board[6][4].setIcon(whitePawn5);
+        board[6][5].setIcon(whitePawn6);
+        board[6][6].setIcon(whitePawn7);
+        board[6][7].setIcon(whitePawn8);
 
 
         //Perform Modifications below
-        board[7][4].setIcon(whiteKing);
-        board[7][0].setIcon(whiteRook1);
-        board[7][7].setIcon(whiteRook2);
-        board[0][4].setIcon(blackKing);
-        board[0][0].setIcon(blackRook1);
-        board[0][7].setIcon(blackRook2);
     }
 
     @Override
@@ -329,7 +340,6 @@ public class Main implements MouseListener {
 
         String pieceColor = getColor((ImageIcon) clickedCell.getIcon());
         String pieceType = getType((ImageIcon) clickedCell.getIcon());
-//        System.out.println(pieceColor+" "+pieceType);
         if (pieceType.equals("pawn")) {
             Pawn pawn = new Pawn(row, col, pieceColor);
             pawn.highlightCells(row, col);
@@ -377,8 +387,19 @@ public class Main implements MouseListener {
             }
             if (isCheckMate("white")) {
                 JOptionPane.showMessageDialog(null, "Black wins!");
-                player = "white";
-                initialiseBoard();
+                resetGame();
+            }
+        } else {
+            if (checkDraw("white") == 1) {
+                JOptionPane.showMessageDialog(null, "Draw by Stalemate!");
+                resetGame();
+            } else if (checkDraw("white") == 2) {
+                JOptionPane.showMessageDialog(null, "Draw by Insufficient pieces!");
+                resetGame();
+            }
+            else if (checkDraw("white") == 3) {
+                JOptionPane.showMessageDialog(null, "Draw by 50-move rule");
+                resetGame();
             }
         }
         if (isCheck("black", board)) {
@@ -392,11 +413,23 @@ public class Main implements MouseListener {
             }
             if (isCheckMate("black")) {
                 JOptionPane.showMessageDialog(null, "White wins!");
-                player = "white";
-                initialiseBoard();
+                resetGame();
+            }
+        } else {
+            if (checkDraw("black") == 1) {
+                JOptionPane.showMessageDialog(null, "Draw by Stalemate!");
+                resetGame();
+            } else if (checkDraw("black") == 2) {
+                JOptionPane.showMessageDialog(null, "Draw by Insufficient pieces!");
+                resetGame();
+            }
+            else if (checkDraw("black") == 3) {
+                JOptionPane.showMessageDialog(null, "Draw by 50-move rule");
+                resetGame();
             }
         }
     }
+
 
     public static void movePiece(JLabel source, JLabel destination) {
         if (source != destination
@@ -407,6 +440,256 @@ public class Main implements MouseListener {
                 && !(getColor((ImageIcon) source.getIcon()).equals("black") && getType((ImageIcon) destination.getIcon()).equals("king") && getColor((ImageIcon) destination.getIcon()).equals("white"))
                 && movableCells(source).contains(destination)
         ) {
+            if(source.getIcon() == whitePawn1 || source.getIcon() == blackPawn1 || destination.getIcon() != null){
+                uselessHalfMoves = 0;
+            }
+            else{
+                uselessHalfMoves++;
+            }
+            System.out.println(uselessHalfMoves);
+            if (blackEnpasante1 && source.getIcon() != whitePawn1 && destination != board[2][0]) {
+                blackEnpasante1 = false;
+            } else if (blackEnpasante2 && source.getIcon() != whitePawn1 && destination != board[2][1]) {
+                blackEnpasante2 = false;
+            } else if (blackEnpasante3 && source.getIcon() != whitePawn1 && destination != board[2][2]) {
+                blackEnpasante3 = false;
+            } else if (blackEnpasante4 && source.getIcon() != whitePawn1 && destination != board[2][3]) {
+                blackEnpasante4 = false;
+            } else if (blackEnpasante5 && source.getIcon() != whitePawn1 && destination != board[2][4]) {
+                blackEnpasante5 = false;
+            } else if (blackEnpasante6 && source.getIcon() != whitePawn1 && destination != board[2][5]) {
+                blackEnpasante6 = false;
+            } else if (blackEnpasante7 && source.getIcon() != whitePawn1 && destination != board[2][6]) {
+                blackEnpasante7 = false;
+            } else if (blackEnpasante8 && source.getIcon() != whitePawn1 && destination != board[2][7]) {
+                blackEnpasante8 = false;
+            }
+
+            if (whiteEnpasante1 && source.getIcon() != blackPawn1 && destination != board[5][0]) {
+                whiteEnpasante1 = false;
+            } else if (whiteEnpasante2 && source.getIcon() != blackPawn1 && destination != board[5][1]) {
+                whiteEnpasante2 = false;
+            } else if (whiteEnpasante3 && source.getIcon() != blackPawn1 && destination != board[5][2]) {
+                whiteEnpasante3 = false;
+            } else if (whiteEnpasante4 && source.getIcon() != blackPawn1 && destination != board[5][3]) {
+                whiteEnpasante4 = false;
+            } else if (whiteEnpasante5 && source.getIcon() != blackPawn1 && destination != board[5][4]) {
+                whiteEnpasante5 = false;
+            } else if (whiteEnpasante6 && source.getIcon() != blackPawn1 && destination != board[5][5]) {
+                whiteEnpasante6 = false;
+            } else if (whiteEnpasante7 && source.getIcon() != blackPawn1 && destination != board[5][6]) {
+                whiteEnpasante7 = false;
+            } else if (whiteEnpasante8 && source.getIcon() != blackPawn1 && destination != board[5][7]) {
+                whiteEnpasante8 = false;
+            }
+            if (source.getIcon() == blackPawn1) {
+                if (source == board[1][0] && destination == board[3][0]) {
+                    blackEnpasante1 = true;
+                } else if (source == board[1][1] && destination == board[3][1]) {
+                    blackEnpasante2 = true;
+                } else if (source == board[1][2] && destination == board[3][2]) {
+                    blackEnpasante3 = true;
+                } else if (source == board[1][3] && destination == board[3][3]) {
+                    blackEnpasante4 = true;
+                } else if (source == board[1][4] && destination == board[3][4]) {
+                    blackEnpasante5 = true;
+                } else if (source == board[1][5] && destination == board[3][5]) {
+                    blackEnpasante6 = true;
+                } else if (source == board[1][6] && destination == board[3][6]) {
+                    blackEnpasante7 = true;
+                } else if (source == board[1][7] && destination == board[3][7]) {
+                    blackEnpasante8 = true;
+                }
+            } else if (source.getIcon() == whitePawn1) {
+                if (source == board[6][0] && destination == board[4][0]) {
+                    whiteEnpasante1 = true;
+                } else if (source == board[6][1] && destination == board[4][1]) {
+                    whiteEnpasante2 = true;
+                } else if (source == board[6][2] && destination == board[4][2]) {
+                    whiteEnpasante3 = true;
+                } else if (source == board[6][3] && destination == board[4][3]) {
+                    whiteEnpasante4 = true;
+                } else if (source == board[6][4] && destination == board[4][4]) {
+                    whiteEnpasante5 = true;
+                } else if (source == board[6][5] && destination == board[4][5]) {
+                    whiteEnpasante6 = true;
+                } else if (source == board[6][6] && destination == board[4][6]) {
+                    whiteEnpasante7 = true;
+                } else if (source == board[6][7] && destination == board[4][7]) {
+                    whiteEnpasante8 = true;
+                }
+            }
+
+            //movements
+            if (blackEnpasante1 && source.getIcon() == whitePawn1 && destination == board[2][0]) {
+                blackEnpasante1 = false;
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[3][0].setIcon(null);
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (blackEnpasante2 && source.getIcon() == whitePawn1 && destination == board[2][1]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[3][1].setIcon(null);
+                blackEnpasante2 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (blackEnpasante3 && source.getIcon() == whitePawn1 && destination == board[2][2]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[3][2].setIcon(null);
+                blackEnpasante3 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (blackEnpasante4 && source.getIcon() == whitePawn1 && destination == board[2][3]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[3][3].setIcon(null);
+                blackEnpasante4 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (blackEnpasante5 && source.getIcon() == whitePawn1 && destination == board[2][4]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[3][4].setIcon(null);
+                blackEnpasante5 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (blackEnpasante6 && source.getIcon() == whitePawn1 && destination == board[2][5]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[3][5].setIcon(null);
+                blackEnpasante6 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (blackEnpasante7 && source.getIcon() == whitePawn1 && destination == board[2][6]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[3][6].setIcon(null);
+                blackEnpasante7 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (blackEnpasante8 && source.getIcon() == whitePawn1 && destination == board[2][7]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[3][7].setIcon(null);
+                blackEnpasante8 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            }
+
+            if (whiteEnpasante1 && source.getIcon() == blackPawn1 && destination == board[5][0]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[4][0].setIcon(null);
+                whiteEnpasante1 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (whiteEnpasante2 && source.getIcon() == blackPawn1 && destination == board[5][1]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[4][1].setIcon(null);
+                whiteEnpasante2 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (whiteEnpasante3 && source.getIcon() == blackPawn1 && destination == board[5][2]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[4][2].setIcon(null);
+                whiteEnpasante3 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (whiteEnpasante4 && source.getIcon() == blackPawn1 && destination == board[5][3]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[4][3].setIcon(null);
+                whiteEnpasante4 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (whiteEnpasante5 && source.getIcon() == blackPawn1 && destination == board[5][4]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[4][4].setIcon(null);
+                whiteEnpasante5 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (whiteEnpasante6 && source.getIcon() == blackPawn1 && destination == board[5][5]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[4][5].setIcon(null);
+                whiteEnpasante6 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (whiteEnpasante7 && source.getIcon() == blackPawn1 && destination == board[5][6]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[4][6].setIcon(null);
+                whiteEnpasante7 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            } else if (whiteEnpasante8 && source.getIcon() == blackPawn1 && destination == board[5][7]) {
+                destination.setIcon(source.getIcon());
+                source.setIcon(null);
+                board[4][7].setIcon(null);
+                whiteEnpasante8 = false;
+                player = player.equals("white") ? "black" : "white";
+                destination.setBorder(null);
+                return;
+            }
+
+            if (source.getIcon() == blackPawn1) {
+                if (source == board[1][0] && destination == board[3][0]) {
+                    blackEnpasante1 = true;
+                } else if (source == board[1][1] && destination == board[3][1]) {
+                    blackEnpasante2 = true;
+                } else if (source == board[1][2] && destination == board[3][2]) {
+                    blackEnpasante3 = true;
+                } else if (source == board[1][3] && destination == board[3][3]) {
+                    blackEnpasante4 = true;
+                } else if (source == board[1][4] && destination == board[3][4]) {
+                    blackEnpasante5 = true;
+                } else if (source == board[1][5] && destination == board[3][5]) {
+                    blackEnpasante6 = true;
+                } else if (source == board[1][6] && destination == board[3][6]) {
+                    blackEnpasante7 = true;
+                } else if (source == board[1][7] && destination == board[3][7]) {
+                    blackEnpasante8 = true;
+                }
+            } else if (source.getIcon() == whitePawn1) {
+                if (source == board[6][0] && destination == board[4][0]) {
+                    whiteEnpasante1 = true;
+                } else if (source == board[6][1] && destination == board[4][1]) {
+                    whiteEnpasante2 = true;
+                } else if (source == board[6][2] && destination == board[4][2]) {
+                    whiteEnpasante3 = true;
+                } else if (source == board[6][3] && destination == board[4][3]) {
+                    whiteEnpasante4 = true;
+                } else if (source == board[6][4] && destination == board[4][4]) {
+                    whiteEnpasante5 = true;
+                } else if (source == board[6][5] && destination == board[4][5]) {
+                    whiteEnpasante6 = true;
+                } else if (source == board[6][6] && destination == board[4][6]) {
+                    whiteEnpasante7 = true;
+                } else if (source == board[6][7] && destination == board[4][7]) {
+                    whiteEnpasante8 = true;
+                }
+            }
             if (source.getIcon() == whiteKing) {
                 whiteKingMoved = true;
             } else if (source.getIcon() == whiteRook1 && board[7][0] == source) {
@@ -772,6 +1055,163 @@ public class Main implements MouseListener {
                     }
                 }
             }
+        }
+        return true;
+    }
+
+    public static void resetGame() {
+        player = "white";
+        whiteKingMoved = false;
+        whiteRook1Moved = false;
+        whiteRook2Moved = false;
+        blackRook2Moved = false;
+        blackRook1Moved = false;
+        blackKingMoved = false;
+        whiteEnpasante1 = false;
+        whiteEnpasante2 = false;
+        whiteEnpasante3 = false;
+        whiteEnpasante4 = false;
+        whiteEnpasante5 = false;
+        whiteEnpasante6 = false;
+        whiteEnpasante7 = false;
+        whiteEnpasante8 = false;
+        blackEnpasante1 = false;
+        blackEnpasante2 = false;
+        blackEnpasante3 = false;
+        blackEnpasante4 = false;
+        blackEnpasante5 = false;
+        blackEnpasante6 = false;
+        blackEnpasante7 = false;
+        blackEnpasante8 = false;
+        uselessHalfMoves = 0;
+        initialiseBoard();
+    }
+
+    public static int checkDraw(String color) {
+        if (Objects.equals(color, "white")) {
+            //Stalemate
+            if (!isCheck(color, board) && isCheckMate(color)) {
+                return 1;
+            }
+            //Insufficient Material
+            else if (insufficientMaterial(color)) {
+                return 2;
+            } else if (uselessHalfMoves == 100) {
+                return 3;
+            }
+        } else {
+            //Stalemate
+            if (!isCheck(color, board) && isCheckMate(color)) {
+                return 1;
+            }
+            //Insufficient Material
+            else if (insufficientMaterial(color)) {
+                return 2;
+            }
+            else if (uselessHalfMoves == 100) {
+                return 3;
+            }
+        }
+        return 0;
+    }
+
+    public static boolean insufficientMaterial(String color) {
+        if (kingvsking() || kingAndBishopVsKing(color) || kingAndKnightVsKing(color) || kingAndBishopVsKingAndBishop()) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean kingvsking() {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (getType((ImageIcon) board[i][j].getIcon()).equals("king")) {
+                    continue;
+                }
+                if (!getType((ImageIcon) board[i][j].getIcon()).equals("empty")) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean kingAndBishopVsKing(String color) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (getType((ImageIcon) board[i][j].getIcon()).equals("king")) {
+                    continue;
+                }
+                if (!(getColor((ImageIcon) board[i][j].getIcon()).equals(color) && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) && !getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean kingAndKnightVsKing(String color) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (getType((ImageIcon) board[i][j].getIcon()).equals("king")) {
+                    continue;
+                }
+                if (!(getColor((ImageIcon) board[i][j].getIcon()).equals(color) && getType((ImageIcon) board[i][j].getIcon()).equals("knight")) && !getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean kingAndBishopVsKingAndBishop() {
+        int whiteRow = -1;
+        int whiteCol = -1;
+        int blackRow = -1;
+        int blackCol = -1;
+        int whiteBishops = 0;
+        int blackBishops = 0;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (getType((ImageIcon) board[i][j].getIcon()).equals("king") ||
+                        (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) ||
+                        (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop"))
+                        || getColor((ImageIcon) board[i][j].getIcon()).equals("empty")
+                ) {
+                    if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) {
+                        whiteBishops++;
+                        whiteRow = i;
+                        whiteCol = j;
+                    } else if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) {
+                        blackBishops++;
+                        blackRow = i;
+                        blackCol = j;
+                    }
+                    continue;
+                } else {
+                    return false;
+                }
+//                if ((!(getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) || !(getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop"))) && !getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
+//                    return false;
+//                } else {
+//                    if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) {
+//                        whiteBishops++;
+//                        whiteRow = i;
+//                        whiteCol = j;
+//                    } else if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) {
+//                        blackBishops++;
+//                        blackRow = i;
+//                        blackCol = j;
+//                    }
+//                }
+            }
+        }
+
+        if (whiteBishops > 1 || blackBishops > 1) {
+            return false;
+        }
+        if (board[whiteRow][whiteCol].getBackground() != board[blackRow][blackCol].getBackground()) {
+            return false;
         }
         return true;
     }
