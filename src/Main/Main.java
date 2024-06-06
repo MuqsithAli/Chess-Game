@@ -321,12 +321,22 @@ public class Main implements MouseListener {
                 }
             }
         }
+        String pieceColor = getColor((ImageIcon) clickedCell.getIcon());
+        String pieceType = getType((ImageIcon) clickedCell.getIcon());
+        switch(pieceType){
+            case "pawn" -> new Pawn(row, col, pieceColor).highlightCells(row, col);
+            case "queen" -> new Queen(row, col, pieceColor).highlightCells(row, col);
+            case "knight" -> new Knight(row, col, pieceColor).highlightCells(row, col);
+            case "rook" -> new Rook(row, col, pieceColor).highlightCells(row, col);
+            case "bishop" -> new Bishop(row, col,pieceColor).highlightCells(row, col);
+            case "king" -> new King(row, col,pieceColor).highlightCells(row, col);
+        }
+
         if (clickedStack.isEmpty() && player.equals(getColor((ImageIcon) clickedCell.getIcon()))) {
             clickedStack.push(clickedCell);
         } else {
             clickedStack.push(clickedCell);
         }
-        //Highlight the selected piece
         if ((clickedCell.getBorder() == null && clickedCell.getIcon() != null && player.equals(getColor((ImageIcon) clickedCell.getIcon())) || clickedCell.getBackground() == pinkHighLight)) {
             clickedCell.setBorder(BorderFactory.createLineBorder(Color.red, 5));
         } else {
@@ -338,32 +348,6 @@ public class Main implements MouseListener {
             clickedStack.pop();
         }
 
-        String pieceColor = getColor((ImageIcon) clickedCell.getIcon());
-        String pieceType = getType((ImageIcon) clickedCell.getIcon());
-        if (pieceType.equals("pawn")) {
-            Pawn pawn = new Pawn(row, col, pieceColor);
-            pawn.highlightCells(row, col);
-        }
-        if (pieceType.equals("queen")) {
-            Queen queen = new Queen(row, col, pieceColor);
-            queen.highlightCells(row, col);
-        }
-        if (pieceType.equals("knight")) {
-            Knight knight = new Knight(row, col, pieceColor);
-            knight.highlightCells(row, col);
-        }
-        if (pieceType.equals("rook")) {
-            Rook rook = new Rook(row, col, pieceColor);
-            rook.highlightCells(row, col);
-        }
-        if (pieceType.equals("bishop")) {
-            Bishop bishop = new Bishop(row, col, pieceColor);
-            bishop.highlightCells(row, col);
-        }
-        if (pieceType.equals("king")) {
-            King king = new King(row, col, pieceColor);
-            king.highlightCells(row, col);
-        }
         if (clickedCell.getBorder() == null && clickedCell.getIcon() != null) {
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board.length; j++) {
@@ -429,7 +413,6 @@ public class Main implements MouseListener {
             }
         }
     }
-
 
     public static void movePiece(JLabel source, JLabel destination) {
         if (source != destination
@@ -1090,7 +1073,7 @@ public class Main implements MouseListener {
     public static int checkDraw(String color) {
         if (Objects.equals(color, "white")) {
             //Stalemate
-            if (!isCheck(color, board) && isCheckMate(color)) {
+            if (isCheckMate(color)) {
                 return 1;
             }
             //Insufficient Material
@@ -1101,7 +1084,7 @@ public class Main implements MouseListener {
             }
         } else {
             //Stalemate
-            if (!isCheck(color, board) && isCheckMate(color)) {
+            if (isCheckMate(color)) {
                 return 1;
             }
             //Insufficient Material
@@ -1191,19 +1174,6 @@ public class Main implements MouseListener {
                 } else {
                     return false;
                 }
-//                if ((!(getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) || !(getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop"))) && !getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
-//                    return false;
-//                } else {
-//                    if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) {
-//                        whiteBishops++;
-//                        whiteRow = i;
-//                        whiteCol = j;
-//                    } else if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) {
-//                        blackBishops++;
-//                        blackRow = i;
-//                        blackCol = j;
-//                    }
-//                }
             }
         }
 
