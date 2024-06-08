@@ -90,7 +90,6 @@ public class Main implements MouseListener {
     public static File capture;
     public static File promote;
     public static File start;
-    public static File end;
     public static File win;
 
     Main() {
@@ -354,7 +353,7 @@ public class Main implements MouseListener {
 
     public static void playerChoice(){
         JFrame PlayerChoiceWindow = new JFrame("Player Choice Window");
-        PlayerChoiceWindow.setSize(400, 400);
+        PlayerChoiceWindow.setSize(400, 85);
         PlayerChoiceWindow.setLocationRelativeTo(null); // Center the window
 
         JPanel PlayerChoicePanel = new JPanel();
@@ -384,16 +383,6 @@ public class Main implements MouseListener {
     }
 
     public static void initialiseBoard() {
-
-        // for (int i = 0; i < board.length; i++) {
-        // for (int j = 0; j < board.length; j++) {
-        // board[i][j].setBackground((i + j) % 2 != 0 ? darkSquare : lightSquare);
-        // board[i][j].setIcon(null);
-        // board[i][j].setBorder(null);
-        //// board[i][j].setText(i + ", " + j);
-        //// board[i][j].setFont(new Font("Arial", Font.PLAIN, 12));
-        // }
-        // }
         if (!isCreatorModeOn) {
             try {
                 AudioInputStream ais = AudioSystem.getAudioInputStream(start);
@@ -441,13 +430,32 @@ public class Main implements MouseListener {
     }
 
     public static void clearBoard() {
-        for (int i = 0; i < board.length; i++) {
+        JFrame clearBoardWindow = new JFrame("Clear Board");
+        clearBoardWindow.setSize(400, 85);
+        clearBoardWindow.setLocationRelativeTo(null); // Center the window
+
+        JPanel clearBoardPanel = new JPanel();
+        clearBoardPanel.setLayout(new FlowLayout());
+
+        JLabel label = new JLabel("Want to reset the board?");
+        clearBoardPanel.add(label);
+
+        JButton yes = new JButton("Yes");
+        yes.addActionListener(e -> {for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 board[i][j].setBackground((i + j) % 2 != 0 ? darkSquare : lightSquare);
                 board[i][j].setIcon(null);
                 board[i][j].setBorder(null);
             }
         }
+            clearBoardWindow.dispose();});
+        clearBoardPanel.add(yes);
+
+        JButton no = new JButton("No");
+        no.addActionListener(e -> {clearBoardWindow.dispose();});
+        clearBoardPanel.add(no);
+        clearBoardWindow.add(clearBoardPanel);
+        clearBoardWindow.setVisible(true);
     }
 
     @Override
@@ -1135,11 +1143,10 @@ public class Main implements MouseListener {
             source.setIcon(null);
             if (canPromote(player)) {
                 handlePromotion(player);
+                destination.setBorder(null);
+                player = Objects.equals(player, "white") ? "black" : "white";
                 return;
             }
-            
-                
-            
             player = Objects.equals(player, "white") ? "black" : "white";
         }
         destination.setBorder(null);

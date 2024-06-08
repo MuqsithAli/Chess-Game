@@ -1079,7 +1079,8 @@ public class King {
     public boolean canCastle(String direction){
         if(Objects.equals(this.color, "white")){
             if(direction.equals("right")){
-                if((board[7][7].getIcon()==whiteRook1 || board[7][7].getIcon()==whiteRook2) &&  this.row == 7 && this.col == 4 && board[7][5].getIcon()==null && board[7][6].getIcon() == null && isSafe(7, 5) && isSafe(7, 6) && !whiteKingMoved && !whiteRook2Moved){
+//                System.out.println(whiteRook2Moved);
+                if((board[7][7].getIcon()==whiteRook2 || board[7][7].getIcon()==whiteRook1) &&  this.row == 7 && this.col == 4 && board[7][5].getIcon()==null && board[7][6].getIcon() == null && isSafe(7, 5) && isSafe(7, 6) && !whiteKingMoved && !whiteRook2Moved){
                     return true;
                 }
                 else{
@@ -1105,7 +1106,7 @@ public class King {
                 }
             }
             else{
-                if((board[0][0].getIcon()==blackRook1 || board[0][0].getIcon()==blackRook2) && this.row == 0 && this.col == 4 && board[0][3].getIcon()==null && board[0][2].getIcon() == null && board[0][1].getIcon() == null && isSafe(0, 3) && isSafe(0, 2)  && isSafe(0, 2) && !blackKingMoved && !blackRook1Moved){
+                if((board[0][0].getIcon()==blackRook2 || board[0][0].getIcon()==blackRook1) && this.row == 0 && this.col == 4 && board[0][3].getIcon()==null && board[0][2].getIcon() == null && board[0][1].getIcon() == null && isSafe(0, 3) && isSafe(0, 2)  && isSafe(0, 2) && !blackKingMoved && !blackRook1Moved){
                     return true;
                 }
                 else{
