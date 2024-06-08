@@ -2,11 +2,14 @@ package Main;
 
 import Piece.*;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -82,6 +85,12 @@ public class Main implements MouseListener {
     public static JMenu game;
     public static JMenuItem restart;
     public static JMenuItem creatorMode;
+    public static File move;
+    public static File castle;
+    public static File capture;
+    public static File promote;
+    public static File start;
+    public static File end;
 
     Main() {
         JFrame frame = new JFrame("Chess");
@@ -93,6 +102,13 @@ public class Main implements MouseListener {
         game = new JMenu("Game");
         restart = new JMenuItem("Restart");
         creatorMode = new JMenuItem("Creator Mode OFF");
+
+        //start sound
+        start = new File("src/sounds/game-start.wav");
+        capture = new File("src/sounds/capture.wav");
+        move = new File("src/sounds/move.wav");
+        castle = new File("src/sounds/castle.wav");
+        promote = new File("src/sounds/promote.wav");
 
         menubar.add(game);
         game.add(restart);
@@ -316,6 +332,14 @@ public class Main implements MouseListener {
 //            }
 //        }
         if (!isCreatorModeOn) {
+            try {
+                AudioInputStream ais = AudioSystem.getAudioInputStream(start);
+                Clip clip = AudioSystem.getClip();
+                clip.open(ais);
+                clip.loop(0);
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                throw new RuntimeException(e);
+            }
             board[0][0].setIcon(blackRook1);
             board[0][7].setIcon(blackRook2);
             board[0][1].setIcon(blackKnight1);
@@ -875,6 +899,14 @@ public class Main implements MouseListener {
                 board[7][5].setIcon(whiteRook2);
                 player = Objects.equals(player, "white") ? "black" : "white";
                 destination.setBorder(null);
+                try {
+                    AudioInputStream ais = AudioSystem.getAudioInputStream(castle);
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(ais);
+                    clip.loop(0);
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                    throw new RuntimeException(e);
+                }
                 return;
             }
             if (source == board[7][4] && source.getIcon() == whiteKing && destination == board[7][1]) {
@@ -884,6 +916,14 @@ public class Main implements MouseListener {
                 board[7][2].setIcon(whiteRook1);
                 player = Objects.equals(player, "white") ? "black" : "white";
                 destination.setBorder(null);
+                try {
+                    AudioInputStream ais = AudioSystem.getAudioInputStream(castle);
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(ais);
+                    clip.loop(0);
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                    throw new RuntimeException(e);
+                }
                 return;
             }
             if (source == board[0][4] && source.getIcon() == blackKing && destination == board[0][6]) {
@@ -893,6 +933,14 @@ public class Main implements MouseListener {
                 board[0][5].setIcon(blackRook2);
                 player = Objects.equals(player, "white") ? "black" : "white";
                 destination.setBorder(null);
+                try {
+                    AudioInputStream ais = AudioSystem.getAudioInputStream(castle);
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(ais);
+                    clip.loop(0);
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                    throw new RuntimeException(e);
+                }
                 return;
             }
             if (source == board[0][4] && source.getIcon() == blackKing && destination == board[0][1]) {
@@ -902,6 +950,14 @@ public class Main implements MouseListener {
                 board[0][2].setIcon(blackRook1);
                 player = Objects.equals(player, "white") ? "black" : "white";
                 destination.setBorder(null);
+                try {
+                    AudioInputStream ais = AudioSystem.getAudioInputStream(castle);
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(ais);
+                    clip.loop(0);
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                    throw new RuntimeException(e);
+                }
                 return;
             }
             destination.setIcon(source.getIcon());
