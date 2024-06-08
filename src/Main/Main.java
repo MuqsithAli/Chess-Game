@@ -674,51 +674,51 @@ public class Main implements MouseListener {
         JPanel creatorModePanel = new JPanel();
         creatorModePanel.setLayout(new FlowLayout());
 
-        JButton whiteQueenButton = new JButton("white Queen");
+        JButton whiteQueenButton = new JButton(whiteQueen);
         whiteQueenButton.addActionListener(e -> addPiece(row, col, whiteQueen, creatorModeWindow));
         creatorModePanel.add(whiteQueenButton);
 
-        JButton whiteRookButton = new JButton("white Rook");
+        JButton whiteRookButton = new JButton(whiteRook2);
         whiteRookButton.addActionListener(e -> addPiece(row, col, whiteRook1, creatorModeWindow));
         creatorModePanel.add(whiteRookButton);
 
-        JButton whiteBishopButton = new JButton("white Bishop");
+        JButton whiteBishopButton = new JButton(whiteBishop1);
         whiteBishopButton.addActionListener(e -> addPiece(row, col, whiteBishop1, creatorModeWindow));
         creatorModePanel.add(whiteBishopButton);
 
-        JButton whiteKnightButton = new JButton("white Knight");
+        JButton whiteKnightButton = new JButton(whiteKnight1);
         whiteKnightButton.addActionListener(e -> addPiece(row, col, whiteKnight1, creatorModeWindow));
         creatorModePanel.add(whiteKnightButton);
 
-        JButton whiteKingButton = new JButton("white King");
+        JButton whiteKingButton = new JButton(whiteKing);
         whiteKingButton.addActionListener(e -> addPiece(row, col, whiteKing, creatorModeWindow));
         creatorModePanel.add(whiteKingButton);
 
-        JButton whitePawnButton = new JButton("white Pawn");
+        JButton whitePawnButton = new JButton(whitePawn1);
         whitePawnButton.addActionListener(e -> addPiece(row, col, whitePawn1, creatorModeWindow));
         creatorModePanel.add(whitePawnButton);
 
-        JButton blackQueenButton = new JButton("black Queen");
+        JButton blackQueenButton = new JButton(blackQueen);
         blackQueenButton.addActionListener(e -> addPiece(row, col, blackQueen, creatorModeWindow));
         creatorModePanel.add(blackQueenButton);
 
-        JButton blackRookButton = new JButton("black Rook");
+        JButton blackRookButton = new JButton(blackRook2);
         blackRookButton.addActionListener(e -> addPiece(row, col, blackRook1, creatorModeWindow));
         creatorModePanel.add(blackRookButton);
 
-        JButton blackBishopButton = new JButton("black Bishop");
+        JButton blackBishopButton = new JButton(blackBishop1);
         blackBishopButton.addActionListener(e -> addPiece(row, col, blackBishop1, creatorModeWindow));
         creatorModePanel.add(blackBishopButton);
 
-        JButton blackKnightButton = new JButton("black Knight");
+        JButton blackKnightButton = new JButton(blackKnight1);
         blackKnightButton.addActionListener(e -> addPiece(row, col, blackKnight1, creatorModeWindow));
         creatorModePanel.add(blackKnightButton);
 
-        JButton blackKingButton = new JButton("black King");
+        JButton blackKingButton = new JButton(blackKing);
         blackKingButton.addActionListener(e -> addPiece(row, col, blackKing, creatorModeWindow));
         creatorModePanel.add(blackKingButton);
 
-        JButton blackPawnButton = new JButton("black Pawn");
+        JButton blackPawnButton = new JButton(blackPawn1);
         blackPawnButton.addActionListener(e -> addPiece(row, col, blackPawn1, creatorModeWindow));
         creatorModePanel.add(blackPawnButton);
 
