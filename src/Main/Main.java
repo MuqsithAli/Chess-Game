@@ -75,13 +75,61 @@ public class Main implements MouseListener {
     public static boolean whiteEnpasante6 = false;
     public static boolean whiteEnpasante7 = false;
     public static boolean whiteEnpasante8 = false;
+    public static boolean isCreatorModeOn = false;
     public static String player = "white";
     public static int uselessHalfMoves = 0;
+    public static JMenuBar menubar;
+    public static JMenu game;
+    public static JMenuItem restart;
+    public static JMenuItem creatorMode;
 
     Main() {
         JFrame frame = new JFrame("Chess");
         frame.setLayout(new GridLayout(8, 8));
         board = new JLabel[8][8];
+
+        //menubar
+        menubar = new JMenuBar();
+        game = new JMenu("Game");
+        restart = new JMenuItem("Restart");
+        creatorMode = new JMenuItem("Creator Mode OFF");
+
+        menubar.add(game);
+        game.add(restart);
+        game.add(creatorMode);
+        restart.addActionListener(e -> resetGame());
+        creatorMode.addActionListener(e -> {if(!isCreatorModeOn){
+            isCreatorModeOn = true;
+        }
+        else{
+            boolean isWhiteKingPresent = false;
+            boolean isBlackKingPresent = false;
+            for(int i = 0 ; i < board.length ; i++){
+                for(int j = 0 ; j < board.length ; j++){
+                    if(getType((ImageIcon) board[i][j].getIcon()).equals("king") && getColor((ImageIcon) board[i][j].getIcon()).equals("white")){
+                        isWhiteKingPresent = true;
+                    }
+                    if(getType((ImageIcon) board[i][j].getIcon()).equals("king") && getColor((ImageIcon) board[i][j].getIcon()).equals("black")){
+                        isBlackKingPresent = true;
+                    }
+                }
+            }
+            if(isWhiteKingPresent && isBlackKingPresent){
+                isCreatorModeOn = false;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Please Add atleast one black King and one white King");
+                return;
+            }
+        }
+        if(isCreatorModeOn){
+        creatorMode.setText("Creator Mode ON");
+        clearBoard();}
+        else{
+            creatorMode.setText("Creator Mode OFF");
+        }
+        });
+        frame.setJMenuBar(menubar);
 
         // Load the image icon
         blackRook1 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/black_rook.png")));
@@ -259,15 +307,16 @@ public class Main implements MouseListener {
 
     public static void initialiseBoard() {
 
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board.length; j++) {
-                board[i][j].setBackground((i + j) % 2 != 0 ? darkSquare : lightSquare);
-                board[i][j].setIcon(null);
-                board[i][j].setBorder(null);
-//                board[i][j].setText(i + ", " + j);
-//                board[i][j].setFont(new Font("Arial", Font.PLAIN, 12));
-            }
-        }
+//        for (int i = 0; i < board.length; i++) {
+//            for (int j = 0; j < board.length; j++) {
+//                board[i][j].setBackground((i + j) % 2 != 0 ? darkSquare : lightSquare);
+//                board[i][j].setIcon(null);
+//                board[i][j].setBorder(null);
+////                board[i][j].setText(i + ", " + j);
+////                board[i][j].setFont(new Font("Arial", Font.PLAIN, 12));
+//            }
+//        }
+    if(!isCreatorModeOn){
         board[0][0].setIcon(blackRook1);
         board[0][7].setIcon(blackRook2);
         board[0][1].setIcon(blackKnight1);
@@ -300,9 +349,20 @@ public class Main implements MouseListener {
         board[6][5].setIcon(whitePawn6);
         board[6][6].setIcon(whitePawn7);
         board[6][7].setIcon(whitePawn8);
+    }
 
 
         //Perform Modifications below
+    }
+
+    public static void clearBoard(){
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                board[i][j].setBackground((i + j) % 2 != 0 ? darkSquare : lightSquare);
+                board[i][j].setIcon(null);
+                board[i][j].setBorder(null);
+            }
+        }
     }
 
     @Override
@@ -320,6 +380,9 @@ public class Main implements MouseListener {
                     col = j;
                 }
             }
+        }
+        if(isCreatorModeOn){
+            handleCreatorMode(row, col);
         }
         if (clickedStack.isEmpty()) {
             if(player.equals(getColor((ImageIcon) clickedCell.getIcon()))){
@@ -378,58 +441,115 @@ public class Main implements MouseListener {
                 }
             }
         }
-        if (isCheck("white", board)) {
-            for (JLabel[] jLabels : board) {
-                for (int j = 0; j < board.length; j++) {
-                    if (getColor((ImageIcon) jLabels[j].getIcon()).equals("white") && getType((ImageIcon) jLabels[j].getIcon()).equals("king")) {
-                        jLabels[j].setBackground(pinkHighLight);
-                        jLabels[j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+        if(!isCreatorModeOn){
+            if (isCheck("white", board)) {
+                for (JLabel[] jLabels : board) {
+                    for (int j = 0; j < board.length; j++) {
+                        if (getColor((ImageIcon) jLabels[j].getIcon()).equals("white") && getType((ImageIcon) jLabels[j].getIcon()).equals("king")) {
+                            jLabels[j].setBackground(pinkHighLight);
+                            jLabels[j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                        }
+                    }
+                }
+                if (isCheckMate("white")) {
+                    JOptionPane.showMessageDialog(null, "Black wins!");
+                    resetGame();
+                }
+            } else {
+                if (checkDraw("white") == 1) {
+                    JOptionPane.showMessageDialog(null, "Draw by Stalemate!");
+                    resetGame();
+                } else if (checkDraw("white") == 2) {
+                    JOptionPane.showMessageDialog(null, "Draw by Insufficient pieces!");
+                    resetGame();
+                }
+                else if (checkDraw("white") == 3) {
+                    JOptionPane.showMessageDialog(null, "Draw by 50-move rule");
+                    resetGame();
+                }
+            }
+            if (isCheck("black", board)) {
+                for (JLabel[] jLabels : board) {
+                    for (int j = 0; j < board.length; j++) {
+                        if (getColor((ImageIcon) jLabels[j].getIcon()).equals("black") && getType((ImageIcon) jLabels[j].getIcon()).equals("king")) {
+                            jLabels[j].setBackground(pinkHighLight);
+                            jLabels[j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                        }
+                    }
+                }
+                if (isCheckMate("black")) {
+                    JOptionPane.showMessageDialog(null, "White wins!");
+                    resetGame();
+                }
+            } else {
+                if (checkDraw("black") == 1) {
+                    JOptionPane.showMessageDialog(null, "Draw by Stalemate!");
+                    resetGame();
+                } else if (checkDraw("black") == 2) {
+                    JOptionPane.showMessageDialog(null, "Draw by Insufficient pieces!");
+                    resetGame();
+                }
+                else if (checkDraw("black") == 3) {
+                    JOptionPane.showMessageDialog(null, "Draw by 50-move rule");
+                    resetGame();
+                }
+            }
+        }
+    }
+
+    public static void handleCreatorMode(int row, int col) {
+            JFrame creatorModeWindow = new JFrame("Creator Mode");
+            creatorModeWindow.setSize(400, 80);
+            creatorModeWindow.setLocationRelativeTo(null); // Center the window
+
+            JPanel creatorModePanel = new JPanel();
+            creatorModePanel.setLayout(new FlowLayout());
+            JButton whiteQueenButton = new JButton("Queen");
+            whiteQueenButton.addActionListener(e -> addPiece(row, col, whiteQueen, creatorModeWindow));
+            creatorModePanel.add(whiteQueenButton);
+
+            JButton whiteRookButton = new JButton("Rook");
+            whiteRookButton.addActionListener(e -> addPiece(row, col, whiteRook2, creatorModeWindow));
+            creatorModePanel.add(whiteRookButton);
+
+            JButton whiteBishopButton = new JButton("Bishop");
+            whiteBishopButton.addActionListener(e -> addPiece(row, col, whiteBishop2, creatorModeWindow));
+            creatorModePanel.add(whiteBishopButton);
+
+            JButton whiteKnightButton = new JButton("Knight");
+            whiteKnightButton.addActionListener(e -> addPiece(row, col, whiteKnight1, creatorModeWindow));
+            creatorModePanel.add(whiteKnightButton);
+
+            creatorModeWindow.add(creatorModePanel);
+            creatorModeWindow.setVisible(true);
+    }
+
+    public static void addPiece(int row, int col, ImageIcon addedPiece, JFrame creatorModeWindow){
+        if(getType((ImageIcon) board[row][col].getIcon()).equals("king")){
+            if(getColor((ImageIcon) board[row][col].getIcon()).equals("white")){
+                for (int i = 0; i < board.length ; i++){
+                    for(int j = 0 ; j < board.length ; j++){
+                        if(getType((ImageIcon) board[row][col].getIcon()).equals("king") && getColor((ImageIcon) board[row][col].getIcon()).equals("white")){
+                            JOptionPane.showMessageDialog(null, "white King already exists");
+                            return;
+                        }
                     }
                 }
             }
-            if (isCheckMate("white")) {
-                JOptionPane.showMessageDialog(null, "Black wins!");
-                resetGame();
-            }
-        } else {
-            if (checkDraw("white") == 1) {
-                JOptionPane.showMessageDialog(null, "Draw by Stalemate!");
-                resetGame();
-            } else if (checkDraw("white") == 2) {
-                JOptionPane.showMessageDialog(null, "Draw by Insufficient pieces!");
-                resetGame();
-            }
-            else if (checkDraw("white") == 3) {
-                JOptionPane.showMessageDialog(null, "Draw by 50-move rule");
-                resetGame();
-            }
-        }
-        if (isCheck("black", board)) {
-            for (JLabel[] jLabels : board) {
-                for (int j = 0; j < board.length; j++) {
-                    if (getColor((ImageIcon) jLabels[j].getIcon()).equals("black") && getType((ImageIcon) jLabels[j].getIcon()).equals("king")) {
-                        jLabels[j].setBackground(pinkHighLight);
-                        jLabels[j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+            else if (getColor((ImageIcon) board[row][col].getIcon()).equals("black")){
+                for (int i = 0; i < board.length ; i++){
+                    for(int j = 0 ; j < board.length ; j++){
+                        if(getType((ImageIcon) board[row][col].getIcon()).equals("king") && getColor((ImageIcon) board[row][col].getIcon()).equals("black")){
+                            JOptionPane.showMessageDialog(null, "black King already exists");
+                            return;
+                        }
                     }
                 }
             }
-            if (isCheckMate("black")) {
-                JOptionPane.showMessageDialog(null, "White wins!");
-                resetGame();
-            }
-        } else {
-            if (checkDraw("black") == 1) {
-                JOptionPane.showMessageDialog(null, "Draw by Stalemate!");
-                resetGame();
-            } else if (checkDraw("black") == 2) {
-                JOptionPane.showMessageDialog(null, "Draw by Insufficient pieces!");
-                resetGame();
-            }
-            else if (checkDraw("black") == 3) {
-                JOptionPane.showMessageDialog(null, "Draw by 50-move rule");
-                resetGame();
-            }
+
         }
+        board[row][col].setIcon(addedPiece);
+        creatorModeWindow.dispose();
     }
 
 
@@ -768,19 +888,19 @@ public class Main implements MouseListener {
 
             JPanel promotionPanel = new JPanel();
             promotionPanel.setLayout(new FlowLayout());
-            JButton queenButton = new JButton("Queen");
+            JButton queenButton = new JButton("white Queen");
             queenButton.addActionListener(e -> promotePawn(row, col, whiteQueen, promotionWindow));
             promotionPanel.add(queenButton);
 
-            JButton rookButton = new JButton("Rook");
-            rookButton.addActionListener(e -> promotePawn(row, col, whiteRook2, promotionWindow));
+            JButton rookButton = new JButton("white Rook");
+            rookButton.addActionListener(e -> promotePawn(row, col, whiteRook1, promotionWindow));
             promotionPanel.add(rookButton);
 
-            JButton bishopButton = new JButton("Bishop");
-            bishopButton.addActionListener(e -> promotePawn(row, col, whiteBishop2, promotionWindow));
+            JButton bishopButton = new JButton("white Bishop");
+            bishopButton.addActionListener(e -> promotePawn(row, col, whiteBishop1, promotionWindow));
             promotionPanel.add(bishopButton);
 
-            JButton knightButton = new JButton("Knight");
+            JButton knightButton = new JButton("white Knight");
             knightButton.addActionListener(e -> promotePawn(row, col, whiteKnight1, promotionWindow));
             promotionPanel.add(knightButton);
 
@@ -1061,6 +1181,14 @@ public class Main implements MouseListener {
     }
 
     public static void resetGame() {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                board[i][j].setBackground((i + j) % 2 != 0 ? darkSquare : lightSquare);
+                board[i][j].setIcon(null);
+                board[i][j].setBorder(null);
+            }
+        }
+        initialiseBoard();
         player = "white";
         whiteKingMoved = false;
         whiteRook1Moved = false;
