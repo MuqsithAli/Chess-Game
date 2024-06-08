@@ -1165,24 +1165,24 @@ public class Main implements MouseListener {
             }
             int col = x;
             JFrame promotionWindow = new JFrame("Pawn Promotion");
-            promotionWindow.setSize(400, 80);
+            promotionWindow.setSize(400, 230);
             promotionWindow.setLocationRelativeTo(null); // Center the window
 
             JPanel promotionPanel = new JPanel();
             promotionPanel.setLayout(new FlowLayout());
-            JButton queenButton = new JButton("Queen");
+            JButton queenButton = new JButton(whiteQueen);
             queenButton.addActionListener(e -> promotePawn(row, col, whiteQueen, promotionWindow));
             promotionPanel.add(queenButton);
 
-            JButton rookButton = new JButton("Rook");
+            JButton rookButton = new JButton(whiteRook1);
             rookButton.addActionListener(e -> promotePawn(row, col, whiteRook1, promotionWindow));
             promotionPanel.add(rookButton);
 
-            JButton bishopButton = new JButton("Bishop");
+            JButton bishopButton = new JButton(whiteBishop1);
             bishopButton.addActionListener(e -> promotePawn(row, col, whiteBishop1, promotionWindow));
             promotionPanel.add(bishopButton);
 
-            JButton knightButton = new JButton("Knight");
+            JButton knightButton = new JButton(whiteKnight1);
             knightButton.addActionListener(e -> promotePawn(row, col, whiteKnight1, promotionWindow));
             promotionPanel.add(knightButton);
 
@@ -1200,24 +1200,24 @@ public class Main implements MouseListener {
             }
             int col = x;
             JFrame promotionWindow = new JFrame("Pawn Promotion");
-            promotionWindow.setSize(400, 80);
+            promotionWindow.setSize(400, 230);
             promotionWindow.setLocationRelativeTo(null); // Center the window
 
             JPanel promotionPanel = new JPanel();
             promotionPanel.setLayout(new FlowLayout());
-            JButton queenButton = new JButton("Queen");
+            JButton queenButton = new JButton(blackQueen);
             queenButton.addActionListener(e -> promotePawn(row, col, blackQueen, promotionWindow));
             promotionPanel.add(queenButton);
 
-            JButton rookButton = new JButton("Rook");
+            JButton rookButton = new JButton(blackRook1);
             rookButton.addActionListener(e -> promotePawn(row, col, blackRook1, promotionWindow));
             promotionPanel.add(rookButton);
 
-            JButton bishopButton = new JButton("Bishop");
+            JButton bishopButton = new JButton(blackBishop1);
             bishopButton.addActionListener(e -> promotePawn(row, col, blackBishop1, promotionWindow));
             promotionPanel.add(bishopButton);
 
-            JButton knightButton = new JButton("Knight");
+            JButton knightButton = new JButton(blackKnight1);
             knightButton.addActionListener(e -> promotePawn(row, col, blackKnight1, promotionWindow));
             promotionPanel.add(knightButton);
 
