@@ -91,6 +91,7 @@ public class Main implements MouseListener {
     public static File promote;
     public static File start;
     public static File end;
+    public static File win;
 
     Main() {
         JFrame frame = new JFrame("Chess");
@@ -109,6 +110,7 @@ public class Main implements MouseListener {
         move = new File("src/sounds/move.wav");
         castle = new File("src/sounds/castle.wav");
         promote = new File("src/sounds/promote.wav");
+        win = new File("src/sounds/win.wav");
 
         menubar.add(game);
         game.add(restart);
@@ -134,6 +136,7 @@ public class Main implements MouseListener {
                 }
                 if (isWhiteKingPresent && isBlackKingPresent) {
                     isCreatorModeOn = false;
+                    playerChoice();
                 } else {
                     JOptionPane.showMessageDialog(null, "Please Add atleast one black King and one white King");
                     return;
@@ -349,6 +352,33 @@ public class Main implements MouseListener {
         initialiseBoard();
     }
 
+    public static void playerChoice(){
+        JFrame PlayerChoiceWindow = new JFrame("Player Choice Window");
+        PlayerChoiceWindow.setSize(400, 400);
+        PlayerChoiceWindow.setLocationRelativeTo(null); // Center the window
+
+        JPanel PlayerChoicePanel = new JPanel();
+        PlayerChoicePanel.setLayout(new FlowLayout());
+
+        JLabel label = new JLabel("Who Goes First?");
+        PlayerChoicePanel.add(label);
+
+        JButton Player1Button = new JButton("White");
+        Player1Button.addActionListener(e -> {player = "white";
+        PlayerChoiceWindow.dispose();});
+        PlayerChoicePanel.add(Player1Button);
+
+        JButton Player2Button = new JButton("Black");
+        Player2Button.addActionListener(e -> {player = "black";
+        PlayerChoiceWindow.dispose();});
+        PlayerChoicePanel.add(Player2Button);
+
+
+        PlayerChoiceWindow.add(PlayerChoicePanel);
+        PlayerChoiceWindow.setVisible(true);
+
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Main::new);
     }
@@ -504,23 +534,63 @@ public class Main implements MouseListener {
                         for (int j = 0; j < board.length; j++) {
                             if (getColor((ImageIcon) jLabels[j].getIcon()).equals("white")
                                     && getType((ImageIcon) jLabels[j].getIcon()).equals("king")) {
+                                        try {
+                                            AudioInputStream ais = AudioSystem.getAudioInputStream(capture);
+                                            Clip clip = AudioSystem.getClip();
+                                            clip.open(ais);
+                                            clip.loop(0);
+                                        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException a) {
+                                            throw new RuntimeException(a);
+                                        }
                                 jLabels[j].setBackground(pinkHighLight);
                                 jLabels[j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
                             }
                         }
                     }
                     if (isCheckMate("white")) {
+                        try {
+                            AudioInputStream ais = AudioSystem.getAudioInputStream(win);
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(ais);
+                            clip.loop(0);
+                        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException a) {
+                            throw new RuntimeException(a);
+                        }
                         JOptionPane.showMessageDialog(null, "Black wins!");
                         resetGame();
                     }
                 } else {
                     if (checkDraw("white") == 1) {
+                        try {
+                            AudioInputStream ais = AudioSystem.getAudioInputStream(win);
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(ais);
+                            clip.loop(0);
+                        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException a) {
+                            throw new RuntimeException(a);
+                        }
                         JOptionPane.showMessageDialog(null, "Draw by Stalemate!");
                         resetGame();
                     } else if (checkDraw("white") == 2) {
+                        try {
+                            AudioInputStream ais = AudioSystem.getAudioInputStream(win);
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(ais);
+                            clip.loop(0);
+                        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException a) {
+                            throw new RuntimeException(a);
+                        }
                         JOptionPane.showMessageDialog(null, "Draw by Insufficient pieces!");
                         resetGame();
                     } else if (checkDraw("white") == 3) {
+                        try {
+                            AudioInputStream ais = AudioSystem.getAudioInputStream(win);
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(ais);
+                            clip.loop(0);
+                        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException a) {
+                            throw new RuntimeException(a);
+                        }
                         JOptionPane.showMessageDialog(null, "Draw by 50-move rule");
                         resetGame();
                     }
@@ -530,23 +600,63 @@ public class Main implements MouseListener {
                         for (int j = 0; j < board.length; j++) {
                             if (getColor((ImageIcon) jLabels[j].getIcon()).equals("black")
                                     && getType((ImageIcon) jLabels[j].getIcon()).equals("king")) {
+                                        try {
+                                            AudioInputStream ais = AudioSystem.getAudioInputStream(capture);
+                                            Clip clip = AudioSystem.getClip();
+                                            clip.open(ais);
+                                            clip.loop(0);
+                                        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException a) {
+                                            throw new RuntimeException(a);
+                                        }
                                 jLabels[j].setBackground(pinkHighLight);
                                 jLabels[j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
                             }
                         }
                     }
                     if (isCheckMate("black")) {
+                        try {
+                            AudioInputStream ais = AudioSystem.getAudioInputStream(win);
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(ais);
+                            clip.loop(0);
+                        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException a) {
+                            throw new RuntimeException(a);
+                        }
                         JOptionPane.showMessageDialog(null, "White wins!");
                         resetGame();
                     }
                 } else {
                     if (checkDraw("black") == 1) {
+                        try {
+                            AudioInputStream ais = AudioSystem.getAudioInputStream(win);
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(ais);
+                            clip.loop(0);
+                        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException a) {
+                            throw new RuntimeException(a);
+                        }
                         JOptionPane.showMessageDialog(null, "Draw by Stalemate!");
                         resetGame();
                     } else if (checkDraw("black") == 2) {
+                        try {
+                            AudioInputStream ais = AudioSystem.getAudioInputStream(win);
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(ais);
+                            clip.loop(0);
+                        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException a) {
+                            throw new RuntimeException(a);
+                        }
                         JOptionPane.showMessageDialog(null, "Draw by Insufficient pieces!");
                         resetGame();
                     } else if (checkDraw("black") == 3) {
+                        try {
+                            AudioInputStream ais = AudioSystem.getAudioInputStream(win);
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(ais);
+                            clip.loop(0);
+                        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException a) {
+                            throw new RuntimeException(a);
+                        }
                         JOptionPane.showMessageDialog(null, "Draw by 50-move rule");
                         resetGame();
                     }
@@ -1001,11 +1111,35 @@ public class Main implements MouseListener {
                 }
                 return;
             }
+            if(destination.getIcon()==null){
+                try {
+                    AudioInputStream ais = AudioSystem.getAudioInputStream(move);
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(ais);
+                    clip.loop(0);
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            else{
+                try {
+                    AudioInputStream ais = AudioSystem.getAudioInputStream(capture);
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(ais);
+                    clip.loop(0);
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                    throw new RuntimeException(e);
+                }
+            }
             destination.setIcon(source.getIcon());
             source.setIcon(null);
             if (canPromote(player)) {
                 handlePromotion(player);
+                return;
             }
+            
+                
+            
             player = Objects.equals(player, "white") ? "black" : "white";
         }
         destination.setBorder(null);
@@ -1029,19 +1163,19 @@ public class Main implements MouseListener {
 
             JPanel promotionPanel = new JPanel();
             promotionPanel.setLayout(new FlowLayout());
-            JButton queenButton = new JButton("white Queen");
+            JButton queenButton = new JButton("Queen");
             queenButton.addActionListener(e -> promotePawn(row, col, whiteQueen, promotionWindow));
             promotionPanel.add(queenButton);
 
-            JButton rookButton = new JButton("white Rook");
+            JButton rookButton = new JButton("Rook");
             rookButton.addActionListener(e -> promotePawn(row, col, whiteRook1, promotionWindow));
             promotionPanel.add(rookButton);
 
-            JButton bishopButton = new JButton("white Bishop");
+            JButton bishopButton = new JButton("Bishop");
             bishopButton.addActionListener(e -> promotePawn(row, col, whiteBishop1, promotionWindow));
             promotionPanel.add(bishopButton);
 
-            JButton knightButton = new JButton("white Knight");
+            JButton knightButton = new JButton("Knight");
             knightButton.addActionListener(e -> promotePawn(row, col, whiteKnight1, promotionWindow));
             promotionPanel.add(knightButton);
 
@@ -1088,6 +1222,14 @@ public class Main implements MouseListener {
     public static void promotePawn(int row, int col, ImageIcon promotionPiece, JFrame promotionWindow) {
         board[row][col].setIcon(promotionPiece);
         promotionWindow.dispose(); // Close promotion window
+        try {
+            AudioInputStream ais = AudioSystem.getAudioInputStream(promote);
+            Clip clip = AudioSystem.getClip();
+            clip.open(ais);
+            clip.loop(0);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static boolean canPromote(String color) {
