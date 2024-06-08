@@ -2,22 +2,18 @@ package Main;
 
 import Piece.*;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
-import java.io.File;
-import java.io.IOException;
 
 public class Main implements MouseListener {
     public static JLabel[][] board;
@@ -96,24 +92,23 @@ public class Main implements MouseListener {
     public static File start;
     public static File end;
 
-
     Main() {
         JFrame frame = new JFrame("Chess");
         frame.setLayout(new GridLayout(8, 8));
         board = new JLabel[8][8];
 
-        // menubar
+        //menubar
         menubar = new JMenuBar();
         game = new JMenu("Game");
         restart = new JMenuItem("Restart");
         creatorMode = new JMenuItem("Creator Mode OFF");
 
         //start sound
-        start = new File("sounds/game-start.wav");
-        capture = new File("sounds/capture.wav");
-        move = new File("sounds/move.wav");
-        castle = new File("sounds/castle.wav");
-        promote = new File("sounds/promote.wav");
+        start = new File("src/sounds/game-start.wav");
+        capture = new File("src/sounds/capture.wav");
+        move = new File("src/sounds/move.wav");
+        castle = new File("src/sounds/castle.wav");
+        promote = new File("src/sounds/promote.wav");
 
         menubar.add(game);
         game.add(restart);
@@ -127,12 +122,10 @@ public class Main implements MouseListener {
                 boolean isBlackKingPresent = false;
                 for (int i = 0; i < board.length; i++) {
                     for (int j = 0; j < board.length; j++) {
-                        if (getType((ImageIcon) board[i][j].getIcon()).equals("king")
-                                && getColor((ImageIcon) board[i][j].getIcon()).equals("white")) {
+                        if (getType((ImageIcon) board[i][j].getIcon()).equals("king") && getColor((ImageIcon) board[i][j].getIcon()).equals("white")) {
                             isWhiteKingPresent = true;
                         }
-                        if (getType((ImageIcon) board[i][j].getIcon()).equals("king")
-                                && getColor((ImageIcon) board[i][j].getIcon()).equals("black")) {
+                        if (getType((ImageIcon) board[i][j].getIcon()).equals("king") && getColor((ImageIcon) board[i][j].getIcon()).equals("black")) {
                             isBlackKingPresent = true;
                         }
                     }
@@ -158,23 +151,16 @@ public class Main implements MouseListener {
         blackRook2 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/black_rook.png")));
         whiteRook1 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/white_rook.png")));
         whiteRook2 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/white_rook.png")));
-        blackKnight1 = blackKnight2 = new ImageIcon(
-                Objects.requireNonNull(Objects.requireNonNull(getClass().getResource("/Images/black_knight.png"))));
-        whiteKnight1 = whiteKnight2 = new ImageIcon(
-                Objects.requireNonNull(getClass().getResource("/Images/white_knight.png")));
-        blackBishop1 = blackBishop2 = new ImageIcon(
-                Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(Objects
-                        .requireNonNull(Objects.requireNonNull(getClass().getResource("/Images/black_bishop.png")))))));
-        whiteBishop1 = whiteBishop2 = new ImageIcon(Objects.requireNonNull(
-                Objects.requireNonNull(Objects.requireNonNull(getClass().getResource("/Images/white_bishop.png")))));
+        blackKnight1 = blackKnight2 = new ImageIcon(Objects.requireNonNull(Objects.requireNonNull(getClass().getResource("/Images/black_knight.png"))));
+        whiteKnight1 = whiteKnight2 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/white_knight.png")));
+        blackBishop1 = blackBishop2 = new ImageIcon(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(getClass().getResource("/Images/black_bishop.png")))))));
+        whiteBishop1 = whiteBishop2 = new ImageIcon(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(getClass().getResource("/Images/white_bishop.png")))));
         blackQueen = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/black_queen.png")));
         whiteQueen = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/white_queen.png")));
         blackKing = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/black_king.png")));
         whiteKing = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/white_king.png")));
-        whitePawn1 = whitePawn2 = whitePawn3 = whitePawn4 = whitePawn5 = whitePawn6 = whitePawn7 = whitePawn8 = new ImageIcon(
-                Objects.requireNonNull(getClass().getResource("/Images/white_pawn.png")));
-        blackPawn1 = blackPawn2 = blackPawn3 = blackPawn4 = blackPawn5 = blackPawn6 = blackPawn7 = blackPawn8 = new ImageIcon(
-                Objects.requireNonNull(getClass().getResource("/Images/black_pawn.png")));
+        whitePawn1 = whitePawn2 = whitePawn3 = whitePawn4 = whitePawn5 = whitePawn6 = whitePawn7 = whitePawn8 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/white_pawn.png")));
+        blackPawn1 = blackPawn2 = blackPawn3 = blackPawn4 = blackPawn5 = blackPawn6 = blackPawn7 = blackPawn8 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/black_pawn.png")));
 
         Image image1 = blackRook1.getImage();
         Image scaledImage1 = image1.getScaledInstance(65, 65, Image.SCALE_SMOOTH); // Adjust the size as needed
@@ -336,15 +322,15 @@ public class Main implements MouseListener {
 
     public static void initialiseBoard() {
 
-        // for (int i = 0; i < board.length; i++) {
-        // for (int j = 0; j < board.length; j++) {
-        // board[i][j].setBackground((i + j) % 2 != 0 ? darkSquare : lightSquare);
-        // board[i][j].setIcon(null);
-        // board[i][j].setBorder(null);
-        //// board[i][j].setText(i + ", " + j);
-        //// board[i][j].setFont(new Font("Arial", Font.PLAIN, 12));
-        // }
-        // }
+//        for (int i = 0; i < board.length; i++) {
+//            for (int j = 0; j < board.length; j++) {
+//                board[i][j].setBackground((i + j) % 2 != 0 ? darkSquare : lightSquare);
+//                board[i][j].setIcon(null);
+//                board[i][j].setBorder(null);
+////                board[i][j].setText(i + ", " + j);
+////                board[i][j].setFont(new Font("Arial", Font.PLAIN, 12));
+//            }
+//        }
         if (!isCreatorModeOn) {
             try {
                 AudioInputStream ais = AudioSystem.getAudioInputStream(start);
@@ -354,50 +340,42 @@ public class Main implements MouseListener {
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
                 throw new RuntimeException(e);
             }
-            // board[0][0].setIcon(blackRook1);
-            // board[0][7].setIcon(blackRook2);
-            // board[0][1].setIcon(blackKnight1);
-            // board[0][6].setIcon(blackKnight2);
-            // board[0][2].setIcon(blackBishop1);
-            // board[0][5].setIcon(blackBishop2);
-            // board[0][3].setIcon(blackQueen);
-            // board[0][4].setIcon(blackKing);
-            // board[1][0].setIcon(blackPawn1);
-            // board[1][1].setIcon(blackPawn2);
-            // board[1][2].setIcon(blackPawn3);
-            // board[1][3].setIcon(blackPawn4);
-            // board[1][4].setIcon(blackPawn5);
-            // board[1][5].setIcon(blackPawn6);
-            // board[1][6].setIcon(blackPawn7);
-            // board[1][7].setIcon(blackPawn8);
-            // board[7][7].setIcon(whiteRook2);
-            // board[7][1].setIcon(whiteKnight1);
-            // board[7][6].setIcon(whiteKnight2);
-            // board[7][2].setIcon(whiteBishop1);
-            // board[7][5].setIcon(whiteBishop2);
-            // board[7][3].setIcon(whiteQueen);
-            // board[7][4].setIcon(whiteKing);
-            // board[6][0].setIcon(whitePawn1);
-            // board[6][1].setIcon(whitePawn2);
-            // board[6][2].setIcon(whitePawn3);
-            // board[6][3].setIcon(whitePawn4);
-            // board[6][4].setIcon(whitePawn5);
-            // board[6][5].setIcon(whitePawn6);
-            // board[6][6].setIcon(whitePawn7);
-            // board[6][7].setIcon(whitePawn8);
-            
-            // Perform Modifications below
-            
+            board[0][0].setIcon(blackRook1);
+            board[0][7].setIcon(blackRook2);
+            board[0][1].setIcon(blackKnight1);
+            board[0][6].setIcon(blackKnight2);
+            board[0][2].setIcon(blackBishop1);
+            board[0][5].setIcon(blackBishop2);
+            board[0][3].setIcon(blackQueen);
             board[0][4].setIcon(blackKing);
+            board[1][0].setIcon(blackPawn1);
+            board[1][1].setIcon(blackPawn2);
+            board[1][2].setIcon(blackPawn3);
+            board[1][3].setIcon(blackPawn4);
+            board[1][4].setIcon(blackPawn5);
+            board[1][5].setIcon(blackPawn6);
+            board[1][6].setIcon(blackPawn7);
+            board[1][7].setIcon(blackPawn8);
+            board[7][0].setIcon(whiteRook1);
+            board[7][7].setIcon(whiteRook2);
+            board[7][1].setIcon(whiteKnight1);
+            board[7][6].setIcon(whiteKnight2);
+            board[7][2].setIcon(whiteBishop1);
+            board[7][5].setIcon(whiteBishop2);
+            board[7][3].setIcon(whiteQueen);
             board[7][4].setIcon(whiteKing);
-            board[7][7].setIcon(whiteRook1);
-            board[7][0].setIcon(whiteRook2);
-            board[0][0].setIcon(blackRook2);
-            board[0][7].setIcon(blackRook1);
+            board[6][0].setIcon(whitePawn1);
+            board[6][1].setIcon(whitePawn2);
+            board[6][2].setIcon(whitePawn3);
+            board[6][3].setIcon(whitePawn4);
+            board[6][4].setIcon(whitePawn5);
+            board[6][5].setIcon(whitePawn6);
+            board[6][6].setIcon(whitePawn7);
+            board[6][7].setIcon(whitePawn8);
+        }
 
-            }
-            
 
+        //Perform Modifications below
     }
 
     public static void clearBoard() {
@@ -429,169 +407,212 @@ public class Main implements MouseListener {
         if (isCreatorModeOn) {
             handleCreatorMode(row, col);
         }
-        if (clickedStack.isEmpty()) {
-            if (player.equals(getColor((ImageIcon) clickedCell.getIcon()))) {
+        else{
+            if (clickedStack.isEmpty()) {
+                if (player.equals(getColor((ImageIcon) clickedCell.getIcon()))) {
+                    clickedStack.push(clickedCell);
+                }
+            } else {
                 clickedStack.push(clickedCell);
             }
-        } else {
-            clickedStack.push(clickedCell);
-        }
-        // Highlight the selected piece
-        if ((clickedCell.getBorder() == null && clickedCell.getIcon() != null
-                && player.equals(getColor((ImageIcon) clickedCell.getIcon()))
-                || clickedCell.getBackground() == pinkHighLight)) {
-            clickedCell.setBorder(BorderFactory.createLineBorder(Color.red, 5));
-        } else {
-            clickedCell.setBorder(null);
-        }
-        if (clickedStack.size() == 2) {
-            movePiece(clickedStack.get(0), clickedStack.get(1));
-            clickedStack.pop();
-            clickedStack.pop();
+            //Highlight the selected piece
+            if ((clickedCell.getBorder() == null && clickedCell.getIcon() != null && player.equals(getColor((ImageIcon) clickedCell.getIcon())) || clickedCell.getBackground() == pinkHighLight)) {
+                clickedCell.setBorder(BorderFactory.createLineBorder(Color.red, 5));
+            } else {
+                clickedCell.setBorder(null);
+            }
+            if (clickedStack.size() == 2) {
+                movePiece(clickedStack.get(0), clickedStack.get(1));
+                clickedStack.pop();
+                clickedStack.pop();
+            }
+
+            String pieceColor = getColor((ImageIcon) clickedCell.getIcon());
+            String pieceType = getType((ImageIcon) clickedCell.getIcon());
+            if (pieceType.equals("pawn")) {
+                Pawn pawn = new Pawn(row, col, pieceColor);
+                pawn.highlightCells(row, col);
+            }
+            if (pieceType.equals("queen")) {
+                Queen queen = new Queen(row, col, pieceColor);
+                queen.highlightCells(row, col);
+            }
+            if (pieceType.equals("knight")) {
+                Knight knight = new Knight(row, col, pieceColor);
+                knight.highlightCells(row, col);
+            }
+            if (pieceType.equals("rook")) {
+                Rook rook = new Rook(row, col, pieceColor);
+                rook.highlightCells(row, col);
+            }
+            if (pieceType.equals("bishop")) {
+                Bishop bishop = new Bishop(row, col, pieceColor);
+                bishop.highlightCells(row, col);
+            }
+            if (pieceType.equals("king")) {
+                King king = new King(row, col, pieceColor);
+                king.highlightCells(row, col);
+            }
+            if (clickedCell.getBorder() == null && clickedCell.getIcon() != null) {
+                for (int i = 0; i < board.length; i++) {
+                    for (int j = 0; j < board.length; j++) {
+                        board[i][j].setBorder(null);
+                        if ((i + j) % 2 != 0) {
+                            board[i][j].setBackground(darkSquare); // Dark square color
+                        } else {
+                            board[i][j].setBackground(lightSquare); // Light square color
+                        }
+                    }
+                }
+            }
+            if (!isCreatorModeOn) {
+                if (isCheck("white", board)) {
+                    for (JLabel[] jLabels : board) {
+                        for (int j = 0; j < board.length; j++) {
+                            if (getColor((ImageIcon) jLabels[j].getIcon()).equals("white") && getType((ImageIcon) jLabels[j].getIcon()).equals("king")) {
+                                jLabels[j].setBackground(pinkHighLight);
+                                jLabels[j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                            }
+                        }
+                    }
+                    if (isCheckMate("white")) {
+                        JOptionPane.showMessageDialog(null, "Black wins!");
+                        resetGame();
+                    }
+                } else {
+                    if (checkDraw("white") == 1) {
+                        JOptionPane.showMessageDialog(null, "Draw by Stalemate!");
+                        resetGame();
+                    } else if (checkDraw("white") == 2) {
+                        JOptionPane.showMessageDialog(null, "Draw by Insufficient pieces!");
+                        resetGame();
+                    } else if (checkDraw("white") == 3) {
+                        JOptionPane.showMessageDialog(null, "Draw by 50-move rule");
+                        resetGame();
+                    }
+                }
+                if (isCheck("black", board)) {
+                    for (JLabel[] jLabels : board) {
+                        for (int j = 0; j < board.length; j++) {
+                            if (getColor((ImageIcon) jLabels[j].getIcon()).equals("black") && getType((ImageIcon) jLabels[j].getIcon()).equals("king")) {
+                                jLabels[j].setBackground(pinkHighLight);
+                                jLabels[j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+                            }
+                        }
+                    }
+                    if (isCheckMate("black")) {
+                        JOptionPane.showMessageDialog(null, "White wins!");
+                        resetGame();
+                    }
+                } else {
+                    if (checkDraw("black") == 1) {
+                        JOptionPane.showMessageDialog(null, "Draw by Stalemate!");
+                        resetGame();
+                    } else if (checkDraw("black") == 2) {
+                        JOptionPane.showMessageDialog(null, "Draw by Insufficient pieces!");
+                        resetGame();
+                    } else if (checkDraw("black") == 3) {
+                        JOptionPane.showMessageDialog(null, "Draw by 50-move rule");
+                        resetGame();
+                    }
+                }
+            }
         }
 
-        String pieceColor = getColor((ImageIcon) clickedCell.getIcon());
-        String pieceType = getType((ImageIcon) clickedCell.getIcon());
-        if (pieceType.equals("pawn")) {
-            Pawn pawn = new Pawn(row, col, pieceColor);
-            pawn.highlightCells(row, col);
-        }
-        if (pieceType.equals("queen")) {
-            Queen queen = new Queen(row, col, pieceColor);
-            queen.highlightCells(row, col);
-        }
-        if (pieceType.equals("knight")) {
-            Knight knight = new Knight(row, col, pieceColor);
-            knight.highlightCells(row, col);
-        }
-        if (pieceType.equals("rook")) {
-            Rook rook = new Rook(row, col, pieceColor);
-            rook.highlightCells(row, col);
-        }
-        if (pieceType.equals("bishop")) {
-            Bishop bishop = new Bishop(row, col, pieceColor);
-            bishop.highlightCells(row, col);
-        }
-        if (pieceType.equals("king")) {
-            King king = new King(row, col, pieceColor);
-            king.highlightCells(row, col);
-        }
-        if (clickedCell.getBorder() == null && clickedCell.getIcon() != null) {
-            for (int i = 0; i < board.length; i++) {
-                for (int j = 0; j < board.length; j++) {
-                    board[i][j].setBorder(null);
-                    if ((i + j) % 2 != 0) {
-                        board[i][j].setBackground(darkSquare); // Dark square color
-                    } else {
-                        board[i][j].setBackground(lightSquare); // Light square color
-                    }
-                }
-            }
-        }
-        if (!isCreatorModeOn) {
-            if (isCheck("white", board)) {
-                for (JLabel[] jLabels : board) {
-                    for (int j = 0; j < board.length; j++) {
-                        if (getColor((ImageIcon) jLabels[j].getIcon()).equals("white")
-                                && getType((ImageIcon) jLabels[j].getIcon()).equals("king")) {
-                            jLabels[j].setBackground(pinkHighLight);
-                            jLabels[j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
-                        }
-                    }
-                }
-                if (isCheckMate("white")) {
-                    JOptionPane.showMessageDialog(null, "Black wins!");
-                    resetGame();
-                }
-            } else {
-                if (checkDraw("white") == 1) {
-                    JOptionPane.showMessageDialog(null, "Draw by Stalemate!");
-                    resetGame();
-                } else if (checkDraw("white") == 2) {
-                    JOptionPane.showMessageDialog(null, "Draw by Insufficient pieces!");
-                    resetGame();
-                } else if (checkDraw("white") == 3) {
-                    JOptionPane.showMessageDialog(null, "Draw by 50-move rule");
-                    resetGame();
-                }
-            }
-            if (isCheck("black", board)) {
-                for (JLabel[] jLabels : board) {
-                    for (int j = 0; j < board.length; j++) {
-                        if (getColor((ImageIcon) jLabels[j].getIcon()).equals("black")
-                                && getType((ImageIcon) jLabels[j].getIcon()).equals("king")) {
-                            jLabels[j].setBackground(pinkHighLight);
-                            jLabels[j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
-                        }
-                    }
-                }
-                if (isCheckMate("black")) {
-                    JOptionPane.showMessageDialog(null, "White wins!");
-                    resetGame();
-                }
-            } else {
-                if (checkDraw("black") == 1) {
-                    JOptionPane.showMessageDialog(null, "Draw by Stalemate!");
-                    resetGame();
-                } else if (checkDraw("black") == 2) {
-                    JOptionPane.showMessageDialog(null, "Draw by Insufficient pieces!");
-                    resetGame();
-                } else if (checkDraw("black") == 3) {
-                    JOptionPane.showMessageDialog(null, "Draw by 50-move rule");
-                    resetGame();
-                }
-            }
-        }
     }
 
     public static void handleCreatorMode(int row, int col) {
         JFrame creatorModeWindow = new JFrame("Creator Mode");
-        creatorModeWindow.setSize(400, 80);
+        creatorModeWindow.setSize(400, 400);
         creatorModeWindow.setLocationRelativeTo(null); // Center the window
 
         JPanel creatorModePanel = new JPanel();
         creatorModePanel.setLayout(new FlowLayout());
-        JButton whiteQueenButton = new JButton("Queen");
+
+        JButton whiteQueenButton = new JButton("white Queen");
         whiteQueenButton.addActionListener(e -> addPiece(row, col, whiteQueen, creatorModeWindow));
         creatorModePanel.add(whiteQueenButton);
 
-        JButton whiteRookButton = new JButton("Rook");
-        whiteRookButton.addActionListener(e -> addPiece(row, col, whiteRook2, creatorModeWindow));
+        JButton whiteRookButton = new JButton("white Rook");
+        whiteRookButton.addActionListener(e -> addPiece(row, col, whiteRook1, creatorModeWindow));
         creatorModePanel.add(whiteRookButton);
 
-        JButton whiteBishopButton = new JButton("Bishop");
-        whiteBishopButton.addActionListener(e -> addPiece(row, col, whiteBishop2, creatorModeWindow));
+        JButton whiteBishopButton = new JButton("white Bishop");
+        whiteBishopButton.addActionListener(e -> addPiece(row, col, whiteBishop1, creatorModeWindow));
         creatorModePanel.add(whiteBishopButton);
 
-        JButton whiteKnightButton = new JButton("Knight");
+        JButton whiteKnightButton = new JButton("white Knight");
         whiteKnightButton.addActionListener(e -> addPiece(row, col, whiteKnight1, creatorModeWindow));
         creatorModePanel.add(whiteKnightButton);
+
+        JButton whiteKingButton = new JButton("white King");
+        whiteKingButton.addActionListener(e -> addPiece(row, col, whiteKing, creatorModeWindow));
+        creatorModePanel.add(whiteKingButton);
+
+        JButton whitePawnButton = new JButton("white Pawn");
+        whitePawnButton.addActionListener(e -> addPiece(row, col, whitePawn1, creatorModeWindow));
+        creatorModePanel.add(whitePawnButton);
+
+        JButton blackQueenButton = new JButton("black Queen");
+        blackQueenButton.addActionListener(e -> addPiece(row, col, blackQueen, creatorModeWindow));
+        creatorModePanel.add(blackQueenButton);
+
+        JButton blackRookButton = new JButton("black Rook");
+        blackRookButton.addActionListener(e -> addPiece(row, col, blackRook1, creatorModeWindow));
+        creatorModePanel.add(blackRookButton);
+
+        JButton blackBishopButton = new JButton("black Bishop");
+        blackBishopButton.addActionListener(e -> addPiece(row, col, blackBishop1, creatorModeWindow));
+        creatorModePanel.add(blackBishopButton);
+
+        JButton blackKnightButton = new JButton("black Knight");
+        blackKnightButton.addActionListener(e -> addPiece(row, col, blackKnight1, creatorModeWindow));
+        creatorModePanel.add(blackKnightButton);
+
+        JButton blackKingButton = new JButton("black King");
+        blackKingButton.addActionListener(e -> addPiece(row, col, blackKing, creatorModeWindow));
+        creatorModePanel.add(blackKingButton);
+
+        JButton blackPawnButton = new JButton("black Pawn");
+        blackPawnButton.addActionListener(e -> addPiece(row, col, blackPawn1, creatorModeWindow));
+        creatorModePanel.add(blackPawnButton);
+
+        JButton removeButton = new JButton("Remove Piece");
+        removeButton.addActionListener(e -> {board[row][col].setIcon(null);
+        creatorModeWindow.dispose();});
+        creatorModePanel.add(removeButton);
 
         creatorModeWindow.add(creatorModePanel);
         creatorModeWindow.setVisible(true);
     }
 
     public static void addPiece(int row, int col, ImageIcon addedPiece, JFrame creatorModeWindow) {
-        if (getType((ImageIcon) board[row][col].getIcon()).equals("king")) {
-            if (getColor((ImageIcon) board[row][col].getIcon()).equals("white")) {
+        if (getType(addedPiece).equals("king")) {
+            if (getColor(addedPiece).equals("white")) {
                 for (int i = 0; i < board.length; i++) {
                     for (int j = 0; j < board.length; j++) {
-                        if (getType((ImageIcon) board[row][col].getIcon()).equals("king")
-                                && getColor((ImageIcon) board[row][col].getIcon()).equals("white")) {
+                        if (getType((ImageIcon) board[i][j].getIcon()).equals("king") && getColor((ImageIcon) board[i][j].getIcon()).equals("white")) {
                             JOptionPane.showMessageDialog(null, "white King already exists");
                             return;
                         }
                     }
                 }
-            } else if (getColor((ImageIcon) board[row][col].getIcon()).equals("black")) {
+                if(!new King(row, col, "white").isSafe(row, col)){
+                    JOptionPane.showMessageDialog(null, "Invalid position for king");
+                    return;
+                }
+            } else if (getColor(addedPiece).equals("black")) {
                 for (int i = 0; i < board.length; i++) {
                     for (int j = 0; j < board.length; j++) {
-                        if (getType((ImageIcon) board[row][col].getIcon()).equals("king")
-                                && getColor((ImageIcon) board[row][col].getIcon()).equals("black")) {
+                        if (getType((ImageIcon) board[i][j].getIcon()).equals("king") && getColor((ImageIcon) board[i][j].getIcon()).equals("black")) {
                             JOptionPane.showMessageDialog(null, "black King already exists");
                             return;
                         }
                     }
+                }
+                if(!new King(row, col, "black").isSafe(row, col)){
+                    JOptionPane.showMessageDialog(null, "Invalid position for king");
+                    return;
                 }
             }
 
@@ -600,18 +621,16 @@ public class Main implements MouseListener {
         creatorModeWindow.dispose();
     }
 
+
     public static void movePiece(JLabel source, JLabel destination) {
         if (source != destination
                 && source.getIcon() != null
                 && getColor((ImageIcon) source.getIcon()).equals(player)
                 && !getColor((ImageIcon) source.getIcon()).equals(getColor((ImageIcon) destination.getIcon()))
-                && !(getColor((ImageIcon) source.getIcon()).equals("white")
-                        && getType((ImageIcon) destination.getIcon()).equals("king")
-                        && getColor((ImageIcon) destination.getIcon()).equals("black"))
-                && !(getColor((ImageIcon) source.getIcon()).equals("black")
-                        && getType((ImageIcon) destination.getIcon()).equals("king")
-                        && getColor((ImageIcon) destination.getIcon()).equals("white"))
-                && movableCells(source).contains(destination)) {
+                && !(getColor((ImageIcon) source.getIcon()).equals("white") && getType((ImageIcon) destination.getIcon()).equals("king") && getColor((ImageIcon) destination.getIcon()).equals("black"))
+                && !(getColor((ImageIcon) source.getIcon()).equals("black") && getType((ImageIcon) destination.getIcon()).equals("king") && getColor((ImageIcon) destination.getIcon()).equals("white"))
+                && movableCells(source).contains(destination)
+        ) {
             if (source.getIcon() == whitePawn1 || source.getIcon() == blackPawn1 || destination.getIcon() != null) {
                 uselessHalfMoves = 0;
             } else {
@@ -690,7 +709,7 @@ public class Main implements MouseListener {
                 }
             }
 
-            // movements
+            //movements
             if (blackEnpasante1 && source.getIcon() == whitePawn1 && destination == board[2][0]) {
                 blackEnpasante1 = false;
                 destination.setIcon(source.getIcon());
@@ -874,23 +893,12 @@ public class Main implements MouseListener {
                 blackRook2Moved = true;
             }
             if (source == board[7][4] && source.getIcon() == whiteKing && destination == board[7][6]) {
-                try {
-                    AudioInputStream ais = AudioSystem.getAudioInputStream(castle);
-                    Clip clip = AudioSystem.getClip();
-                    clip.open(ais);
-                    clip.loop(0);
-                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                    throw new RuntimeException(e);
-                }
                 destination.setIcon(whiteKing);
                 source.setIcon(null);
                 board[7][7].setIcon(null);
                 board[7][5].setIcon(whiteRook2);
                 player = Objects.equals(player, "white") ? "black" : "white";
                 destination.setBorder(null);
-                return;
-            }
-            if (source == board[7][4] && source.getIcon() == whiteKing && destination == board[7][1]) {
                 try {
                     AudioInputStream ais = AudioSystem.getAudioInputStream(castle);
                     Clip clip = AudioSystem.getClip();
@@ -899,15 +907,15 @@ public class Main implements MouseListener {
                 } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
                     throw new RuntimeException(e);
                 }
+                return;
+            }
+            if (source == board[7][4] && source.getIcon() == whiteKing && destination == board[7][1]) {
                 destination.setIcon(whiteKing);
                 source.setIcon(null);
                 board[7][0].setIcon(null);
                 board[7][2].setIcon(whiteRook1);
                 player = Objects.equals(player, "white") ? "black" : "white";
                 destination.setBorder(null);
-                return;
-            }
-            if (source == board[0][4] && source.getIcon() == blackKing && destination == board[0][6]) {
                 try {
                     AudioInputStream ais = AudioSystem.getAudioInputStream(castle);
                     Clip clip = AudioSystem.getClip();
@@ -916,15 +924,15 @@ public class Main implements MouseListener {
                 } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
                     throw new RuntimeException(e);
                 }
+                return;
+            }
+            if (source == board[0][4] && source.getIcon() == blackKing && destination == board[0][6]) {
                 destination.setIcon(blackKing);
                 source.setIcon(null);
                 board[0][7].setIcon(null);
                 board[0][5].setIcon(blackRook2);
                 player = Objects.equals(player, "white") ? "black" : "white";
                 destination.setBorder(null);
-                return;
-            }
-            if (source == board[0][4] && source.getIcon() == blackKing && destination == board[0][1]) {
                 try {
                     AudioInputStream ais = AudioSystem.getAudioInputStream(castle);
                     Clip clip = AudioSystem.getClip();
@@ -933,12 +941,23 @@ public class Main implements MouseListener {
                 } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
                     throw new RuntimeException(e);
                 }
+                return;
+            }
+            if (source == board[0][4] && source.getIcon() == blackKing && destination == board[0][1]) {
                 destination.setIcon(blackKing);
                 source.setIcon(null);
                 board[0][0].setIcon(null);
                 board[0][2].setIcon(blackRook1);
                 player = Objects.equals(player, "white") ? "black" : "white";
                 destination.setBorder(null);
+                try {
+                    AudioInputStream ais = AudioSystem.getAudioInputStream(castle);
+                    Clip clip = AudioSystem.getClip();
+                    clip.open(ais);
+                    clip.loop(0);
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                    throw new RuntimeException(e);
+                }
                 return;
             }
             destination.setIcon(source.getIcon());
@@ -951,13 +970,13 @@ public class Main implements MouseListener {
         destination.setBorder(null);
     }
 
+
     public static void handlePromotion(String color) {
         if (color.equals("white")) {
             int row = 0;
             int x = 0;
             for (int j = 0; j < board.length; j++) {
-                if (getColor((ImageIcon) board[0][j].getIcon()).equals("white")
-                        && getType((ImageIcon) board[0][j].getIcon()).equals("pawn")) {
+                if (getColor((ImageIcon) board[0][j].getIcon()).equals("white") && getType((ImageIcon) board[0][j].getIcon()).equals("pawn")) {
                     x = j;
                     break;
                 }
@@ -991,8 +1010,7 @@ public class Main implements MouseListener {
             int row = 7;
             int x = 0;
             for (int j = 0; j < board.length; j++) {
-                if (getColor((ImageIcon) board[7][j].getIcon()).equals("black")
-                        && getType((ImageIcon) board[7][j].getIcon()).equals("pawn")) {
+                if (getColor((ImageIcon) board[7][j].getIcon()).equals("black") && getType((ImageIcon) board[7][j].getIcon()).equals("pawn")) {
                     x = j;
                     break;
                 }
@@ -1033,22 +1051,21 @@ public class Main implements MouseListener {
     public static boolean canPromote(String color) {
         if (color.equals("white")) {
             for (int col = 0; col < board.length; col++) {
-                if (getColor((ImageIcon) board[0][col].getIcon()).equals("white")
-                        && getType((ImageIcon) board[0][col].getIcon()).equals("pawn")) {
+                if (getColor((ImageIcon) board[0][col].getIcon()).equals("white") && getType((ImageIcon) board[0][col].getIcon()).equals("pawn")) {
                     return true;
                 }
             }
             return false;
         } else {
             for (int col = 0; col < board.length; col++) {
-                if (getColor((ImageIcon) board[7][col].getIcon()).equals("black")
-                        && getType((ImageIcon) board[7][col].getIcon()).equals("pawn")) {
+                if (getColor((ImageIcon) board[7][col].getIcon()).equals("black") && getType((ImageIcon) board[7][col].getIcon()).equals("pawn")) {
                     return true;
                 }
             }
             return false;
         }
     }
+
 
     public static List<JLabel> movableCells(JLabel source) {
         int row = -1;
@@ -1209,8 +1226,7 @@ public class Main implements MouseListener {
     public static boolean isCheck(String color, JLabel[][] board) {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
-                if (getColor((ImageIcon) board[i][j].getIcon()).equals(color)
-                        && getType((ImageIcon) board[i][j].getIcon()).equals("king")) {
+                if (getColor((ImageIcon) board[i][j].getIcon()).equals(color) && getType((ImageIcon) board[i][j].getIcon()).equals("king")) {
                     King king = new King(i, j, color);
                     if (!king.isSafe(i, j)) {
                         return true;
@@ -1302,22 +1318,22 @@ public class Main implements MouseListener {
 
     public static int checkDraw(String color) {
         if (Objects.equals(color, "white")) {
-            // Stalemate
+            //Stalemate
             if (!isCheck(color, board) && isCheckMate(color)) {
                 return 1;
             }
-            // Insufficient Material
+            //Insufficient Material
             else if (insufficientMaterial(color)) {
                 return 2;
             } else if (uselessHalfMoves == 100) {
                 return 3;
             }
         } else {
-            // Stalemate
+            //Stalemate
             if (!isCheck(color, board) && isCheckMate(color)) {
                 return 1;
             }
-            // Insufficient Material
+            //Insufficient Material
             else if (insufficientMaterial(color)) {
                 return 2;
             } else if (uselessHalfMoves == 100) {
@@ -1328,8 +1344,7 @@ public class Main implements MouseListener {
     }
 
     public static boolean insufficientMaterial(String color) {
-        if (kingvsking() || kingAndBishopVsKing(color) || kingAndKnightVsKing(color)
-                || kingAndBishopVsKingAndBishop()) {
+        if (kingvsking() || kingAndBishopVsKing(color) || kingAndKnightVsKing(color) || kingAndBishopVsKingAndBishop()) {
             return true;
         }
         return false;
@@ -1355,9 +1370,7 @@ public class Main implements MouseListener {
                 if (getType((ImageIcon) board[i][j].getIcon()).equals("king")) {
                     continue;
                 }
-                if (!(getColor((ImageIcon) board[i][j].getIcon()).equals(color)
-                        && getType((ImageIcon) board[i][j].getIcon()).equals("bishop"))
-                        && !getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
+                if (!(getColor((ImageIcon) board[i][j].getIcon()).equals(color) && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) && !getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
                     return false;
                 }
             }
@@ -1371,9 +1384,7 @@ public class Main implements MouseListener {
                 if (getType((ImageIcon) board[i][j].getIcon()).equals("king")) {
                     continue;
                 }
-                if (!(getColor((ImageIcon) board[i][j].getIcon()).equals(color)
-                        && getType((ImageIcon) board[i][j].getIcon()).equals("knight"))
-                        && !getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
+                if (!(getColor((ImageIcon) board[i][j].getIcon()).equals(color) && getType((ImageIcon) board[i][j].getIcon()).equals("knight")) && !getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
                     return false;
                 }
             }
@@ -1391,19 +1402,15 @@ public class Main implements MouseListener {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 if (getType((ImageIcon) board[i][j].getIcon()).equals("king") ||
-                        (getColor((ImageIcon) board[i][j].getIcon()).equals("white")
-                                && getType((ImageIcon) board[i][j].getIcon()).equals("bishop"))
-                        ||
-                        (getColor((ImageIcon) board[i][j].getIcon()).equals("black")
-                                && getType((ImageIcon) board[i][j].getIcon()).equals("bishop"))
-                        || getColor((ImageIcon) board[i][j].getIcon()).equals("empty")) {
-                    if (getColor((ImageIcon) board[i][j].getIcon()).equals("white")
-                            && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) {
+                        (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) ||
+                        (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop"))
+                        || getColor((ImageIcon) board[i][j].getIcon()).equals("empty")
+                ) {
+                    if (getColor((ImageIcon) board[i][j].getIcon()).equals("white") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) {
                         whiteBishops++;
                         whiteRow = i;
                         whiteCol = j;
-                    } else if (getColor((ImageIcon) board[i][j].getIcon()).equals("black")
-                            && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) {
+                    } else if (getColor((ImageIcon) board[i][j].getIcon()).equals("black") && getType((ImageIcon) board[i][j].getIcon()).equals("bishop")) {
                         blackBishops++;
                         blackRow = i;
                         blackCol = j;
