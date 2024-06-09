@@ -18,7 +18,7 @@ public class ChessMainMenu extends JFrame {
 
         ImageIcon coverImage = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/KingsGame.png")));
         ImageIcon play8Icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/play8.png")));
-        ImageIcon play16Icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/play16.png")));
+        ImageIcon play16Icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/play15.png")));
 
         JLabel coverLabel = new JLabel(coverImage);
         coverLabel.setBounds(0, 0, 600, 400);
